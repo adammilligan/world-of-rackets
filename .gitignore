@@ -1,0 +1,11 @@
+.DS_Store
+.idea/
+*.log
+node_modules/
+dist/
+.vscode/
+*.local
+.venv/
+.fig-extract/
+.fig-preview/
+*.fig
