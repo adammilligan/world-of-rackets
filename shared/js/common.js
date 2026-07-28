@@ -92,8 +92,7 @@ function initMobileHeader() {
   const header = qs(".header");
   const drawer = qs("#mobile-drawer");
   const panel = qs(".drawer__panel", drawer);
-  const burger = qs("[data-drawer-open]");
-  const searchToggle = qs("[data-search-toggle]");
+  const burger = qs(".header__burger[data-drawer-open]");
   const searchInput = qs(".search__input");
   let lastFocus = null;
 
@@ -154,11 +153,13 @@ function initMobileHeader() {
     }
   });
 
-  searchToggle?.addEventListener("click", () => {
-    const open = header?.classList.toggle("is-search-open");
-    if (open) {
-      searchInput?.focus();
-    }
+  qsa("[data-search-toggle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const open = header?.classList.toggle("is-search-open");
+      if (open) {
+        searchInput?.focus();
+      }
+    });
   });
 
   document.addEventListener("keydown", (event) => {

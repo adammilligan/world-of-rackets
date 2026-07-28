@@ -35,6 +35,63 @@ function initHeroSlider(root) {
   dots.forEach((dot, i) => {
     dot.addEventListener("click", () => goTo(i));
   });
+
+  let startX = 0;
+  let startY = 0;
+  let tracking = false;
+  let locked = false;
+
+  root.addEventListener(
+    "touchstart",
+    (event) => {
+      if (event.touches.length !== 1) return;
+      startX = event.touches[0].clientX;
+      startY = event.touches[0].clientY;
+      tracking = true;
+      locked = false;
+    },
+    { passive: true }
+  );
+
+  root.addEventListener(
+    "touchmove",
+    (event) => {
+      if (!tracking || event.touches.length !== 1) return;
+      const dx = event.touches[0].clientX - startX;
+      const dy = event.touches[0].clientY - startY;
+      if (!locked) {
+        if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+        locked = Math.abs(dx) > Math.abs(dy);
+        if (!locked) {
+          tracking = false;
+          return;
+        }
+      }
+      if (locked) {
+        event.preventDefault();
+      }
+    },
+    { passive: false }
+  );
+
+  root.addEventListener(
+    "touchend",
+    (event) => {
+      if (!tracking) return;
+      tracking = false;
+      if (!locked) return;
+      const endX = event.changedTouches[0]?.clientX ?? startX;
+      const dx = endX - startX;
+      if (Math.abs(dx) < 40) return;
+      goTo(dx < 0 ? index + 1 : index - 1);
+    },
+    { passive: true }
+  );
+
+  root.addEventListener("touchcancel", () => {
+    tracking = false;
+    locked = false;
+  });
 }
 
 function initProductsCarousel(root) {
