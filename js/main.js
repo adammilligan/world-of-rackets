@@ -79,5 +79,31 @@ function initMobileHeader() {
   });
 }
 
+function initFavorites() {
+  const badge = qs(".icon-btn__badge--fav");
+  const buttons = qsa(".product-card__fav");
+
+  function syncBadge() {
+    const count = buttons.filter((btn) => btn.classList.contains("is-active")).length;
+    if (!badge) return;
+    badge.textContent = String(count);
+    badge.hidden = count <= 0;
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const active = btn.classList.toggle("is-active");
+      btn.setAttribute("aria-pressed", String(active));
+      btn.setAttribute("aria-label", active ? "Убрать из избранного" : "В избранное");
+      syncBadge();
+    });
+  });
+
+  syncBadge();
+}
+
 qsa(".hero__slider").forEach(initHeroSlider);
 initMobileHeader();
+initFavorites();
