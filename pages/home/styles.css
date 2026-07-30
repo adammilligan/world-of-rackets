@@ -58,9 +58,13 @@
 }
 
 .hero__content .btn {
-  min-height: 0;
+  box-sizing: border-box;
+  width: 149px;
+  height: 48px;
+  min-height: 48px;
+  gap: 8px;
   padding: 12px 24px;
-  border-radius: var(--radius);
+  border-radius: 8px;
   font-family: var(--font-meta), sans-serif;
   font-size: 20px;
   font-weight: 500;
@@ -488,14 +492,108 @@
 
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1100px) and (min-width: 861px) {
+.container {
+    width: min(100% - 2 * var(--page-gutter), var(--container));
+  }
+
+.hero__slider,
+.hero__track {
+    width: 100%;
+    max-width: 100%;
+    height: min(520px, 56vw);
+  }
+
+.hero__content {
+    padding: 0 40px 96px;
+    gap: 12px;
+  }
+
+.hero__title {
+    font-size: clamp(24px, 3vw, 32px);
+  }
+
+.hero__content .btn {
+    width: 149px;
+    height: 48px;
+    min-height: 48px;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+.hero__dots {
+    bottom: 48px;
+  }
+
+.hero__arrow--prev {
+    left: 12px;
+  }
+
+.hero__arrow--next {
+    right: 12px;
+  }
+
+.categories {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding-inline: 0;
+    gap: 8px;
+  }
+
+.category-card {
+    height: auto;
+    aspect-ratio: 1;
+    padding: 16px;
+  }
+
+.category-card__title {
+    font-size: clamp(14px, 1.8vw, 20px);
+  }
+
+.products-carousel {
+    width: 100%;
+    max-width: 100%;
+  }
+
+.products-carousel__viewport {
+    overflow: hidden;
+    width: 100%;
+    container-type: inline-size;
+  }
+
+.products {
+    gap: 12px;
+  }
+
 .product-card {
-    flex-basis: calc((100% - 16px) / 2);
-    width: calc((100% - 16px) / 2);
+    flex: 0 0 calc((100cqw - 24px) / 3);
+    width: calc((100cqw - 24px) / 3);
+    min-width: calc((100cqw - 24px) / 3);
+    max-width: calc((100cqw - 24px) / 3);
+    gap: 10px;
+  }
+
+.product-card__media {
+    height: 280px;
   }
 
 .products-carousel__arrow {
-    top: 28%;
+    top: 140px;
+  }
+
+.products-carousel__arrow--prev {
+    left: 4px;
+  }
+
+.products-carousel__arrow--next {
+    right: 4px;
+  }
+
+.section__title {
+    font-size: 26px;
   }
 
 }
@@ -503,6 +601,8 @@
 @media (max-width: 860px) {
 .section {
     padding-top: 40px;
+    overflow-x: clip;
+    max-width: 100%;
   }
 
 .section--last {
@@ -518,7 +618,9 @@
 .container:has(.categories),
 .container:has([data-products-carousel]) {
     width: 100%;
-    max-width: none;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
   }
 
 .categories {
@@ -526,7 +628,8 @@
     gap: 4px;
     height: auto;
     width: 100%;
-    max-width: none;
+    max-width: 100%;
+    min-width: 0;
     padding-inline: 16px;
     overflow-x: auto;
     overscroll-behavior-x: contain;
@@ -561,10 +664,15 @@
 
 .products-carousel {
     width: 100%;
-    max-width: none;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
   }
 
 .products-carousel__viewport {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     padding-inline: 16px;
     overflow-x: auto;
     overflow-y: hidden;
@@ -614,6 +722,27 @@
     font-size: 13px;
   }
 
+.product-card__price {
+    font-family: var(--font-meta), sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0;
+    vertical-align: middle;
+  }
+
+.product-card__price-old {
+    font-family: var(--font-meta), sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0;
+    vertical-align: middle;
+    text-decoration: line-through;
+  }
+
 .product-card__cart {
     opacity: 1;
     transform: none;
@@ -626,19 +755,23 @@
 
 .hero {
     padding-top: 0;
+    overflow-x: clip;
+    max-width: 100%;
   }
 
 .container:has(.hero__slider) {
     width: 100%;
-    max-width: none;
+    max-width: 100%;
+    min-width: 0;
     padding: 0;
+    overflow-x: clip;
   }
 
 .hero__slider,
 .hero__track {
     height: 283px;
     min-height: 283px;
-    max-width: none;
+    max-width: 100%;
     border-radius: 0;
   }
 
@@ -653,8 +786,14 @@
   }
 
 .hero__content .btn {
+    box-sizing: border-box;
+    width: 129px;
+    height: 44px;
+    min-height: 44px;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
     font-size: 16px;
-    padding: 10px 20px;
   }
 
 .hero__dots {
@@ -684,7 +823,7 @@
 
 }
 
-@media (max-width: 1700px) and (min-width: 861px) {
+@media (max-width: 1700px) and (min-width: 1101px) {
 .categories {
     height: auto;
     padding-inline: clamp(16px, 7.2vw, 124px);

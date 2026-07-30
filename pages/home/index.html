@@ -138,10 +138,11 @@
           <div class="header__actions">
             <a class="icon-btn" href="#" aria-label="Избранное">
               <img src="../../shared/images/icons/heart.svg" alt="" width="22" height="22" />
-              <span class="icon-btn__badge icon-btn__badge--fav">2</span>
+              <span class="icon-btn__badge icon-btn__badge--fav" data-fav-badge>2</span>
             </a>
             <a class="icon-btn" href="#" aria-label="Корзина">
               <img src="../../shared/images/icons/trash.svg" alt="" width="22" height="22" />
+              <span class="icon-btn__badge icon-btn__badge--cart" data-cart-badge hidden>0</span>
             </a>
             <a class="icon-btn" href="#" aria-label="Профиль">
               <img src="../../shared/images/icons/profile.svg" alt="" width="22" height="22" />
@@ -153,35 +154,21 @@
           <button class="header__search-btn" type="button" aria-label="Поиск" data-search-toggle>
             <img src="../../shared/images/icons/search.svg" alt="" width="24" height="24" />
           </button>
-          <details class="header__contacts">
-            <summary>
+          <div class="header__contacts-group">
+            <a class="header__contacts-call" href="tel:+79197734033" aria-label="Позвонить">
               <img class="header__contacts-phone" src="../../shared/images/icons/phone.svg" alt="" width="24" height="24" />
+            </a>
+            <button
+              class="header__contacts-btn"
+              type="button"
+              aria-expanded="false"
+              aria-controls="contacts-sheet"
+              data-contacts-open
+            >
               <span>контакты</span>
               <img class="dropdown-chevron" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" />
-            </summary>
-            <div class="header__contacts-panel">
-              <div class="header__contacts-block">
-                <p class="header__contacts-label">Интернет-магазин</p>
-                <a href="tel:+79197734033">+7 (919) 773-40-33</a>
-                <p>с 10 до 21 без выходных</p>
-                <a href="mailto:info@mirraketok.ru">info@mirraketok.ru</a>
-              </div>
-              <div class="header__contacts-block">
-                <p class="header__contacts-label">Адрес</p>
-                <p>Москва, ул. Мытная, 48</p>
-                <p>м. Тульская, Шаболовская, Добрынинская</p>
-                <a href="#">На карте</a>
-              </div>
-              <div class="header__contacts-social">
-                <a href="https://wa.me/79197734033" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-                  <img src="../../shared/images/icons/whatsapp.svg" alt="" width="32" height="32" />
-                </a>
-                <a href="bip://chat?phone=79197734033" aria-label="BIP" target="_blank" rel="noopener noreferrer">
-                  <img src="../../shared/images/icons/bip.svg" alt="" width="32" height="32" />
-                </a>
-              </div>
-            </div>
-          </details>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -1015,8 +1002,8 @@
               <div class="footer__contacts-top">
                 <a class="footer__phone" href="tel:+79197734033">+7 (919) 773-40-33</a>
                 <div class="footer__social">
-                  <a href="https://wa.me/79197734033" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-                    <img src="../../shared/images/icons/whatsapp.svg" alt="" width="32" height="32" />
+                  <a href="tg://resolve?phone=79197734033" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+                    <img src="../../shared/images/icons/telegram.svg" alt="" width="32" height="32" />
                   </a>
                   <a href="bip://chat?phone=79197734033" aria-label="BIP" target="_blank" rel="noopener noreferrer">
                     <img src="../../shared/images/icons/bip.svg" alt="" width="32" height="32" />
@@ -1054,12 +1041,12 @@
       </div>
 
       <div class="footer__mobile">
-        <details class="footer-acc" open>
+        <details class="footer-acc">
           <summary class="footer-acc__summary">
             <span>Контакты</span>
             <span class="footer-acc__icon" aria-hidden="true"></span>
           </summary>
-          <div class="footer-acc__body">
+          <div class="footer-acc__body" data-contacts-source>
             <div class="footer-acc__card">
               <p class="footer-acc__card-title">Интернет-магазин</p>
               <a class="footer-acc__row" href="tel:+79197734033">+7 (919) 773-40-33</a>
@@ -1076,8 +1063,8 @@
               <div class="footer-acc__phone-row">
                 <a href="tel:+79197734033">+7 (919) 773-40-33</a>
                 <div class="footer__social">
-                  <a href="https://wa.me/79197734033" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-                    <img src="../../shared/images/icons/whatsapp.svg" alt="" width="32" height="32" />
+                  <a href="tg://resolve?phone=79197734033" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+                    <img src="../../shared/images/icons/telegram.svg" alt="" width="32" height="32" />
                   </a>
                   <a href="bip://chat?phone=79197734033" aria-label="BIP" target="_blank" rel="noopener noreferrer">
                     <img src="../../shared/images/icons/bip.svg" alt="" width="32" height="32" />
@@ -1095,8 +1082,8 @@
               <div class="footer-acc__phone-row">
                 <a href="tel:+79853342515">+7 (985) 334-25-15</a>
                 <div class="footer__social">
-                  <a href="https://wa.me/79853342515" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-                    <img src="../../shared/images/icons/whatsapp.svg" alt="" width="32" height="32" />
+                  <a href="tg://resolve?phone=79853342515" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+                    <img src="../../shared/images/icons/telegram.svg" alt="" width="32" height="32" />
                   </a>
                   <a href="bip://chat?phone=79853342515" aria-label="BIP" target="_blank" rel="noopener noreferrer">
                     <img src="../../shared/images/icons/bip.svg" alt="" width="32" height="32" />
@@ -1146,11 +1133,17 @@
         <span>Каталог</span>
       </button>
       <a class="tabbar__item" href="#">
-        <span class="tabbar__icon tabbar__icon--heart" aria-hidden="true"></span>
+        <span class="tabbar__icon-wrap">
+          <span class="tabbar__icon tabbar__icon--heart" aria-hidden="true"></span>
+          <span class="tabbar__badge" data-fav-badge>2</span>
+        </span>
         <span>Избранное</span>
       </a>
       <a class="tabbar__item" href="#">
-        <span class="tabbar__icon tabbar__icon--cart" aria-hidden="true"></span>
+        <span class="tabbar__icon-wrap">
+          <span class="tabbar__icon tabbar__icon--cart" aria-hidden="true"></span>
+          <span class="tabbar__badge" data-cart-badge hidden>0</span>
+        </span>
         <span>Корзина</span>
       </a>
       <a class="tabbar__item" href="#">
@@ -1183,6 +1176,20 @@
           <a href="#">Теннисная одежда</a>
           <a href="#">Другие виды спорта</a>
         </nav>
+      </div>
+    </div>
+
+    <div class="contacts-sheet" id="contacts-sheet" hidden>
+      <button class="contacts-sheet__backdrop" type="button" aria-label="Закрыть контакты" data-contacts-close></button>
+      <div
+        class="contacts-sheet__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="contacts-sheet-title"
+        tabindex="-1"
+      >
+        <h2 class="contacts-sheet__title" id="contacts-sheet-title">контакты</h2>
+        <div class="contacts-sheet__body" data-contacts-sheet-body></div>
       </div>
     </div>
 

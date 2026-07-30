@@ -169,8 +169,100 @@ function initMobileHeader() {
   });
 }
 
+function initContactsSheet() {
+  const sheet = qs("#contacts-sheet");
+  const panel = qs(".contacts-sheet__panel", sheet);
+  const body = qs("[data-contacts-sheet-body]", sheet);
+  const source = qs("[data-contacts-source]");
+  const openBtns = qsa("[data-contacts-open]");
+  let lastFocus = null;
+  let filled = false;
+  let closing = false;
+
+  if (!sheet || !panel || !body) return;
+
+  function fillBody() {
+    if (filled || !source) return;
+    body.replaceChildren(...[...source.children].map((node) => node.cloneNode(true)));
+    filled = true;
+  }
+
+  function lockBody(locked) {
+    document.body.classList.toggle("is-locked", locked);
+  }
+
+  function getFocusable(root) {
+    return qsa(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+      root
+    ).filter((el) => !el.hasAttribute("disabled") && el.getAttribute("aria-hidden") !== "true");
+  }
+
+  function openContactsSheet() {
+    fillBody();
+    lastFocus = document.activeElement;
+    closing = false;
+    sheet.hidden = false;
+    requestAnimationFrame(() => {
+      sheet.classList.add("is-open");
+    });
+    openBtns.forEach((btn) => btn.setAttribute("aria-expanded", "true"));
+    lockBody(true);
+    panel.focus();
+  }
+
+  function closeContactsSheet() {
+    if (sheet.hidden || closing) return;
+    closing = true;
+    sheet.classList.remove("is-open");
+    openBtns.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
+
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      sheet.hidden = true;
+      closing = false;
+      lockBody(false);
+      if (lastFocus && typeof lastFocus.focus === "function") {
+        lastFocus.focus();
+      }
+    };
+
+    panel.addEventListener("transitionend", finish, { once: true });
+    window.setTimeout(finish, 320);
+  }
+
+  openBtns.forEach((btn) => {
+    btn.addEventListener("click", openContactsSheet);
+  });
+
+  qsa("[data-contacts-close]").forEach((btn) => {
+    btn.addEventListener("click", closeContactsSheet);
+  });
+
+  sheet.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeContactsSheet();
+      return;
+    }
+    if (event.key !== "Tab" || sheet.hidden) return;
+    const focusable = getFocusable(panel);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+}
+
 function initFavorites() {
-  const badge = qs(".icon-btn__badge--fav");
+  const badges = qsa("[data-fav-badge]");
   const buttons = qsa(".product-card__fav");
 
   function syncButton(btn) {
@@ -181,9 +273,10 @@ function initFavorites() {
 
   function syncBadge() {
     const count = buttons.filter((btn) => btn.classList.contains("is-active")).length;
-    if (!badge) return;
-    badge.textContent = String(count);
-    badge.hidden = count <= 0;
+    badges.forEach((badge) => {
+      badge.textContent = String(count);
+      badge.hidden = count <= 0;
+    });
   }
 
   buttons.forEach((btn) => {
@@ -200,7 +293,32 @@ function initFavorites() {
   syncBadge();
 }
 
+function initCart() {
+  const badges = qsa("[data-cart-badge]");
+  let count = 0;
+
+  function syncBadge() {
+    badges.forEach((badge) => {
+      badge.textContent = String(count);
+      badge.hidden = count <= 0;
+    });
+  }
+
+  qsa(".product-card__cart").forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      count += 1;
+      syncBadge();
+    });
+  });
+
+  syncBadge();
+}
+
 initNavMenus();
 initCatalogMega();
 initMobileHeader();
+initContactsSheet();
 initFavorites();
+initCart();
