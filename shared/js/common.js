@@ -58,113 +58,187 @@ function initNavMenus() {
   });
 }
 
-function initCatalogMega() {
-  const wrap = qs(".header__catalog-wrap");
-  const trigger = qs(".header__catalog", wrap);
-  const panel = qs("#mega-menu");
-  if (!wrap || !trigger || !panel) return;
+function initCatalogSidebar() {
+  const sidebar = qs("#catalog-sidebar");
+  const panel = qs("[data-catalog-panel]", sidebar);
+  const col0 = qs('[data-catalog-col="0"]', sidebar);
+  const col1 = qs('[data-catalog-col="1"]', sidebar);
+  const col2 = qs('[data-catalog-col="2"]', sidebar);
+  const triggers = qsa("[data-catalog-open]");
+  if (!sidebar || !panel || !col0 || !col1 || !col2) return;
 
-  function setOpen(open) {
-    wrap.classList.toggle("is-open", open);
-    trigger.setAttribute("aria-expanded", String(open));
-    panel.setAttribute("aria-hidden", String(!open));
-  }
-
-  trigger.addEventListener("click", () => {
-    setOpen(!wrap.classList.contains("is-open"));
-  });
-
-  wrap.addEventListener("mouseenter", () => setOpen(true));
-  wrap.addEventListener("mouseleave", () => setOpen(false));
-  wrap.addEventListener("focusin", () => setOpen(true));
-
-  wrap.addEventListener("focusout", (event) => {
-    if (wrap.contains(event.relatedTarget)) return;
-    setOpen(false);
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") setOpen(false);
-  });
-}
-
-function initMobileHeader() {
-  const header = qs(".header");
-  const drawer = qs("#mobile-drawer");
-  const panel = qs(".drawer__panel", drawer);
-  const burger = qs(".header__burger[data-drawer-open]");
-  const searchInput = qs(".search__input");
   let lastFocus = null;
+  const hoverMode = () =>
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+    !window.matchMedia("(max-width: 860px)").matches;
+  const mobileNav = () => window.matchMedia("(max-width: 860px)").matches;
 
   function lockBody(locked) {
     document.body.classList.toggle("is-locked", locked);
   }
 
-  function getFocusable(root) {
-    return qsa(
-      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
-      root
-    ).filter((el) => !el.hasAttribute("disabled") && el.getAttribute("aria-hidden") !== "true");
+  function setDepth(depth) {
+    panel.dataset.depth = String(depth);
+    col1.hidden = depth < 1;
+    col2.hidden = depth < 2;
+    col0.classList.toggle("is-front", depth === 0);
+    col1.classList.toggle("is-front", depth === 1);
+    col2.classList.toggle("is-front", depth === 2);
   }
 
-  function openDrawer() {
-    if (!drawer || !panel) return;
+  function clearActive(col) {
+    qsa(".catalog-sidebar__item.is-active", col).forEach((el) => el.classList.remove("is-active"));
+  }
+
+  function fillCol(col, branchId, title, backLabel) {
+    const tpl = qs(`#catalog-branch-${branchId}`);
+    if (!tpl) return false;
+    col.innerHTML = "";
+    if (title && mobileNav()) {
+      const head = document.createElement("div");
+      head.className = "catalog-sidebar__subhead";
+
+      const back = document.createElement("button");
+      back.className = "catalog-sidebar__back-link";
+      back.type = "button";
+      back.setAttribute("data-catalog-back", "");
+      const backText = document.createElement("span");
+      backText.textContent = backLabel || "вернуться к главному меню";
+      back.innerHTML =
+        '<img class="catalog-sidebar__chevron catalog-sidebar__chevron--back" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />';
+      back.appendChild(backText);
+
+      const titleEl = document.createElement("p");
+      titleEl.className = "catalog-sidebar__section";
+      titleEl.textContent = title;
+
+      head.append(back, titleEl);
+      col.appendChild(head);
+    }
+    col.appendChild(tpl.content.cloneNode(true));
+    return true;
+  }
+
+  function openBranch(fromCol, item, nextColIndex) {
+    const branchId = item.getAttribute("data-catalog-branch");
+    if (!branchId) return;
+    const title = item.querySelector("span")?.textContent?.trim() || item.textContent.trim();
+    const nextCol = nextColIndex === 1 ? col1 : col2;
+    clearActive(fromCol);
+    item.classList.add("is-active");
+
+    let backLabel = "вернуться к главному меню";
+    if (nextColIndex === 2) {
+      const parentTitle =
+        qs(".catalog-sidebar__section", col1)?.textContent?.trim() ||
+        qs('[data-catalog-col="0"] .catalog-sidebar__item.is-active span', sidebar)?.textContent?.trim() ||
+        "меню";
+      backLabel = `вернуться к ${parentTitle.toLowerCase()}`;
+    }
+
+    if (!fillCol(nextCol, branchId, hoverMode() ? null : title, backLabel)) return;
+    setDepth(nextColIndex);
+    if (nextColIndex === 1) {
+      col2.innerHTML = "";
+      col2.hidden = true;
+      panel.dataset.depth = "1";
+      col2.classList.remove("is-front");
+      col1.classList.add("is-front");
+      col0.classList.remove("is-front");
+    }
+  }
+
+  function resetBranches() {
+    clearActive(col0);
+    clearActive(col1);
+    col1.innerHTML = "";
+    col2.innerHTML = "";
+    setDepth(0);
+  }
+
+  function openSidebar() {
     lastFocus = document.activeElement;
-    drawer.hidden = false;
-    burger?.setAttribute("aria-expanded", "true");
+    sidebar.hidden = false;
+    triggers.forEach((btn) => btn.setAttribute("aria-expanded", "true"));
     lockBody(true);
-    if (!panel.hasAttribute("tabindex")) {
-      panel.setAttribute("tabindex", "-1");
-    }
-    const focusable = getFocusable(panel);
-    (focusable[0] || panel).focus();
+    resetBranches();
+    panel.focus();
   }
 
-  function closeDrawer() {
-    if (!drawer || drawer.hidden) return;
-    drawer.hidden = true;
-    burger?.setAttribute("aria-expanded", "false");
+  function closeSidebar() {
+    if (sidebar.hidden) return;
+    sidebar.hidden = true;
+    triggers.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
     lockBody(false);
-    if (lastFocus && typeof lastFocus.focus === "function") {
-      lastFocus.focus();
-    }
+    resetBranches();
+    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
   }
 
-  qsa("[data-drawer-open]").forEach((btn) => {
-    btn.addEventListener("click", openDrawer);
+  triggers.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (sidebar.hidden) openSidebar();
+      else closeSidebar();
+    });
   });
 
-  qsa("[data-drawer-close]").forEach((btn) => {
-    btn.addEventListener("click", closeDrawer);
+  qsa("[data-catalog-close]", sidebar).forEach((btn) => {
+    btn.addEventListener("click", closeSidebar);
   });
 
-  drawer?.addEventListener("keydown", (event) => {
-    if (event.key !== "Tab" || !panel || drawer.hidden) return;
-    const focusable = getFocusable(panel);
-    if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
+  sidebar.addEventListener("mouseover", (event) => {
+    if (!hoverMode()) return;
+    const item = event.target.closest("[data-catalog-branch]");
+    if (!item || !sidebar.contains(item)) return;
+    const col = item.closest("[data-catalog-col]");
+    if (!col) return;
+    const colIndex = Number(col.getAttribute("data-catalog-col"));
+    if (colIndex === 0) openBranch(col0, item, 1);
+    if (colIndex === 1) openBranch(col1, item, 2);
+  });
+
+  sidebar.addEventListener("click", (event) => {
+    const back = event.target.closest("[data-catalog-back]");
+    if (back) {
+      const depth = Number(panel.dataset.depth || 0);
+      if (depth >= 2) {
+        clearActive(col1);
+        col2.innerHTML = "";
+        setDepth(1);
+      } else {
+        resetBranches();
+      }
+      return;
     }
+
+    if (hoverMode()) return;
+    const item = event.target.closest("[data-catalog-branch]");
+    if (!item || !sidebar.contains(item)) return;
+    const col = item.closest("[data-catalog-col]");
+    if (!col) return;
+    const colIndex = Number(col.getAttribute("data-catalog-col"));
+    if (colIndex === 0) openBranch(col0, item, 1);
+    if (colIndex === 1) openBranch(col1, item, 2);
   });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeSidebar();
+  });
+}
+
+function initMobileHeader() {
+  const header = qs(".header");
+  const searchInput = qs(".search__input");
 
   qsa("[data-search-toggle]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const open = header?.classList.toggle("is-search-open");
-      if (open) {
-        searchInput?.focus();
-      }
+      if (open) searchInput?.focus();
     });
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
-    closeDrawer();
     header?.classList.remove("is-search-open");
   });
 }
@@ -317,7 +391,7 @@ function initCart() {
 }
 
 initNavMenus();
-initCatalogMega();
+initCatalogSidebar();
 initMobileHeader();
 initContactsSheet();
 initFavorites();

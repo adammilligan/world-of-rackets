@@ -38,8 +38,8 @@
             type="button"
             aria-label="Открыть меню"
             aria-expanded="false"
-            aria-controls="mobile-drawer"
-            data-drawer-open
+            aria-controls="catalog-sidebar"
+            data-catalog-open
           >
             <span class="nav__catalog-icon" aria-hidden="true">
               <span></span><span></span><span></span>
@@ -55,70 +55,15 @@
               class="header__catalog"
               type="button"
               aria-expanded="false"
-              aria-controls="mega-menu"
-              aria-haspopup="true"
+              aria-controls="catalog-sidebar"
+              aria-haspopup="dialog"
+              data-catalog-open
             >
               <span class="nav__catalog-icon" aria-hidden="true">
                 <span></span><span></span><span></span>
               </span>
               Каталог
             </button>
-            <div class="mega" id="mega-menu" role="region" aria-label="Каталог" aria-hidden="true">
-              <div class="mega__col">
-                <p class="mega__title">Теннис</p>
-                <ul class="mega__list">
-                  <li><a href="#">Теннисные ракетки</a></li>
-                  <li><a href="#">Струны</a></li>
-                  <li><a href="#">Теннисные мячи</a></li>
-                  <li><a href="#">Грипы и овергрипы</a></li>
-                  <li><a href="#">Теннисные сумки</a></li>
-                  <li><a href="#">Обувь для тенниса</a></li>
-                  <li><a href="#">Одежда</a></li>
-                </ul>
-              </div>
-              <div class="mega__col">
-                <p class="mega__title">Падел</p>
-                <ul class="mega__list">
-                  <li><a href="#">Ракетки для падел</a></li>
-                  <li><a href="#">Мячи для падел</a></li>
-                  <li><a href="#">Сумки и чехлы</a></li>
-                  <li><a href="#">Обувь для падел</a></li>
-                  <li><a href="#">Аксессуары</a></li>
-                </ul>
-              </div>
-              <div class="mega__col">
-                <p class="mega__title">Бадминтон</p>
-                <ul class="mega__list">
-                  <li><a href="#">Ракетки</a></li>
-                  <li><a href="#">Воланы</a></li>
-                  <li><a href="#">Струны</a></li>
-                  <li><a href="#">Сумки</a></li>
-                  <li><a href="#">Обувь</a></li>
-                </ul>
-              </div>
-              <div class="mega__col">
-                <p class="mega__title">Настольный теннис</p>
-                <ul class="mega__list">
-                  <li><a href="#">Ракетки</a></li>
-                  <li><a href="#">Накладки</a></li>
-                  <li><a href="#">Мячи</a></li>
-                  <li><a href="#">Столы</a></li>
-                </ul>
-              </div>
-              <div class="mega__col mega__col--brands">
-                <p class="mega__title">Бренды</p>
-                <ul class="mega__list mega__list--brands">
-                  <li><a href="#">Wilson</a></li>
-                  <li><a href="#">Head</a></li>
-                  <li><a href="#">Babolat</a></li>
-                  <li><a href="#">Yonex</a></li>
-                  <li><a href="#">Asics</a></li>
-                  <li><a href="#">Bullpadel</a></li>
-                  <li><a href="#">Technifibre</a></li>
-                  <li><a href="#">Dunlop</a></li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -1126,7 +1071,7 @@
     </footer>
 
     <nav class="tabbar" aria-label="Мобильная навигация">
-      <button class="tabbar__item" type="button" data-drawer-open>
+      <button class="tabbar__item" type="button" data-catalog-open aria-controls="catalog-sidebar">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
         </svg>
@@ -1156,27 +1101,313 @@
       </button>
     </nav>
 
-    <div class="drawer" id="mobile-drawer" hidden>
-      <button class="drawer__backdrop" type="button" aria-label="Закрыть меню" data-drawer-close></button>
-      <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Каталог">
-        <div class="drawer__head">
-          <h2 class="drawer__title">Каталог</h2>
-          <button class="drawer__close" type="button" aria-label="Закрыть" data-drawer-close>
+    <div class="catalog-sidebar" id="catalog-sidebar" hidden>
+      <button class="catalog-sidebar__backdrop" type="button" aria-label="Закрыть каталог" data-catalog-close></button>
+      <aside
+        class="catalog-sidebar__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Каталог"
+        tabindex="-1"
+        data-catalog-panel
+      >
+        <div class="catalog-sidebar__head">
+          <p class="catalog-sidebar__title">
+            <span class="catalog-sidebar__title-text catalog-sidebar__title-text--desktop">Каталог</span>
+            <span class="catalog-sidebar__title-text catalog-sidebar__title-text--mobile">Мир ракеток</span>
+          </p>
+          <button class="catalog-sidebar__close" type="button" aria-label="Закрыть" data-catalog-close>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
             </svg>
           </button>
         </div>
-        <nav class="drawer__nav">
-          <a href="#">Большой теннис</a>
-          <a href="#">Падел</a>
-          <a href="#">Настольный теннис</a>
-          <a href="#">Бадминтон</a>
-          <a href="#">Теннисная обувь</a>
-          <a href="#">Теннисная одежда</a>
-          <a href="#">Другие виды спорта</a>
-        </nav>
-      </div>
+        <div class="catalog-sidebar__cols" data-catalog-cols>
+          <div class="catalog-sidebar__col" data-catalog-col="0">
+            <ul class="catalog-sidebar__list" data-catalog-root>
+              <li>
+                <button class="catalog-sidebar__item" type="button" data-catalog-branch="tennis">
+                  <span>Большой теннис</span>
+                  <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+                </button>
+              </li>
+              <li>
+                <button class="catalog-sidebar__item" type="button" data-catalog-branch="padel">
+                  <span>Падел</span>
+                  <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+                </button>
+              </li>
+              <li>
+                <button class="catalog-sidebar__item" type="button" data-catalog-branch="table">
+                  <span>Настольный теннис</span>
+                  <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+                </button>
+              </li>
+              <li>
+                <button class="catalog-sidebar__item" type="button" data-catalog-branch="badminton">
+                  <span>Бадминтон</span>
+                  <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+                </button>
+              </li>
+              <li>
+                <button class="catalog-sidebar__item" type="button" data-catalog-branch="shoes">
+                  <span>Теннисная обувь</span>
+                  <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+                </button>
+              </li>
+              <li>
+                <button class="catalog-sidebar__item" type="button" data-catalog-branch="clothes">
+                  <span>Теннисная одежда</span>
+                  <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+                </button>
+              </li>
+              <li>
+                <button class="catalog-sidebar__item" type="button" data-catalog-branch="other">
+                  <span>Другие виды спорта</span>
+                  <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+                </button>
+              </li>
+              <li>
+                <button class="catalog-sidebar__item" type="button" data-catalog-branch="brands">
+                  <span>Бренды</span>
+                  <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div class="catalog-sidebar__col" data-catalog-col="1" hidden></div>
+          <div class="catalog-sidebar__col" data-catalog-col="2" hidden></div>
+        </div>
+      </aside>
+
+      <template id="catalog-branch-tennis">
+        <ul class="catalog-sidebar__list">
+          <li>
+            <button class="catalog-sidebar__item" type="button" data-catalog-branch="tennis-adult">
+              <span>Взрослые ракетки</span>
+              <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+            </button>
+          </li>
+          <li>
+            <button class="catalog-sidebar__item" type="button" data-catalog-branch="tennis-kids">
+              <span>Детские ракетки</span>
+              <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+            </button>
+          </li>
+          <li>
+            <button class="catalog-sidebar__item" type="button" data-catalog-branch="tennis-strings">
+              <span>Теннисные струны</span>
+              <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+            </button>
+          </li>
+          <li>
+            <button class="catalog-sidebar__item" type="button" data-catalog-branch="tennis-balls">
+              <span>Теннисные мячи</span>
+              <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+            </button>
+          </li>
+          <li>
+            <button class="catalog-sidebar__item" type="button" data-catalog-branch="tennis-bags">
+              <span>Сумки. Рюкзаки. Чехлы.</span>
+              <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+            </button>
+          </li>
+          <li>
+            <button class="catalog-sidebar__item" type="button" data-catalog-branch="tennis-acc">
+              <span>Аксессуары</span>
+              <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+            </button>
+          </li>
+          <li><a class="catalog-sidebar__item" href="#">Натяжка струн</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Подарочные сертификаты</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-tennis-adult">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">7/6</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Babolat</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Head</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Prince</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Pro Kennex</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Tecnifibre</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Wilson</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Yonex</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-tennis-kids">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">7/6</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Babolat</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Head</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Pro Kennex</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Tecnifibre</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Tour Spin</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Wilson</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-tennis-strings">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Babolat</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Diadem</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Head</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Luxilon</a></li>
+          <li><a class="catalog-sidebar__item" href="#">MSV</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Tecnifibre</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Wilson</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-tennis-balls">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Babolat</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Dunlop</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Head</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Wilson</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-tennis-bags">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Babolat</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Head</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Wilson</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Yonex</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-tennis-acc">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Грипы и овергрипы</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Виброгасители</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Напульсники</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Кепки и повязки</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-padel">
+        <ul class="catalog-sidebar__list">
+          <li>
+            <button class="catalog-sidebar__item" type="button" data-catalog-branch="padel-rackets">
+              <span>Ракетки для падел</span>
+              <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+            </button>
+          </li>
+          <li><a class="catalog-sidebar__item" href="#">Мячи</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Сумки и чехлы</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Обувь для падел</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Аксессуары</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-padel-rackets">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Babolat</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Bullpadel</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Head</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Wilson</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-table">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Ракетки</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Накладки</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Мячи</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Столы</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Аксессуары</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-badminton">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Ракетки</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Воланы</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Струны</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Сумки</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Обувь</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-shoes">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Мужская обувь</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Женская обувь</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Детская обувь</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Все кроссовки</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-clothes">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Мужская одежда</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Женская одежда</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Детская одежда</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Вся одежда</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-other">
+        <ul class="catalog-sidebar__list">
+          <li>
+            <button class="catalog-sidebar__item" type="button" data-catalog-branch="other-squash">
+              <span>Сквош</span>
+              <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+            </button>
+          </li>
+          <li>
+            <button class="catalog-sidebar__item" type="button" data-catalog-branch="other-beach">
+              <span>Пляжный теннис</span>
+              <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+            </button>
+          </li>
+          <li>
+            <button class="catalog-sidebar__item" type="button" data-catalog-branch="other-pickle">
+              <span>Пиклбол</span>
+              <img class="catalog-sidebar__chevron" src="../../shared/images/icons/chevron-right.svg" alt="" width="8" height="14" />
+            </button>
+          </li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-other-squash">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Ракетки</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Мячи</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Сумки</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-other-beach">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Ракетки</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Мячи</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Сумки</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-other-pickle">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Ракетки</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Мячи</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Аксессуары</a></li>
+        </ul>
+      </template>
+
+      <template id="catalog-branch-brands">
+        <ul class="catalog-sidebar__list">
+          <li><a class="catalog-sidebar__item" href="#">Wilson</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Head</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Babolat</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Yonex</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Asics</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Bullpadel</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Tecnifibre</a></li>
+          <li><a class="catalog-sidebar__item" href="#">Dunlop</a></li>
+        </ul>
+      </template>
     </div>
 
     <div class="contacts-sheet" id="contacts-sheet" hidden>
