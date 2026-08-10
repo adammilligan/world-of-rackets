@@ -1,3 +1,60 @@
+function initProductGalleryThumbsScroll(root) {
+  const col = qs(".product-gallery__thumbs-col", root);
+  const thumbs = qs(".product-gallery__thumbs", root);
+  const prevBtn = qs("[data-thumbs-prev]", root);
+  const nextBtn = qs("[data-thumbs-next]", root);
+  if (!col || !thumbs || !prevBtn || !nextBtn) return;
+
+  const desktopMq = window.matchMedia("(min-width: 861px)");
+
+  function scrollStep() {
+    const thumb = qs(".product-gallery__thumb", thumbs);
+    if (!thumb) return 120;
+    const styles = getComputedStyle(thumbs);
+    const gap = parseFloat(styles.rowGap || styles.gap) || 8;
+    return thumb.offsetHeight + gap;
+  }
+
+  function update() {
+    if (!desktopMq.matches) {
+      col.classList.remove("is-scrollable");
+      prevBtn.hidden = true;
+      nextBtn.hidden = true;
+      return;
+    }
+
+    const canScroll = thumbs.scrollHeight > thumbs.clientHeight + 1;
+    col.classList.toggle("is-scrollable", canScroll);
+    prevBtn.hidden = !canScroll;
+    nextBtn.hidden = !canScroll;
+
+    if (!canScroll) return;
+
+    prevBtn.disabled = thumbs.scrollTop <= 1;
+    nextBtn.disabled = thumbs.scrollTop + thumbs.clientHeight >= thumbs.scrollHeight - 1;
+  }
+
+  prevBtn.addEventListener("click", () => {
+    thumbs.scrollBy({ top: -scrollStep(), behavior: "smooth" });
+  });
+
+  nextBtn.addEventListener("click", () => {
+    thumbs.scrollBy({ top: scrollStep(), behavior: "smooth" });
+  });
+
+  thumbs.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  desktopMq.addEventListener("change", update);
+
+  if (typeof ResizeObserver !== "undefined") {
+    const observer = new ResizeObserver(update);
+    observer.observe(thumbs);
+    qsa(".product-gallery__thumb", thumbs).forEach((thumb) => observer.observe(thumb));
+  }
+
+  update();
+}
+
 function initProductGallery(root) {
   const images = qsa("[data-gallery-image]", root);
   const thumbs = qsa("[data-gallery-thumb]", root);
@@ -58,6 +115,8 @@ function initProductGallery(root) {
     },
     { passive: true }
   );
+
+  initProductGalleryThumbsScroll(root);
 }
 
 function initProductTabs(root) {
