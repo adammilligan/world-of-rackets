@@ -100,7 +100,7 @@
 }
 
 .hero__arrow:hover {
-  background: rgba(255, 255, 255, 0.35);
+  background: #fff;
 }
 
 .hero__arrow--prev {
@@ -110,7 +110,6 @@
 
 .hero__arrow--next {
   right: 24px;
-  background: #fff;
 }
 
 .hero__dots {
