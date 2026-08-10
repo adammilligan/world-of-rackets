@@ -10,8 +10,8 @@
   --color-brand: #e43c62;
   --color-new: #009688;
   --color-sale: #96001c;
-  --color-footer: #232323;
-  --color-footer-muted: #ffffff;
+  --color-footer: #eef6a7;
+  --color-footer-muted: #32333e;
   --color-overlay: rgba(0, 0, 0, 0.45);
 
   --font-sans: "Manrope", sans-serif;
@@ -405,18 +405,37 @@ p {
   z-index: 1;
   box-sizing: border-box;
   display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
   align-content: start;
   gap: 16px;
   width: min(100%, 390px);
   height: min(682px, calc(100dvh - 24px));
   max-height: min(682px, calc(100dvh - 24px));
-  padding: 24px 16px calc(16px + env(safe-area-inset-bottom, 0px));
-  overflow: auto;
+  padding: 8px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+  overflow: hidden;
+  border: 0;
+  outline: none;
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
   background: #fff;
   transform: translateY(100%);
   transition: transform 0.28s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.contacts-sheet__panel:focus {
+  outline: none;
+}
+
+.contacts-sheet__handle {
+  justify-self: center;
+  width: 36px;
+  height: 5px;
+  margin-top: 4px;
+  border-radius: 100px;
+  background: #d1d1d6;
+  flex-shrink: 0;
+  touch-action: none;
 }
 
 .contacts-sheet.is-open .contacts-sheet__panel {
@@ -433,11 +452,15 @@ p {
   letter-spacing: 0;
   text-align: center;
   color: var(--color-text);
+  touch-action: none;
 }
 
 .contacts-sheet__body {
   display: grid;
   gap: 16px;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .header__actions {
@@ -680,6 +703,15 @@ details[open] > summary .dropdown-chevron {
   box-shadow: 0 8px 6px rgba(0, 0, 0, 0.15), 0 4px 2px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
   transform: translateX(-50%);
+}
+
+.nav__panel::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
 }
 
 .nav__item:hover .nav__panel,
@@ -1026,7 +1058,7 @@ details[open] > summary .dropdown-chevron {
   width: 100%;
   padding: 87px 155px 145px;
   background: var(--color-footer);
-  color: #fff;
+  color: var(--color-text);
 }
 
 .footer__mobile {
@@ -1069,13 +1101,13 @@ details[open] > summary .dropdown-chevron {
   font-size: 24px;
   font-weight: 600;
   line-height: normal;
-  color: #fff;
+  color: inherit;
   white-space: nowrap;
 }
 
 .footer__email,
 .footer__links a {
-  color: #fff;
+  color: inherit;
   transition: opacity 0.2s ease;
 }
 
@@ -1097,7 +1129,7 @@ details[open] > summary .dropdown-chevron {
   height: 32px;
   border-radius: 0;
   background: transparent;
-  color: #fff;
+  color: inherit;
   transition: opacity 0.2s ease;
 }
 
@@ -1124,7 +1156,7 @@ details[open] > summary .dropdown-chevron {
 
 .footer__heading {
   margin: 0 0 24px;
-  color: #fff;
+  color: inherit;
   font-family: var(--font-sans), sans-serif;
   font-size: 24px;
   font-weight: 600;
@@ -1144,7 +1176,7 @@ details[open] > summary .dropdown-chevron {
 }
 
 .footer__links a {
-  color: #fff;
+  color: inherit;
   font-family: var(--font-sans), sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -1453,7 +1485,7 @@ details[open] > summary .dropdown-chevron {
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
-    padding-top: 50px;
+    padding-top: env(safe-area-inset-top, 0px);
   }
 
   .catalog-sidebar__cols {
@@ -1588,10 +1620,6 @@ details[open] > summary .dropdown-chevron {
     display: none;
   }
 
-.header {
-    padding-top: 50px;
-  }
-
 .container {
     width: min(100% - 2 * var(--page-gutter), var(--container));
   }
@@ -1654,14 +1682,23 @@ details[open] > summary .dropdown-chevron {
     display: inline-flex;
   }
 
-.header__contacts-phone {
+  .header__contacts-phone {
     flex: none;
     display: block;
     width: 24px;
     height: 24px;
   }
 
-.logo__img {
+  .contacts-sheet {
+    justify-content: stretch;
+  }
+
+  .contacts-sheet__panel {
+    width: 100%;
+    max-width: none;
+  }
+
+  .logo__img {
     width: auto;
     height: 23px;
   }
@@ -1702,7 +1739,7 @@ details[open] > summary .dropdown-chevron {
 
 .footer {
     padding: 0 0 calc(24px + var(--tabbar-h));
-    background: #fff;
+    background: var(--color-footer);
     color: var(--color-text);
     overflow-x: clip;
     max-width: 100%;

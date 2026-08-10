@@ -9,7 +9,28 @@ function qsa(selector, root = document) {
 }
 
 function initNavMenus() {
+  const nav = qs(".nav");
   const items = qsa(".nav__item");
+  let closeTimer = null;
+
+  const hoverMode = () =>
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+    !window.matchMedia("(max-width: 860px)").matches;
+
+  function cancelClose() {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+  }
+
+  function scheduleClose() {
+    cancelClose();
+    closeTimer = window.setTimeout(() => {
+      items.forEach(closeItem);
+      closeTimer = null;
+    }, 140);
+  }
 
   function closeItem(item) {
     const trigger = qs(".nav__trigger", item);
@@ -32,6 +53,7 @@ function initNavMenus() {
 
   items.forEach((item) => {
     const trigger = qs(".nav__trigger", item);
+    const panel = qs(".nav__panel", item);
     if (!trigger) return;
 
     trigger.addEventListener("click", () => {
@@ -42,14 +64,28 @@ function initNavMenus() {
       }
     });
 
-    item.addEventListener("mouseenter", () => openItem(item));
-    item.addEventListener("mouseleave", () => closeItem(item));
+    if (hoverMode()) {
+      const handleEnter = () => {
+        cancelClose();
+        openItem(item);
+      };
+
+      trigger.addEventListener("mouseenter", handleEnter);
+      panel?.addEventListener("mouseenter", handleEnter);
+      trigger.addEventListener("mouseleave", scheduleClose);
+      panel?.addEventListener("mouseleave", scheduleClose);
+    }
+
     item.addEventListener("focusin", () => openItem(item));
 
     item.addEventListener("focusout", (event) => {
       if (item.contains(event.relatedTarget)) return;
       closeItem(item);
     });
+  });
+
+  nav?.addEventListener("mouseleave", () => {
+    if (hoverMode()) scheduleClose();
   });
 
   document.addEventListener("keydown", (event) => {
@@ -246,12 +282,17 @@ function initMobileHeader() {
 function initContactsSheet() {
   const sheet = qs("#contacts-sheet");
   const panel = qs(".contacts-sheet__panel", sheet);
+  const handle = qs(".contacts-sheet__handle", sheet);
+  const title = qs(".contacts-sheet__title", sheet);
   const body = qs("[data-contacts-sheet-body]", sheet);
   const source = qs("[data-contacts-source]");
   const openBtns = qsa("[data-contacts-open]");
   let lastFocus = null;
   let filled = false;
   let closing = false;
+  let dragging = false;
+  let dragMode = null;
+  let dragStartY = 0;
 
   if (!sheet || !panel || !body) return;
 
@@ -272,10 +313,28 @@ function initContactsSheet() {
     ).filter((el) => !el.hasAttribute("disabled") && el.getAttribute("aria-hidden") !== "true");
   }
 
+  function resetPanelDrag() {
+    dragging = false;
+    dragMode = null;
+    panel.style.transition = "";
+    panel.style.transform = "";
+  }
+
+  function finishClose() {
+    sheet.hidden = true;
+    closing = false;
+    resetPanelDrag();
+    lockBody(false);
+    if (lastFocus && typeof lastFocus.focus === "function") {
+      lastFocus.focus();
+    }
+  }
+
   function openContactsSheet() {
     fillBody();
     lastFocus = document.activeElement;
     closing = false;
+    resetPanelDrag();
     sheet.hidden = false;
     requestAnimationFrame(() => {
       sheet.classList.add("is-open");
@@ -288,6 +347,7 @@ function initContactsSheet() {
   function closeContactsSheet() {
     if (sheet.hidden || closing) return;
     closing = true;
+    resetPanelDrag();
     sheet.classList.remove("is-open");
     openBtns.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
 
@@ -295,16 +355,113 @@ function initContactsSheet() {
     const finish = () => {
       if (done) return;
       done = true;
-      sheet.hidden = true;
-      closing = false;
-      lockBody(false);
-      if (lastFocus && typeof lastFocus.focus === "function") {
-        lastFocus.focus();
-      }
+      finishClose();
     };
 
     panel.addEventListener("transitionend", finish, { once: true });
     window.setTimeout(finish, 320);
+  }
+
+  function closeContactsSheetFromDrag() {
+    if (sheet.hidden || closing) return;
+    closing = true;
+    dragging = false;
+    dragMode = null;
+    openBtns.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
+    sheet.classList.remove("is-open");
+    panel.style.transition = "transform 0.22s ease";
+    panel.style.transform = "translateY(100%)";
+
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      finishClose();
+    };
+
+    panel.addEventListener("transitionend", finish, { once: true });
+    window.setTimeout(finish, 320);
+  }
+
+  function initContactsSheetSwipe() {
+    const dismissThreshold = 80;
+
+    panel.addEventListener(
+      "touchstart",
+      (event) => {
+        if (event.touches.length !== 1 || closing || sheet.hidden) return;
+        dragStartY = event.touches[0].clientY;
+        dragMode = null;
+        dragging = false;
+      },
+      { passive: true }
+    );
+
+    panel.addEventListener(
+      "touchmove",
+      (event) => {
+        if (event.touches.length !== 1 || closing || sheet.hidden) return;
+        const currentY = event.touches[0].clientY;
+        const deltaY = currentY - dragStartY;
+
+        if (!dragMode) {
+          if (Math.abs(deltaY) < 8) return;
+          const fromHandle = handle && handle.contains(event.target);
+          const fromTitle = title && title.contains(event.target);
+          if ((fromHandle || fromTitle) && deltaY > 0) {
+            dragMode = "dismiss";
+          } else if (body.scrollTop <= 0 && deltaY > 0) {
+            dragMode = "dismiss";
+          } else {
+            dragMode = "scroll";
+            return;
+          }
+        }
+
+        if (dragMode !== "dismiss" || deltaY <= 0) return;
+
+        event.preventDefault();
+        dragging = true;
+        panel.style.transition = "none";
+        panel.style.transform = `translateY(${deltaY}px)`;
+      },
+      { passive: false }
+    );
+
+    function onTouchEnd(event) {
+      if (dragMode !== "dismiss") {
+        dragMode = null;
+        dragging = false;
+        return;
+      }
+
+      const endY = event.changedTouches[0]?.clientY ?? dragStartY;
+      const deltaY = endY - dragStartY;
+      dragMode = null;
+
+      if (!dragging || deltaY <= 0) {
+        resetPanelDrag();
+        return;
+      }
+
+      if (deltaY >= dismissThreshold) {
+        closeContactsSheetFromDrag();
+        return;
+      }
+
+      panel.style.transition = "transform 0.2s ease";
+      panel.style.transform = "translateY(0)";
+      panel.addEventListener(
+        "transitionend",
+        () => {
+          if (!closing) resetPanelDrag();
+        },
+        { once: true }
+      );
+    }
+
+    panel.addEventListener("touchend", onTouchEnd, { passive: true });
+    panel.addEventListener("touchcancel", onTouchEnd, { passive: true });
   }
 
   openBtns.forEach((btn) => {
@@ -333,6 +490,8 @@ function initContactsSheet() {
       first.focus();
     }
   });
+
+  initContactsSheetSwipe();
 }
 
 function initFavorites() {
