@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Мир ракеток — главная</title>
+    <title>Set Men CLAY White/Navy — Мир ракеток</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../shared/css/base.css" />
+    <link rel="stylesheet" href="../home/styles.css" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -46,7 +47,7 @@
             </span>
           </button>
 
-          <a class="logo" href="./" aria-label="Мир ракеток — на главную">
+          <a class="logo" href="../home/" aria-label="Мир ракеток — на главную">
             <img class="logo__img" src="../../shared/images/brand/logo.png" alt="" width="112" height="23" />
           </a>
 
@@ -466,103 +467,232 @@
       </nav>
     </header>
 
+    <main id="main-content" class="product-page product-page--store-only">
+      <div class="container product-page__container">
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+          <ol class="breadcrumbs__list">
+            <li class="breadcrumbs__item"><a href="../home/">Главная</a></li>
+            <li class="breadcrumbs__item"><a href="#">Каталог</a></li>
+            <li class="breadcrumbs__item"><a href="#">Теннисная обувь</a></li>
+            <li class="breadcrumbs__item"><a href="#">Мужская обувь</a></li>
+            <li class="breadcrumbs__item"><a href="#">JOMA</a></li>
+            <li class="breadcrumbs__item"><span aria-current="page">Set Men CLAY White/Navy</span></li>
+          </ol>
+        </nav>
 
-    <main id="main-content">
-      <section class="hero" aria-label="Баннер">
-        <div class="container">
-          <div class="hero__slider" role="region" aria-roledescription="карусель" aria-label="Промо-баннер">
-            <div class="hero__track">
-              <article class="hero__slide is-active">
+        <section class="product" aria-label="Карточка товара">
+          <div class="product__layout">
+            <div class="product-gallery" data-product-gallery>
+              <div class="product-gallery__thumbs" aria-label="Миниатюры">
+                <button class="product-gallery__thumb is-active" type="button" aria-label="Фото 1" data-gallery-thumb="0">
+                  <img src="../home/images/products/shoes.jpg" alt="" width="202" height="202" />
+                </button>
+                <button class="product-gallery__thumb" type="button" aria-label="Фото 2" data-gallery-thumb="1">
+                  <img src="../home/images/products/shoes.jpg" alt="" width="202" height="202" />
+                </button>
+                <button class="product-gallery__thumb" type="button" aria-label="Фото 3" data-gallery-thumb="2">
+                  <img src="../home/images/products/shoes.jpg" alt="" width="202" height="202" />
+                </button>
+                <button class="product-gallery__thumb" type="button" aria-label="Фото 4" data-gallery-thumb="3">
+                  <img src="../home/images/products/shoes.jpg" alt="" width="202" height="202" />
+                </button>
+              </div>
+
+              <div class="product-gallery__stage">
                 <img
-                  class="hero__image"
-                  src="./images/hero/slide-1.jpg"
-                  alt="Теннисные мячи и ракетка на корте"
+                  class="product-gallery__image is-active"
+                  src="../home/images/products/shoes.jpg"
+                  alt="Set Men CLAY White/Navy"
+                  width="730"
+                  height="730"
+                  data-gallery-image
                 />
-                <div class="hero__content">
-                  <h1 class="hero__title">Новая коллекция</h1>
-                  <a class="btn" href="#">В каталог</a>
-                </div>
-              </article>
-              <article class="hero__slide">
                 <img
-                  class="hero__image"
-                  src="./images/hero/slide-2.jpg"
-                  alt="Экипировка для ракетных видов спорта"
+                  class="product-gallery__image"
+                  src="../home/images/products/shoes.jpg"
+                  alt=""
+                  width="730"
+                  height="730"
+                  hidden
+                  data-gallery-image
                 />
-                <div class="hero__content">
-                  <p class="hero__title">Сезон скидок</p>
-                  <a class="btn" href="#">В каталог</a>
+                <img
+                  class="product-gallery__image"
+                  src="../home/images/products/shoes.jpg"
+                  alt=""
+                  width="730"
+                  height="730"
+                  hidden
+                  data-gallery-image
+                />
+                <img
+                  class="product-gallery__image"
+                  src="../home/images/products/shoes.jpg"
+                  alt=""
+                  width="730"
+                  height="730"
+                  hidden
+                  data-gallery-image
+                />
+                <button class="product-gallery__arrow product-gallery__arrow--prev" type="button" aria-label="Предыдущее фото" data-gallery-prev>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <button class="product-gallery__arrow product-gallery__arrow--next" type="button" aria-label="Следующее фото" data-gallery-next>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <div class="product-gallery__dots" aria-hidden="true">
+                  <span class="product-gallery__dot is-active"></span>
+                  <span class="product-gallery__dot"></span>
+                  <span class="product-gallery__dot"></span>
+                  <span class="product-gallery__dot"></span>
                 </div>
-              </article>
+                <button class="product-gallery__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
+                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
+                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
+                </button>
+              </div>
             </div>
 
-            <button class="hero__arrow hero__arrow--prev" type="button" aria-label="Предыдущий слайд">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
-            <button class="hero__arrow hero__arrow--next" type="button" aria-label="Следующий слайд">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
+            <div class="product-info">
+              <div class="product-info__sidebar">
+                <div class="product-info__block product-info__block--before">
+                  <h1 class="product-info__title">Set Men CLAY White/Navy</h1>
+                  <p class="product-info__meta">
+                    <span>Фирма-производитель:</span>
+                    <strong>JOMA</strong>
+                  </p>
+                  <p class="product-info__sku">Артикул: 2230–3224–1000</p>
 
-            <div class="hero__dots">
-              <button class="hero__dot is-active" type="button" aria-label="Слайд 1" aria-current="true"></button>
-              <button class="hero__dot" type="button" aria-label="Слайд 2"></button>
+                  <div class="product-store-sizes">
+                    <div class="product-store-sizes__block">
+                      <p class="product-store-sizes__label">Размер обуви на Тульской</p>
+                      <div class="product-store-sizes__grid" role="group" aria-label="Размер обуви на Тульской">
+                        <button class="product-size" type="button">40</button>
+                        <button class="product-size is-active" type="button" aria-pressed="true">41</button>
+                        <button class="product-size is-unavailable" type="button" disabled aria-disabled="true">42</button>
+                        <button class="product-size is-low" type="button">42,5</button>
+                        <button class="product-size" type="button">43</button>
+                        <button class="product-size" type="button">44</button>
+                      </div>
+                    </div>
+                    <div class="product-store-sizes__block">
+                      <p class="product-store-sizes__label">Размер обуви на Беломорской</p>
+                      <div class="product-store-sizes__grid" role="group" aria-label="Размер обуви на Беломорской">
+                        <button class="product-size" type="button">40</button>
+                        <button class="product-size is-active" type="button" aria-pressed="true">41</button>
+                        <button class="product-size is-unavailable" type="button" disabled aria-disabled="true">42</button>
+                        <button class="product-size is-low" type="button">42,5</button>
+                        <button class="product-size" type="button">43</button>
+                        <button class="product-size" type="button">44</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="product-info__price">
+                    <span class="product-info__price-current">4 890 ₽</span>
+                  </div>
+                </div>
+
+                <div class="product-info__block product-info__block--after">
+                  <div class="product-buy product-buy--inline product-buy--store-only">
+                    <div class="product-buy__actions">
+                      <p class="product-store-notice" role="note">Доставка обуви не производится!</p>
+                      <button class="product-buy__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
+                        <span class="product-buy__fav-icon" aria-hidden="true">
+                          <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="24" height="24" />
+                          <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="24" height="24" />
+                        </span>
+                        <span class="product-buy__fav-text">в избранное</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <section class="product-stores" aria-label="Магазины с товаром в наличии">
+                    <p class="product-stores__lead">Обувь можно приобрести в розничных магазинах:</p>
+                    <div class="product-stores__list" data-product-stores-list></div>
+                  </section>
+                </div>
+              </div>
+
+              <section class="product-details" aria-label="Описание и характеристики">
+                <div class="product-tabs product-tabs--accordion" data-product-tabs>
+                  <div class="product-tabs__nav product-tabs__nav--desktop" role="tablist" aria-label="Информация о товаре">
+                    <button class="product-tabs__btn" type="button" role="tab" aria-selected="false" data-tab="description">Описание</button>
+                    <button class="product-tabs__btn" type="button" role="tab" aria-selected="false" data-tab="specs">Характеристики</button>
+                  </div>
+                  <details class="product-acc" data-panel="description">
+                    <summary class="product-acc__summary">
+                      <span>Описание</span>
+                      <img class="product-acc__icon" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" aria-hidden="true" />
+                    </summary>
+                    <div class="product-acc__body">
+                      <div class="product-tabs__content">
+                        <p>Кроссовки Set Men CLAY White/Navy от JOMA созданы для игры на грунтовых кортах. Прочный верх из комбинированных материалов обеспечивает износостойкость и поддержку стопы при интенсивных движениях.</p>
+                        <p>Амортизирующая подошва снижает нагрузку на суставы, а рифлёный протектор даёт надёжное сцепление на грунте. Модель подойдёт игрокам, которым важны стабильность и комфорт в длительных матчах.</p>
+                        <p>Обувь доступна только в розничных магазинах «Мир ракеток» — выберите размер по наличию в ближайшем магазине.</p>
+                      </div>
+                    </div>
+                  </details>
+                  <details class="product-acc" data-panel="specs">
+                    <summary class="product-acc__summary">
+                      <span>Характеристики</span>
+                      <img class="product-acc__icon" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" aria-hidden="true" />
+                    </summary>
+                    <div class="product-acc__body">
+                      <dl class="product-specs-table">
+                        <div class="product-specs-table__row">
+                          <dt>Фирма-производитель</dt>
+                          <dd>JOMA</dd>
+                        </div>
+                        <div class="product-specs-table__row">
+                          <dt>Артикул</dt>
+                          <dd>2230–3224–1000</dd>
+                        </div>
+                        <div class="product-specs-table__row">
+                          <dt>Тип покрытия</dt>
+                          <dd>Грунт (CLAY)</dd>
+                        </div>
+                        <div class="product-specs-table__row">
+                          <dt>Пол</dt>
+                          <dd>Мужской</dd>
+                        </div>
+                        <div class="product-specs-table__row">
+                          <dt>Размерный ряд</dt>
+                          <dd>40–44</dd>
+                        </div>
+                        <div class="product-specs-table__row">
+                          <dt>Цвет</dt>
+                          <dd>White/Navy</dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </details>
+                </div>
+              </section>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section class="section">
-        <div class="container">
-          <h2 class="section__title">Популярные категории</h2>
-          <ul class="categories">
-            <li>
-              <a class="category-card" href="#">
-                <img class="category-card__image" src="./images/categories/rackets.jpg" alt="" />
-                <span class="category-card__title">Взрослые ракетки</span>
-              </a>
-            </li>
-            <li>
-              <a class="category-card" href="#">
-                <img class="category-card__image" src="./images/categories/padel.jpg" alt="" />
-                <span class="category-card__title">Ракетки для падел</span>
-              </a>
-            </li>
-            <li>
-              <a class="category-card" href="#">
-                <img class="category-card__image" src="./images/categories/table.jpg" alt="" />
-                <span class="category-card__title">Настольный теннис</span>
-              </a>
-            </li>
-            <li>
-              <a class="category-card" href="#">
-                <img class="category-card__image" src="./images/categories/rackets.jpg" alt="" />
-                <span class="category-card__title">Бадминтон</span>
-              </a>
-            </li>
-            <li>
-              <a class="category-card" href="#">
-                <img class="category-card__image" src="./images/categories/shoes.jpg" alt="" />
-                <span class="category-card__title">Обувь для тенниса</span>
-              </a>
-            </li>
-            <li>
-              <a class="category-card" href="#">
-                <img class="category-card__image" src="./images/categories/rackets.jpg" alt="" />
-                <span class="category-card__title">Теннисные сумки</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          <div class="product-buy product-buy--bar product-buy--store-only" data-product-buy-bar>
+            <div class="product-buy__actions">
+              <p class="product-store-notice" role="note">Доставка обуви не производится!</p>
+              <button class="product-buy__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
+                <span class="product-buy__fav-icon" aria-hidden="true">
+                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="24" height="24" />
+                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="24" height="24" />
+                </span>
+                <span class="product-buy__fav-text">в избранное</span>
+              </button>
+            </div>
+          </div>
+        </section>
 
-      <section class="section">
-        <div class="container">
-          <h2 class="section__title">Новинки</h2>
-          <div class="products-carousel" data-products-carousel role="region" aria-roledescription="карусель" aria-label="Новинки">
+        <section class="section product-related section--last" aria-label="Похожие товары">
+          <h2 class="section__title">С этим товаром покупают</h2>
+          <div class="products-carousel" data-products-carousel role="region" aria-roledescription="карусель" aria-label="С этим товаром покупают">
             <button class="products-carousel__arrow products-carousel__arrow--prev" type="button" aria-label="Предыдущие товары">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -570,170 +700,114 @@
             </button>
             <div class="products-carousel__viewport">
               <ul class="products">
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-              <div class="product-card__media">
-                <span class="badge badge--new">NEW</span>
-                <button class="product-card__fav is-active" type="button" aria-pressed="true" aria-label="Убрать из избранного">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/padel-racket.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light</span>
-                <ul class="product-card__specs">
-                  <li>фирма: название</li>
-                  <li>вес: значение</li>
-                  <li>баланс: значение</li>
-                  <li>жесткость: значение</li>
-                </ul>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <button class="btn product-card__cart" type="button">В корзину</button>
-            </li>
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/in-store.html" aria-label="Set Men CLAY White/Navy"></a>
-              <div class="product-card__media">
-                <span class="badge badge--new">NEW</span>
-                <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/shoes.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Set Men CLAY White/Navy</span>
-                <p class="product-card__sizes">40 40,5 41 42</p>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <p class="product-card__store-notice">Только в магазине</p>
-            </li>
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-              <div class="product-card__media">
-                <span class="badge badge--new">NEW</span>
-                <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/racket.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light</span>
-                <ul class="product-card__specs">
-                  <li>фирма: название</li>
-                  <li>вес: значение</li>
-                  <li>баланс: значение</li>
-                  <li>жесткость: значение</li>
-                </ul>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <button class="btn product-card__cart" type="button">В корзину</button>
-            </li>
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-              <div class="product-card__media">
-                <span class="badge badge--new">NEW</span>
-                <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/padel-racket.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light</span>
-                <ul class="product-card__specs">
-                  <li>фирма: название</li>
-                  <li>вес: значение</li>
-                  <li>баланс: значение</li>
-                  <li>жесткость: значение</li>
-                </ul>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <button class="btn product-card__cart" type="button">В корзину</button>
-            </li>
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-              <div class="product-card__media">
-                <span class="badge badge--new">NEW</span>
-                <button class="product-card__fav is-active" type="button" aria-pressed="true" aria-label="Убрать из избранного">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/padel-racket.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light</span>
-                <ul class="product-card__specs">
-                  <li>фирма: название</li>
-                  <li>вес: значение</li>
-                  <li>баланс: значение</li>
-                  <li>жесткость: значение</li>
-                </ul>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <button class="btn product-card__cart" type="button">В корзину</button>
-            </li>
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/" aria-label="Теннисные кроссовки"></a>
-              <div class="product-card__media">
-                <span class="badge badge--new">NEW</span>
-                <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/shoes.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Теннисные кроссовки</span>
-                <p class="product-card__sizes">40 40,5 41 42</p>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <button class="btn product-card__cart" type="button">В корзину</button>
-            </li>
+                <li class="product-card">
+                  <div class="product-card__shell">
+                    <a class="product-card__link" href="../home/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
+                    <div class="product-card__media">
+                      <span class="badge badge--new">NEW</span>
+                      <button class="product-card__fav is-active" type="button" aria-pressed="true" aria-label="Убрать из избранного">
+                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
+                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
+                      </button>
+                      <img src="../home/images/products/padel-racket.jpg" alt="" />
+                    </div>
+                    <div class="product-card__body">
+                      <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light 26</span>
+                      <ul class="product-card__specs">
+                        <li>фирма: название</li>
+                        <li>вес: значение</li>
+                        <li>баланс: значение</li>
+                      </ul>
+                      <div class="product-card__footer">
+                        <span class="product-card__price">
+                          13 900 ₽
+                          <span class="product-card__price-old">18 900 ₽</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn product-card__cart" type="button">В корзину</button>
+                </li>
+                <li class="product-card">
+                  <div class="product-card__shell">
+                    <a class="product-card__link" href="../home/" aria-label="Теннисные кроссовки"></a>
+                    <div class="product-card__media">
+                      <span class="badge badge--new">NEW</span>
+                      <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
+                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
+                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
+                      </button>
+                      <img src="../home/images/products/shoes.jpg" alt="" />
+                    </div>
+                    <div class="product-card__body">
+                      <span class="product-card__title">Теннисные кроссовки</span>
+                      <p class="product-card__sizes">40 40,5 41 42</p>
+                      <div class="product-card__footer">
+                        <span class="product-card__price">
+                          13 900 ₽
+                          <span class="product-card__price-old">18 900 ₽</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn product-card__cart" type="button">В корзину</button>
+                </li>
+                <li class="product-card">
+                  <div class="product-card__shell">
+                    <a class="product-card__link" href="../home/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
+                    <div class="product-card__media">
+                      <span class="badge badge--new">NEW</span>
+                      <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
+                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
+                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
+                      </button>
+                      <img src="../home/images/products/racket.jpg" alt="" />
+                    </div>
+                    <div class="product-card__body">
+                      <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light 26</span>
+                      <ul class="product-card__specs">
+                        <li>фирма: название</li>
+                        <li>вес: значение</li>
+                        <li>баланс: значение</li>
+                      </ul>
+                      <div class="product-card__footer">
+                        <span class="product-card__price">
+                          13 900 ₽
+                          <span class="product-card__price-old">18 900 ₽</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn product-card__cart" type="button">В корзину</button>
+                </li>
+                <li class="product-card">
+                  <div class="product-card__shell">
+                    <a class="product-card__link" href="../home/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
+                    <div class="product-card__media">
+                      <span class="badge badge--new">NEW</span>
+                      <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
+                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
+                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
+                      </button>
+                      <img src="../home/images/products/padel-racket.jpg" alt="" />
+                    </div>
+                    <div class="product-card__body">
+                      <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light 26</span>
+                      <ul class="product-card__specs">
+                        <li>фирма: название</li>
+                        <li>вес: значение</li>
+                        <li>баланс: значение</li>
+                      </ul>
+                      <div class="product-card__footer">
+                        <span class="product-card__price">
+                          13 900 ₽
+                          <span class="product-card__price-old">18 900 ₽</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn product-card__cart" type="button">В корзину</button>
+                </li>
               </ul>
             </div>
             <button class="products-carousel__arrow products-carousel__arrow--next" type="button" aria-label="Следующие товары">
@@ -742,205 +816,14 @@
               </svg>
             </button>
           </div>
-        </div>
-      </section>
-
-      <section class="section section--last">
-        <div class="container">
-          <h2 class="section__title">Распродажа</h2>
-          <div class="products-carousel" data-products-carousel role="region" aria-roledescription="карусель" aria-label="Распродажа">
-            <button class="products-carousel__arrow products-carousel__arrow--prev" type="button" aria-label="Предыдущие товары">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
-            <div class="products-carousel__viewport">
-              <ul class="products">
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-              <div class="product-card__media">
-                <span class="badge badge--sale">SALE</span>
-                <button class="product-card__fav is-active" type="button" aria-pressed="true" aria-label="Убрать из избранного">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/padel-racket.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light</span>
-                <ul class="product-card__specs">
-                  <li>фирма: название</li>
-                  <li>вес: значение</li>
-                  <li>баланс: значение</li>
-                  <li>жесткость: значение</li>
-                </ul>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <button class="btn product-card__cart" type="button">В корзину</button>
-            </li>
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-              <div class="product-card__media">
-                <span class="badge badge--sale">SALE</span>
-                <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/racket.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light</span>
-                <ul class="product-card__specs">
-                  <li>фирма: название</li>
-                  <li>вес: значение</li>
-                  <li>баланс: значение</li>
-                  <li>жесткость: значение</li>
-                </ul>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <button class="btn product-card__cart" type="button">В корзину</button>
-            </li>
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-              <div class="product-card__media">
-                <span class="badge badge--sale">SALE</span>
-                <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/padel-racket.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light</span>
-                <ul class="product-card__specs">
-                  <li>фирма: название</li>
-                  <li>вес: значение</li>
-                  <li>баланс: значение</li>
-                  <li>жесткость: значение</li>
-                </ul>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <button class="btn product-card__cart" type="button">В корзину</button>
-            </li>
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/" aria-label="Теннисные кроссовки"></a>
-              <div class="product-card__media">
-                <span class="badge badge--sale">SALE</span>
-                <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/shoes.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Теннисные кроссовки</span>
-                <p class="product-card__sizes">40 40,5 41 42</p>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <button class="btn product-card__cart" type="button">В корзину</button>
-            </li>
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-              <div class="product-card__media">
-                <span class="badge badge--sale">SALE</span>
-                <button class="product-card__fav is-active" type="button" aria-pressed="true" aria-label="Убрать из избранного">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/padel-racket.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light</span>
-                <ul class="product-card__specs">
-                  <li>фирма: название</li>
-                  <li>вес: значение</li>
-                  <li>баланс: значение</li>
-                  <li>жесткость: значение</li>
-                </ul>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <button class="btn product-card__cart" type="button">В корзину</button>
-            </li>
-<li class="product-card">
-              <div class="product-card__shell">
-              <a class="product-card__link" href="../product/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-              <div class="product-card__media">
-                <span class="badge badge--sale">SALE</span>
-                <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-                <img src="./images/products/racket.jpg" alt="" />
-              </div>
-              <div class="product-card__body">
-                <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light</span>
-                <ul class="product-card__specs">
-                  <li>фирма: название</li>
-                  <li>вес: значение</li>
-                  <li>баланс: значение</li>
-                  <li>жесткость: значение</li>
-                </ul>
-                <div class="product-card__footer">
-                  <span class="product-card__price">
-                    13 900 ₽
-                    <span class="product-card__price-old">18 900 ₽</span>
-                  </span>
-                </div>
-              </div>
-              </div>
-              <button class="btn product-card__cart" type="button">В корзину</button>
-            </li>
-              </ul>
-            </div>
-            <button class="products-carousel__arrow products-carousel__arrow--next" type="button" aria-label="Следующие товары">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
     <footer class="footer">
       <div class="footer__desktop">
         <div class="footer__grid">
           <div class="footer__brand">
-            <a class="logo logo--footer" href="./" aria-label="Мир ракеток — на главную">
+            <a class="logo logo--footer" href="../home/" aria-label="Мир ракеток — на главную">
               <img class="logo__img" src="../../shared/images/brand/logo.png" alt="" width="196" height="39" />
             </a>
             <div class="footer__contacts">

@@ -499,11 +499,6 @@
               </div>
 
               <div class="product-gallery__stage">
-                <span class="badge badge--sale">-17%</span>
-                <button class="product-gallery__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
                 <img
                   class="product-gallery__image is-active"
                   src="../home/images/products/racket.jpg"
@@ -555,69 +550,143 @@
                   <span class="product-gallery__dot"></span>
                   <span class="product-gallery__dot"></span>
                 </div>
+                <span class="badge badge--sale product-gallery__badge">-17%</span>
+                <button class="product-gallery__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
+                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
+                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
+                </button>
               </div>
             </div>
 
             <div class="product-info">
-              <h1 class="product-info__title">Boost Strike 2020</h1>
-              <p class="product-info__meta">
-                <span>Фирма-производитель:</span>
-                <strong>BULLPADEL</strong>
-              </p>
-              <p class="product-info__sku">Артикул: 2230–3224–1000</p>
+              <div class="product-info__sidebar">
+                <div class="product-info__block product-info__block--before">
+                  <h1 class="product-info__title">Boost Strike 2020</h1>
+                  <p class="product-info__meta">
+                    <span>Фирма-производитель:</span>
+                    <strong>BULLPADEL</strong>
+                  </p>
+                  <p class="product-info__sku">Артикул: 2230–3224–1000</p>
 
-              <ul class="product-specs">
-                <li class="product-specs__item">
-                  <span class="product-specs__icon" aria-hidden="true"></span>
-                  <span class="product-specs__label">вес (гр)</span>
-                  <strong class="product-specs__value">280</strong>
-                </li>
-                <li class="product-specs__item">
-                  <span class="product-specs__icon product-specs__icon--head" aria-hidden="true"></span>
-                  <span class="product-specs__label">головка (см²)</span>
-                  <strong class="product-specs__value">280</strong>
-                </li>
-                <li class="product-specs__item">
-                  <span class="product-specs__icon product-specs__icon--balance" aria-hidden="true"></span>
-                  <span class="product-specs__label">баланс (мм)</span>
-                  <strong class="product-specs__value">280</strong>
-                </li>
-              </ul>
+                  <ul class="product-specs">
+                    <li class="product-specs__item">
+                      <span class="product-specs__icon" aria-hidden="true"></span>
+                      <span class="product-specs__label">вес (гр)</span>
+                      <strong class="product-specs__value">280</strong>
+                    </li>
+                    <li class="product-specs__item">
+                      <span class="product-specs__icon product-specs__icon--head" aria-hidden="true"></span>
+                      <span class="product-specs__label">головка (см²)</span>
+                      <strong class="product-specs__value">280</strong>
+                    </li>
+                    <li class="product-specs__item">
+                      <span class="product-specs__icon product-specs__icon--balance" aria-hidden="true"></span>
+                      <span class="product-specs__label">баланс (мм)</span>
+                      <strong class="product-specs__value">280</strong>
+                    </li>
+                  </ul>
 
-              <div class="product-info__price">
-                <span class="product-info__price-current">12 900 ₽</span>
-                <span class="product-info__price-old">17 550 ₽</span>
-              </div>
+                  <div class="product-options">
+                    <p class="product-options__label">Размер ручки</p>
+                    <div class="product-options__sizes" role="group" aria-label="Размер ручки">
+                      <button class="product-size" type="button">0</button>
+                      <button class="product-size is-active" type="button" aria-pressed="true">1</button>
+                      <button class="product-size" type="button">2</button>
+                      <button class="product-size" type="button">3</button>
+                      <button class="product-size" type="button">4</button>
+                      <button class="product-size" type="button">5</button>
+                    </div>
+                  </div>
 
-              <div class="product-options">
-                <p class="product-options__label">Размер ручки</p>
-                <div class="product-options__sizes" role="group" aria-label="Размер ручки">
-                  <button class="product-size" type="button">0</button>
-                  <button class="product-size is-active" type="button" aria-pressed="true">1</button>
-                  <button class="product-size" type="button">2</button>
-                  <button class="product-size" type="button">3</button>
-                  <button class="product-size" type="button">4</button>
-                  <button class="product-size" type="button">5</button>
+                  <div class="product-info__price">
+                    <span class="badge badge--sale product-info__badge">-17%</span>
+                    <div class="product-info__price-row">
+                      <span class="product-info__price-current">12 900 ₽</span>
+                      <span class="product-info__price-old">17 550 ₽</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="product-info__block product-info__block--after">
+                  <div class="product-buy product-buy--inline">
+                    <div class="product-qty" data-product-qty>
+                      <button class="product-qty__btn" type="button" aria-label="Уменьшить количество" data-qty-minus>−</button>
+                      <span class="product-qty__value" data-qty-value>1</span>
+                      <button class="product-qty__btn" type="button" aria-label="Увеличить количество" data-qty-plus>+</button>
+                    </div>
+                    <div class="product-buy__actions">
+                      <button class="btn product-buy__cart" type="button">В корзину</button>
+                      <button class="product-buy__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
+                        <span class="product-buy__fav-icon" aria-hidden="true">
+                          <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="24" height="24" />
+                          <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="24" height="24" />
+                        </span>
+                        <span class="product-buy__fav-text">в избранное</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div class="product-buy product-buy--inline">
-                <div class="product-qty" data-product-qty>
-                  <button class="product-qty__btn" type="button" aria-label="Уменьшить количество" data-qty-minus>−</button>
-                  <span class="product-qty__value" data-qty-value>1</span>
-                  <button class="product-qty__btn" type="button" aria-label="Увеличить количество" data-qty-plus>+</button>
+              <section class="product-details" aria-label="Описание и характеристики">
+                <div class="product-tabs product-tabs--accordion" data-product-tabs>
+                  <div class="product-tabs__nav product-tabs__nav--desktop" role="tablist" aria-label="Информация о товаре">
+                    <button class="product-tabs__btn" type="button" role="tab" aria-selected="false" data-tab="description">Описание</button>
+                    <button class="product-tabs__btn" type="button" role="tab" aria-selected="false" data-tab="specs">Характеристики</button>
+                  </div>
+                  <details class="product-acc" data-panel="description">
+                    <summary class="product-acc__summary">
+                      <span>Описание</span>
+                      <img class="product-acc__icon" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" aria-hidden="true" />
+                    </summary>
+                    <div class="product-acc__body">
+                      <div class="product-tabs__content">
+                        <p>Ракетка Boost Strike 2020 на 100% состоит из графита, что обеспечивает отличную мощность и контроль. Подходит для игроков среднего и продвинутого уровня, которые ищут универсальную модель для динамичной игры.</p>
+                        <p>Технология Carbon Flex обеспечивает оптимальную жесткость и комфорт при ударе. Ракетка отлично подойдет для игроков, которые ценят баланс между силой и точностью.</p>
+                        <p>Модель рекомендована для любителей, которые хотят улучшить технику и получить стабильный результат на корте.</p>
+                      </div>
+                    </div>
+                  </details>
+                  <details class="product-acc" data-panel="specs">
+                    <summary class="product-acc__summary">
+                      <span>Характеристики</span>
+                      <img class="product-acc__icon" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" aria-hidden="true" />
+                    </summary>
+                    <div class="product-acc__body">
+                      <dl class="product-specs-table">
+                        <div class="product-specs-table__row">
+                          <dt>Фирма-производитель</dt>
+                          <dd>BULLPADEL</dd>
+                        </div>
+                        <div class="product-specs-table__row">
+                          <dt>Артикул</dt>
+                          <dd>2230–3224–1000</dd>
+                        </div>
+                        <div class="product-specs-table__row">
+                          <dt>Вес (гр)</dt>
+                          <dd>280</dd>
+                        </div>
+                        <div class="product-specs-table__row">
+                          <dt>Размер головки (см²)</dt>
+                          <dd>280</dd>
+                        </div>
+                        <div class="product-specs-table__row">
+                          <dt>Баланс (мм)</dt>
+                          <dd>280</dd>
+                        </div>
+                        <div class="product-specs-table__row">
+                          <dt>Материал</dt>
+                          <dd>Графит</dd>
+                        </div>
+                        <div class="product-specs-table__row">
+                          <dt>Размер ручки</dt>
+                          <dd>1–5</dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </details>
                 </div>
-                <div class="product-buy__actions">
-                  <button class="btn product-buy__cart" type="button">В корзину</button>
-                  <button class="product-buy__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                    <span class="product-buy__fav-icon" aria-hidden="true">
-                      <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="24" height="24" />
-                      <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="24" height="24" />
-                    </span>
-                    <span class="product-buy__fav-text">в избранное</span>
-                  </button>
-                </div>
-              </div>
+              </section>
             </div>
           </div>
 
@@ -636,54 +705,6 @@
                 </span>
                 <span class="product-buy__fav-text">в избранное</span>
               </button>
-            </div>
-          </div>
-        </section>
-
-        <section class="product-details" aria-label="Описание и характеристики">
-          <div class="product-tabs" data-product-tabs>
-            <div class="product-tabs__nav" role="tablist" aria-label="Информация о товаре">
-              <button class="product-tabs__btn is-active" type="button" role="tab" aria-selected="true" aria-controls="product-tab-description" id="product-tab-btn-description" data-tab="description">Описание</button>
-              <button class="product-tabs__btn" type="button" role="tab" aria-selected="false" aria-controls="product-tab-specs" id="product-tab-btn-specs" data-tab="specs">Характеристики</button>
-            </div>
-            <div class="product-tabs__panel is-active" role="tabpanel" id="product-tab-description" aria-labelledby="product-tab-btn-description" data-panel="description">
-              <div class="product-tabs__content">
-                <p>Ракетка Boost Strike 2020 на 100% состоит из графита, что обеспечивает отличную мощность и контроль. Подходит для игроков среднего и продвинутого уровня, которые ищут универсальную модель для динамичной игры.</p>
-                <p>Технология Carbon Flex обеспечивает оптимальную жесткость и комфорт при ударе. Ракетка отлично подойдет для игроков, которые ценят баланс между силой и точностью.</p>
-                <p>Модель рекомендована для любителей, которые хотят улучшить технику и получить стабильный результат на корте.</p>
-              </div>
-            </div>
-            <div class="product-tabs__panel" role="tabpanel" id="product-tab-specs" aria-labelledby="product-tab-btn-specs" data-panel="specs" hidden>
-              <dl class="product-specs-table">
-                <div class="product-specs-table__row">
-                  <dt>Фирма-производитель</dt>
-                  <dd>BULLPADEL</dd>
-                </div>
-                <div class="product-specs-table__row">
-                  <dt>Артикул</dt>
-                  <dd>2230–3224–1000</dd>
-                </div>
-                <div class="product-specs-table__row">
-                  <dt>Вес (гр)</dt>
-                  <dd>280</dd>
-                </div>
-                <div class="product-specs-table__row">
-                  <dt>Размер головки (см²)</dt>
-                  <dd>280</dd>
-                </div>
-                <div class="product-specs-table__row">
-                  <dt>Баланс (мм)</dt>
-                  <dd>280</dd>
-                </div>
-                <div class="product-specs-table__row">
-                  <dt>Материал</dt>
-                  <dd>Графит</dd>
-                </div>
-                <div class="product-specs-table__row">
-                  <dt>Размер ручки</dt>
-                  <dd>1–5</dd>
-                </div>
-              </dl>
             </div>
           </div>
         </section>

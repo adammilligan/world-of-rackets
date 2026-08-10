@@ -62,8 +62,10 @@ function initProductGallery(root) {
 
 function initProductTabs(root) {
   const buttons = qsa("[data-tab]", root);
-  const panels = qsa("[data-panel]", root);
-  if (!buttons.length || !panels.length) return;
+  const items = qsa(".product-acc", root);
+  if (!items.length) return;
+
+  const mq = window.matchMedia("(min-width: 861px)");
 
   function activate(name) {
     buttons.forEach((button) => {
@@ -71,11 +73,15 @@ function initProductTabs(root) {
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-selected", String(active));
     });
-    panels.forEach((panel) => {
-      const active = panel.getAttribute("data-panel") === name;
-      panel.classList.toggle("is-active", active);
-      panel.hidden = !active;
+    items.forEach((item) => {
+      item.open = item.getAttribute("data-panel") === name;
     });
+  }
+
+  function syncDesktopState() {
+    if (!mq.matches) return;
+    const openItem = items.find((item) => item.open);
+    activate(openItem?.getAttribute("data-panel") || "description");
   }
 
   buttons.forEach((button) => {
@@ -83,6 +89,22 @@ function initProductTabs(root) {
       activate(button.getAttribute("data-tab"));
     });
   });
+
+  mq.addEventListener("change", () => {
+    if (mq.matches) {
+      syncDesktopState();
+      return;
+    }
+    buttons.forEach((button) => {
+      button.classList.remove("is-active");
+      button.setAttribute("aria-selected", "false");
+    });
+    items.forEach((item) => {
+      item.open = false;
+    });
+  });
+
+  syncDesktopState();
 }
 
 function initProductQty() {
@@ -111,8 +133,10 @@ function initProductQty() {
 }
 
 function initProductSizes() {
-  qsa(".product-options__sizes").forEach((group) => {
+  qsa(".product-options__sizes, .product-store-sizes__grid").forEach((group) => {
     qsa(".product-size", group).forEach((button) => {
+      if (button.disabled || button.classList.contains("is-unavailable")) return;
+
       button.addEventListener("click", () => {
         qsa(".product-size", group).forEach((item) => {
           item.classList.remove("is-active");
@@ -123,6 +147,17 @@ function initProductSizes() {
       });
     });
   });
+}
+
+function initProductStores() {
+  const list = qs("[data-product-stores-list]");
+  const source = qs("[data-contacts-source]");
+  if (!list || !source || list.children.length) return;
+
+  const storeCards = [...source.querySelectorAll(".footer-acc__card")].slice(1);
+  if (!storeCards.length) return;
+
+  list.replaceChildren(...storeCards.map((card) => card.cloneNode(true)));
 }
 
 function initProductsCarousel(root) {
@@ -169,8 +204,32 @@ function initProductsCarousel(root) {
   update();
 }
 
+function initProductFavorites() {
+  const scope = qs(".product");
+  if (!scope) return;
+
+  const buttons = qsa(".product-card__fav", scope);
+  if (buttons.length < 2) return;
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      requestAnimationFrame(() => {
+        const active = button.classList.contains("is-active");
+        buttons.forEach((other) => {
+          if (other === button) return;
+          other.classList.toggle("is-active", active);
+          other.setAttribute("aria-pressed", String(active));
+          other.setAttribute("aria-label", active ? "Убрать из избранного" : "В избранное");
+        });
+      });
+    });
+  });
+}
+
 qsa("[data-product-gallery]").forEach(initProductGallery);
 qsa("[data-product-tabs]").forEach(initProductTabs);
 initProductQty();
 initProductSizes();
+initProductStores();
+initProductFavorites();
 qsa("[data-products-carousel]").forEach(initProductsCarousel);
