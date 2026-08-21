@@ -1,132 +1,166 @@
-# Изменения 10 августа
+# Изменения 21 августа
 
-Документ для разработчика Blade-шаблонов. Старые шаблоны уже свёрстаны — ниже список правок, которые нужно перенести.
+Документ для разработчика Blade-шаблонов. Ниже — правки, которые нужно перенести в Laravel.
 
-Затронутые файлы:
+Эталон вёрстки:
+- `pages/home/index.html` — футер
+- `pages/product/index.html` / `in-store.html` — футер + галерея
 - `shared/css/base.css`
-- `shared/js/common.js`
-- `pages/home/index.html` (только модалка контактов)
+- `pages/home/styles.css`
+- `pages/product/styles.css`
+- `pages/product/main.js`
 
 ---
 
-## 1. Модалка контактов (mobile)
+## 1. Ширина большого экрана: 1920
 
-### Разметка
-
-Внутри `.contacts-sheet__panel` **перед заголовком** добавить полоску для свайпа:
-
-```html
-<div class="contacts-sheet" id="contacts-sheet" hidden>
-  <button class="contacts-sheet__backdrop" type="button" aria-label="Закрыть контакты" data-contacts-close></button>
-  <div class="contacts-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="contacts-sheet-title" tabindex="-1">
-    <div class="contacts-sheet__handle" aria-hidden="true"></div>
-    <h2 class="contacts-sheet__title" id="contacts-sheet-title">контакты</h2>
-    <div class="contacts-sheet__body" data-contacts-sheet-body></div>
-  </div>
-</div>
-```
-
-### CSS
-
-- На mobile (≤860px) панель на **всю ширину экрана**.
-- Добавлен `.contacts-sheet__handle` — iOS-полоска сверху (36×5px, цвет `#d1d1d6`, по центру).
-- У `.contacts-sheet__panel` убран синий бордер при фокусе: `outline: none`, `border: 0`.
-- Прокрутка перенесена с панели на `.contacts-sheet__body` — заголовок и полоска остаются на месте.
-- Padding панели сверху уменьшен до `8px` (под полоску).
-
-### JS
-
-- Модалка закрывается **свайпом вниз** (не только по клику на backdrop).
-- Свайп работает с полоски, заголовка и тела (если контент прокручен до верха).
-- Порог закрытия — 80px; короткий свайп возвращает панель на место.
-- Логика в `initContactsSheetSwipe()` в `common.js`.
-
----
-
-## 2. Safe area (mobile)
-
-### CSS
-
-- **Убран** фиксированный `padding-top: 50px` у `.header` в `@media (max-width: 860px)`.
-- У `.catalog-sidebar__panel` на mobile: `padding-top: env(safe-area-inset-top, 0px)` вместо `50px`.
-
-### Поведение
-
-- Отступ сверху только под статус-бар / челку / Dynamic Island.
-- На устройствах без safe area отступ = 0.
-- В `<head>` должен быть `viewport-fit=cover`:
-
-```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-```
-
----
-
-## 3. Навбар — выпадающие меню (desktop)
-
-### Проблема
-
-При наведении меню появлялось, но исчезало при попытке перевести курсор в dropdown.
-
-### CSS
-
-Невидимый «мост» над панелью — заполняет зазор между пунктом меню и выпадающим блоком:
-
-```css
-.nav__panel::before {
-  content: "";
-  position: absolute;
-  top: -16px;
-  left: 0;
-  right: 0;
-  height: 16px;
-}
-```
-
-### JS
-
-- Hover работает только на desktop с мышью (`hover: hover`, `pointer: fine`), не на mobile.
-- `mouseenter` на `.nav__trigger` и `.nav__panel` — открывает меню.
-- `mouseleave` — закрытие с задержкой **140ms** (успевает перевести курсор на меню).
-- `mouseleave` на `.nav` — закрывает все меню.
-- Клик по пункту — по-прежнему toggle.
-
----
-
-## 4. Футер — новый цвет
-
-### CSS
+Было: `--container: 1648px` (+ gutters 40×2 = **1728**).  
+Стало: `--container: 1840px` (+ gutters 40×2 = **1920**).
 
 ```css
 :root {
-  --color-footer: #eef6a7;        /* было #232323 */
-  --color-footer-muted: #32333e;  /* было #ffffff */
+  --container: 1840px;
+  --page-gutter: 40px;
 }
 ```
 
-- Фон футера: `#EEF6A7` (desktop и mobile).
-- Текст и ссылки: `color: var(--color-text)` вместо белого.
-- Элементы `.footer__phone`, `.footer__email`, `.footer__links a`, `.footer__heading`, `.footer__social a` — `color: inherit`.
-- На mobile у `.footer` убран `background: #fff`, используется `var(--color-footer)`.
+В шаблонах/CSS убрать хардкод `1648px` — везде `var(--container)` (hero, категории, карусели на главной).
+
+У `.footer` на desktop padding: `87px var(--page-gutter) 145px` (вместо фиксированных `155px` по бокам).
+
+---
+
+## 2. Футер — новая структура (desktop)
+
+### Бренд-колонка (порядок сверху вниз)
+
+1. Логотип компании (`.logo--footer`, img **140×28**)
+2. Иконки мессенджеров (`.footer__social`)
+3. Телефон (`.footer__phone`, шрифт **20px**)
+4. Почта (`.footer__email`, шрифт **20px**)
+
+Обёртки `.footer__contacts` / `.footer__contacts-top` больше не нужны.
+
+```html
+<div class="footer__brand">
+  <a class="logo logo--footer" href="{{ route('home') }}" aria-label="Мир ракеток — на главную">
+    <img class="logo__img" src="..." alt="" width="140" height="28" />
+  </a>
+  <div class="footer__social">
+    <!-- telegram, bip -->
+  </div>
+  <a class="footer__phone" href="tel:...">+7 (919) 773-40-33</a>
+  <a class="footer__email" href="mailto:...">info@mirraketok.ru</a>
+</div>
+```
+
+### Навигация — 4 колонки × 2 ряда разделов
+
+Вместо старых «Информация» + «Каталог» — развёрнутые разделы. Каждая `.footer__col` содержит две `.footer__section` (верхний и нижний ряд).
+
+| Колонка | Верх | Низ |
+|---------|------|-----|
+| 1 | Информация | Бадминтон |
+| 2 | Большой теннис | Теннисная обувь |
+| 3 | Падел | Теннисная одежда |
+| 4 | Настольный теннис | Другие виды спорта |
+
+Полный список ссылок — в эталоне `pages/home/index.html` (блок `.footer__desktop`).
+
+Каркас:
+
+```html
+<nav class="footer__nav" aria-label="Разделы сайта">
+  <div class="footer__col">
+    <section class="footer__section">
+      <h3 class="footer__heading">Информация</h3>
+      <ul class="footer__links">...</ul>
+    </section>
+    <section class="footer__section">
+      <h3 class="footer__heading">Бадминтон</h3>
+      <ul class="footer__links">...</ul>
+    </section>
+  </div>
+  <!-- ещё 3 колонки -->
+</nav>
+```
+
+### Типографика и сетка (CSS уже в `base.css`)
+
+- Заголовки разделов `.footer__heading` — **18px** / weight 600
+- Ссылки `.footer__links a` — **14px** / weight 500, line-height 18px
+- Телефон / почта — **20px** / weight 600
+- Логотип футера — **140×28** (`.logo--footer .logo__img`)
+- Сетка: 5 равных колонок (бренд + 4 раздела), `column-gap: 24px`, `row-gap: 64px`
+- Нижний ряд разделов выровнен по одной линии (`grid-auto-flow: column`, у `.footer__nav` и `.footer__col` — `display: contents`)
+- Фон desktop: `var(--color-footer)` (`#eef6a7`)
+
+---
+
+## 3. Футер — mobile
+
+### Фон
+
+На `≤860px` у `.footer` фон **белый** (`var(--color-bg)`), не лаймовый.
+
+### Аккордеоны
+
+После блока «Контакты» (`data-contacts-source`) — не «Доставка / Гарантия / О нас», а разделы каталога:
+
+1. Информация  
+2. Большой теннис  
+3. Падел  
+4. Настольный теннис  
+5. Бадминтон  
+6. Теннисная обувь  
+7. Теннисная одежда  
+8. Другие виды спорта  
+
+В теле аккордеона — список `.footer__links` (те же ссылки, что в desktop).  
+Блок контактов (`data-contacts-source`) **не трогать** — от него зависит модалка контактов и страница «в магазине».
+
+---
+
+## 4. Карточка товара — одно фото
+
+Если у товара **одна** фотография, слева нет колонки миниатюр и скролла.
+
+### JS (`pages/product/main.js`)
+
+В `initProductGallery`: если `[data-gallery-image]` ≤ 1, на корне галереи вешается класс `product-gallery--single`, дальше инициализация слайдера/миниатюр не нужна.
+
+### CSS (`pages/product/styles.css`)
+
+```css
+.product-gallery--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.product-gallery--single .product-gallery__thumbs-col,
+.product-gallery--single .product-gallery__arrow,
+.product-gallery--single .product-gallery__dots {
+  display: none;
+}
+```
+
+В Blade: рендерить миниатюры / стрелки / точки только при `count($images) > 1` **или** оставить разметку и полагаться на JS+CSS (класс добавится сам).
 
 ---
 
 ## Чеклист для Blade
 
-- [ ] Модалка контактов: добавить `.contacts-sheet__handle` в partial
-- [ ] Подключить обновлённые стили модалки из `base.css`
-- [ ] Подключить обновлённый `initContactsSheet` / swipe из `common.js`
-- [ ] Header: убрать фиксированный `50px` padding-top на mobile
-- [ ] Catalog sidebar: `env(safe-area-inset-top)` вместо `50px`
-- [ ] Nav: добавить `::before`-мост у `.nav__panel`
-- [ ] Nav: обновить hover-логику в `initNavMenus`
-- [ ] Footer: фон `#EEF6A7`, тёмный текст
-- [ ] Meta viewport с `viewport-fit=cover`
+- [ ] `--container: 1840px`; убрать хардкод `1648px`
+- [ ] Partial футера desktop: новая бренд-колонка (лого → мессенджеры → телефон → почта)
+- [ ] Partial футера desktop: 4 колонки с двумя `.footer__section` в каждой
+- [ ] Partial футера mobile: аккордеоны по разделам каталога; контакты без изменений
+- [ ] Подключить обновлённый `base.css` (типографика, сетка, белый фон mobile)
+- [ ] Страница товара: поддержка `product-gallery--single` (JS + CSS)
+- [ ] Размеры логотипа футера: 140×28
 
 ---
 
-## Не менялось
+## Не менялось в этой итерации
 
-- Структура контента футера, карточек, пунктов навигации
-- Логика каталога, корзины, избранного
-- Tabbar и нижняя safe area (уже были настроены ранее)
+- Модалка контактов, safe area, hover навбара (уже перенесены ранее)
+- Tabbar, каталог, корзина, избранное
+- Логика `data-contacts-source` / contacts sheet

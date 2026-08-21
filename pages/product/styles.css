@@ -67,6 +67,16 @@
   container-type: inline-size;
 }
 
+.product-gallery--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.product-gallery--single .product-gallery__thumbs-col,
+.product-gallery--single .product-gallery__arrow,
+.product-gallery--single .product-gallery__dots {
+  display: none;
+}
+
 .product-gallery__thumbs-col {
   position: relative;
   min-height: 0;

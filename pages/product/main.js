@@ -63,6 +63,11 @@ function initProductGallery(root) {
   const nextBtn = qs("[data-gallery-next]", root);
   if (!images.length) return;
 
+  if (images.length <= 1) {
+    root.classList.add("product-gallery--single");
+    return;
+  }
+
   let index = images.findIndex((image) => image.classList.contains("is-active"));
   if (index < 0) index = 0;
 

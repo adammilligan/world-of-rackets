@@ -5,7 +5,7 @@
 .hero__slider {
   position: relative;
   width: 100%;
-  max-width: 1648px;
+  max-width: var(--container);
   height: 701px;
   margin-inline: auto;
   overflow: hidden;
@@ -167,7 +167,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  width: min(100%, 1648px);
+  width: min(100%, var(--container));
   height: 930px;
   margin-inline: auto;
   padding-inline: 124px;
@@ -221,7 +221,7 @@
 
 .products-carousel {
   position: relative;
-  width: min(100%, 1648px);
+  width: min(100%, var(--container));
   margin-inline: auto;
 }
 

@@ -18,7 +18,7 @@
   --font-display: "Manrope", sans-serif;
   --font-meta: "Montserrat", "Manrope", sans-serif;
 
-  --container: 1648px;
+  --container: 1840px;
   --page-gutter: 40px;
   --radius: 8px;
   --radius-sm: 4px;
@@ -169,8 +169,8 @@ p {
 }
 
 .logo--footer .logo__img {
-  width: 196px;
-  height: 39px;
+  width: 140px;
+  height: 28px;
   filter: none;
 }
 
@@ -1056,7 +1056,7 @@ details[open] > summary .dropdown-chevron {
 .footer {
   box-sizing: border-box;
   width: 100%;
-  padding: 87px 155px 145px;
+  padding: 87px var(--page-gutter) 145px;
   background: var(--color-footer);
   color: var(--color-text);
 }
@@ -1066,30 +1066,27 @@ details[open] > summary .dropdown-chevron {
 }
 
 .footer__grid {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  grid-auto-flow: column;
+  column-gap: 24px;
+  row-gap: 64px;
+  align-items: start;
   width: 100%;
 }
 
 .footer__brand {
   display: flex;
   flex-direction: column;
-  gap: 46px;
+  gap: 24px;
   align-items: flex-start;
-  width: 217px;
-  flex-shrink: 0;
+  grid-column: 1;
+  grid-row: 1 / -1;
+  min-width: 0;
 }
 
 .footer__contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  width: 100%;
-}
-
-.footer__contacts-top {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -1098,7 +1095,7 @@ details[open] > summary .dropdown-chevron {
 
 .footer__phone {
   font-family: var(--font-sans), sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   line-height: normal;
   color: inherit;
@@ -1144,21 +1141,22 @@ details[open] > summary .dropdown-chevron {
 }
 
 .footer__nav {
-  display: flex;
-  align-items: flex-start;
-  gap: 13px;
-  flex-shrink: 0;
+  display: contents;
 }
 
 .footer__col {
-  width: 345px;
+  display: contents;
+}
+
+.footer__section {
+  min-width: 0;
 }
 
 .footer__heading {
   margin: 0 0 24px;
   color: inherit;
   font-family: var(--font-sans), sans-serif;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
   font-style: normal;
   line-height: 100%;
@@ -1178,17 +1176,17 @@ details[open] > summary .dropdown-chevron {
 .footer__links a {
   color: inherit;
   font-family: var(--font-sans), sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   font-style: normal;
-  line-height: 20px;
+  line-height: 18px;
   letter-spacing: 0;
   vertical-align: middle;
 }
 
 .footer__email {
   font-family: var(--font-sans), sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   line-height: normal;
   white-space: nowrap;
@@ -1901,7 +1899,7 @@ details[open] > summary .dropdown-chevron {
 
 .footer {
     padding: 0 0 calc(24px + var(--tabbar-h));
-    background: var(--color-footer);
+    background: var(--color-bg);
     color: var(--color-text);
     overflow-x: clip;
     max-width: 100%;
@@ -1973,6 +1971,16 @@ details[open] > summary .dropdown-chevron {
     display: grid;
     gap: 12px;
     padding: 0 16px 16px;
+  }
+
+.footer-acc__body .footer__links {
+    gap: 12px;
+  }
+
+.footer-acc__body .footer__links a {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
   }
 
 .modal__actions {
