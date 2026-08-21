@@ -5,6 +5,7 @@
 Эталон вёрстки:
 - `pages/home/index.html` — футер
 - `pages/product/index.html` / `in-store.html` — футер + галерея
+- `pages/product/single.html` — карточка товара с **одним** фото (превью `product-gallery--single`)
 - `shared/css/base.css`
 - `pages/home/styles.css`
 - `pages/product/styles.css`
@@ -144,6 +145,13 @@
 ```
 
 В Blade: рендерить миниатюры / стрелки / точки только при `count($images) > 1` **или** оставить разметку и полагаться на JS+CSS (класс добавится сам).
+
+### Превью в вёрстке
+
+Файл `pages/product/single.html` — копия карточки товара с одним `data-gallery-image`.  
+Нужен только для проверки вида без миниатюр; в Laravel отдельный шаблон не обязателен — достаточно условия по числу фото.
+
+Открыть локально: `/pages/product/single.html`
 
 ---
 
