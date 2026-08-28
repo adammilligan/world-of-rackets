@@ -56,7 +56,17 @@ function initNavMenus() {
     const panel = qs(".nav__panel", item);
     if (!trigger) return;
 
-    trigger.addEventListener("click", () => {
+    trigger.addEventListener("click", (event) => {
+      // Desktop: hover opens menu; click on section link navigates.
+      if (hoverMode() && trigger.tagName === "A" && trigger.getAttribute("href")) {
+        return;
+      }
+      // Mobile / no-href: toggle panel; prevent navigation if submenu needed... 
+      // Top-level links still navigate to section catalog as requested.
+      if (trigger.tagName === "A" && trigger.getAttribute("href") && !hoverMode()) {
+        return;
+      }
+      event.preventDefault();
       if (item.classList.contains("is-open")) {
         closeItem(item);
       } else {

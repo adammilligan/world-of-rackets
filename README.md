@@ -3,11 +3,12 @@
 Документ для разработчика Blade-шаблонов. Ниже — правки, которые нужно перенести в Laravel.
 
 Эталон вёрстки:
-- `pages/home/index.html` — футер
-- `pages/product/index.html` / `in-store.html` — футер + галерея
-- `pages/product/single.html` — карточка товара с **одним** фото (превью `product-gallery--single`)
+- `pages/home/index.html` — футер, category-card → раздел
+- `pages/product/index.html` / `in-store.html` / `single.html` — PDP + крошки
+- `pages/catalog/index.html` — **каталог раздела** (эталон «Взрослые ракетки») + фильтры
+- `pages/catalog/styles.css` / `pages/catalog/main.js`
 - `shared/css/base.css`
-- `pages/home/styles.css`
+- `pages/home/styles.css` (карточки товаров)
 - `pages/product/styles.css`
 - `pages/product/main.js`
 
@@ -155,6 +156,65 @@
 
 ---
 
+## 5. Каталог раздела с фильтрами
+
+Отдельная страница раздела (не хаб «всего каталога»). URL общего каталога **нет**.
+
+Эталон: `pages/catalog/index.html` («Взрослые ракетки»).
+
+### Навигация
+
+```
+Главная → (клик по разделу) → /catalog/ (страница раздела) → карточка товара
+```
+
+- Крошки на разделе: `Главная` → `Большой теннис` (текст) → `Взрослые ракетки` (current). **Без пункта «Каталог».**
+- На PDP: убрать ссылку «Каталог»; «Взрослые ракетки» → route раздела.
+- Category-card «Взрослые ракетки» на главной ведёт на страницу раздела.
+
+### Desktop layout
+
+Сетка: слева подрубрики + фильтры (~288px), справа H1 + сортировка + `ul.products.products--grid` (3 колонки).
+
+Классы:
+- `.catalog-layout` / `.catalog-aside` / `.catalog-main`
+- `.catalog-subnav` — список подрубрик
+- `.catalog-filters` / `.filter-acc` — аккордеоны фильтров
+- `.catalog-sort` — dropdown сортировки
+- `.products--grid` — переопределяет карусельный `.products` из home CSS
+
+Фильтры (UI): бренд (radio) → при выборе появляется **Серия**; цена / вес / голова / баланс (range + inputs); размер ручки; материал; наличие струн; «Очистить фильтр».
+
+### Mobile (≤860px)
+
+- Сайдбар скрыт.
+- Кнопка «Фильтры» открывает `.filters-sheet` (bottom sheet); DOM фильтров переносится в sheet через JS.
+- Сетка 2 колонки.
+
+### JS (`pages/catalog/main.js`)
+
+- sort dropdown
+- brand → show/hide series
+- clear filters
+- filters sheet open/close + move panel
+
+Подключить: `base.css` + `home/styles.css` (карточки) + `catalog/styles.css` + `common.js` + `catalog/main.js`.
+
+Открыть локально: `/pages/catalog/`
+
+### Навигация с главной / mega-menu
+
+| Клик | URL |
+|------|-----|
+| Пункт меню «Падел» | `?section=padel` |
+| «Ракетки для падел» | `?section=padel-rackets` |
+| Бренд (напр. Bullpadel) | `?section=padel-rackets&brand=bullpadel` |
+
+`main.js` читает `section` + `brand` и обновляет заголовок, крошки, подрубрики и выбранный бренд.  
+`.nav__trigger` — ссылки; на desktop меню по hover, клик ведёт в раздел.
+
+---
+
 ## Чеклист для Blade
 
 - [ ] `--container: 1840px`; убрать хардкод `1648px`
@@ -164,11 +224,16 @@
 - [ ] Подключить обновлённый `base.css` (типографика, сетка, белый фон mobile)
 - [ ] Страница товара: поддержка `product-gallery--single` (JS + CSS)
 - [ ] Размеры логотипа футера: 140×28
+- [ ] Шаблон каталога раздела (не общий `/catalog` index-хаб)
+- [ ] Крошки без «Каталог»; ссылки раздел ↔ PDP
+- [ ] Фильтры desktop + mobile sheet; `catalog/styles.css` + `catalog/main.js`
+- [ ] Mega-menu / category-card → `section` + опционально `brand`
 
 ---
 
 ## Не менялось в этой итерации
 
 - Модалка контактов, safe area, hover навбара (уже перенесены ранее)
-- Tabbar, каталог, корзина, избранное
+- Tabbar, sidebar-каталог, корзина, избранное
 - Логика `data-contacts-source` / contacts sheet
+- Реальная серверная фильтрация/сортировка товаров (только UI)

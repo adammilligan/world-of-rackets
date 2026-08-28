@@ -647,6 +647,7 @@ p {
   line-height: 20px;
   letter-spacing: 0;
   text-transform: uppercase;
+  text-decoration: none;
   vertical-align: middle;
   white-space: nowrap;
   cursor: pointer;
