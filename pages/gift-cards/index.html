@@ -20,16 +20,16 @@
     <div class="topbar">
       <div class="topbar__inner">
         <p class="topbar__hours">с 10 до 21 без выходных</p>
-        <details class="topbar__contacts">
-          <summary>
-            контакты
-            <img class="dropdown-chevron" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" />
-          </summary>
-          <div class="topbar__contacts-panel">
-            <a href="tel:+74957774555">+7 (495) 777-45-55</a>
-            <a href="mailto:info@mirraketok.ru">info@mirraketok.ru</a>
-          </div>
-        </details>
+        <button
+          class="topbar__contacts-btn"
+          type="button"
+          aria-expanded="false"
+          aria-controls="contacts-sheet"
+          data-contacts-open
+        >
+          контакты
+          <img class="dropdown-chevron" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" />
+        </button>
       </div>
     </div>
     <header class="header">
@@ -482,12 +482,21 @@
           <div class="gift-cards-page__visual">
             <figure class="gift-cards-page__visual-box" aria-label="Подарочный сертификат «Мир ракеток»">
               <img
-                class="gift-cards-page__visual-image"
-                src="./images/certificate-visual-box.png"
+                class="gift-cards-page__visual-bg"
+                src="./images/certificate-visual-bg.png"
                 alt=""
                 width="804"
                 height="338"
                 decoding="async"
+              />
+              <img
+                class="gift-cards-page__visual-card"
+                src="./images/certificate-card.png"
+                alt=""
+                width="1056"
+                height="656"
+                decoding="async"
+                data-gift-card-image
               />
             </figure>
           </div>
@@ -495,7 +504,7 @@
           <div class="gift-cards-page__panel">
             <div class="gift-cards-page__intro">
               <h1 class="gift-cards-page__title">Подарочный сертификат</h1>
-              <p class="gift-cards-page__subtitle">Подарочный сертификат на&nbsp;любую покупку в&nbsp;магазинах «Мир ракеток»</p>
+              <p class="gift-cards-page__subtitle">Пластиковая подарочная карта для покупок в&nbsp;магазинах «Мир ракеток».</p>
             </div>
 
             <div class="gift-cards-page__denoms-block">
@@ -529,6 +538,25 @@
           </div>
         </div>
 
+        <ul class="gift-cards-page__features">
+          <li class="gift-cards-page__feature">
+            <strong class="gift-cards-page__feature-title">6&nbsp;месяцев</strong>
+            <p class="gift-cards-page__feature-text">Срок действия с&nbsp;даты покупки</p>
+          </li>
+          <li class="gift-cards-page__feature">
+            <strong class="gift-cards-page__feature-title">В&nbsp;магазинах «Мир ракеток»</strong>
+            <p class="gift-cards-page__feature-text">Сертификат действует в&nbsp;розничных магазинах</p>
+          </li>
+          <li class="gift-cards-page__feature">
+            <strong class="gift-cards-page__feature-title">Один раз</strong>
+            <p class="gift-cards-page__feature-text">Карта используется при покупке один раз</p>
+          </li>
+          <li class="gift-cards-page__feature">
+            <strong class="gift-cards-page__feature-title">Можно доплатить</strong>
+            <p class="gift-cards-page__feature-text">Если стоимость покупки выше номинала</p>
+          </li>
+        </ul>
+
         <div class="gift-cards-page__about">
           <section class="product-details gift-cards-page__details" aria-label="Описание">
             <div class="product-tabs product-tabs--accordion" data-product-tabs>
@@ -550,25 +578,6 @@
               </details>
             </div>
           </section>
-
-          <ul class="gift-cards-page__features">
-            <li class="gift-cards-page__feature">
-              <strong class="gift-cards-page__feature-title">6&nbsp;месяцев</strong>
-              <p class="gift-cards-page__feature-text">Срок действия с&nbsp;даты покупки</p>
-            </li>
-            <li class="gift-cards-page__feature">
-              <strong class="gift-cards-page__feature-title">В&nbsp;магазинах «Мир ракеток»</strong>
-              <p class="gift-cards-page__feature-text">Сертификат действует в&nbsp;розничных магазинах</p>
-            </li>
-            <li class="gift-cards-page__feature">
-              <strong class="gift-cards-page__feature-title">Один раз</strong>
-              <p class="gift-cards-page__feature-text">Карта используется при покупке один раз</p>
-            </li>
-            <li class="gift-cards-page__feature">
-              <strong class="gift-cards-page__feature-title">Можно доплатить</strong>
-              <p class="gift-cards-page__feature-text">Если стоимость покупки выше номинала</p>
-            </li>
-          </ul>
         </div>
 
         <div class="gift-cards-page__legal">
@@ -684,18 +693,17 @@
                   <li><a href="../stores/">Магазины</a></li>
                   <li><a href="../delivery/">Доставка</a></li>
                   <li><a href="../warranty/">Гарантия</a></li>
-                  <li><a href="#">Центр продаж теннисных мячей</a></li>
-                  <li><a href="./">Подарочные сертификаты</a></li>
+<li><a href="./">Подарочные сертификаты</a></li>
                   <li><a href="../privacy/">Политика конфиденциальности</a></li>
                 </ul>
               </section>
               <section class="footer__section">
                 <h3 class="footer__heading">Бадминтон</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Ракетки</a></li>
-                  <li><a href="#">Наборы</a></li>
-                  <li><a href="#">Воланы</a></li>
-                  <li><a href="#">Сумки. Рюкзаки. Чехлы</a></li>
+                  <li><a href="../catalog/?section=badminton-rackets">Ракетки</a></li>
+                  <li><a href="../catalog/?section=badminton">Наборы</a></li>
+                  <li><a href="../catalog/?section=badminton-shuttle">Воланы</a></li>
+                  <li><a href="../catalog/?section=badminton-bags">Сумки. Рюкзаки. Чехлы</a></li>
                 </ul>
               </section>
             </div>
@@ -704,20 +712,20 @@
               <section class="footer__section">
                 <h3 class="footer__heading">Большой теннис</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Взрослые ракетки</a></li>
-                  <li><a href="#">Детские ракетки</a></li>
-                  <li><a href="#">Теннисные мячи</a></li>
-                  <li><a href="#">Сумки. Рюкзаки. Чехлы</a></li>
-                  <li><a href="#">Теннисные струны</a></li>
-                  <li><a href="#">Аксессуары</a></li>
+                  <li><a href="../catalog/?section=tennis-adult">Взрослые ракетки</a></li>
+                  <li><a href="../catalog/?section=tennis-kids">Детские ракетки</a></li>
+                  <li><a href="../catalog/?section=tennis-balls">Теннисные мячи</a></li>
+                  <li><a href="../catalog/?section=tennis-bags">Сумки. Рюкзаки. Чехлы</a></li>
+                  <li><a href="../catalog/?section=tennis-strings">Теннисные струны</a></li>
+                  <li><a href="../catalog/?section=tennis-acc">Аксессуары</a></li>
                 </ul>
               </section>
               <section class="footer__section">
                 <h3 class="footer__heading">Теннисная обувь</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Мужские кроссовки</a></li>
-                  <li><a href="#">Женские кроссовки</a></li>
-                  <li><a href="#">Детские кроссовки</a></li>
+                  <li><a href="../catalog/?section=shoes-men">Мужские кроссовки</a></li>
+                  <li><a href="../catalog/?section=shoes-women">Женские кроссовки</a></li>
+                  <li><a href="../catalog/?section=shoes-kids">Детские кроссовки</a></li>
                 </ul>
               </section>
             </div>
@@ -726,20 +734,20 @@
               <section class="footer__section">
                 <h3 class="footer__heading">Падел</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Взрослые ракетки</a></li>
-                  <li><a href="#">Детские ракетки</a></li>
-                  <li><a href="#">Мячи для падел</a></li>
-                  <li><a href="#">Сумки. Рюкзаки. Чехлы</a></li>
-                  <li><a href="#">Аксессуары</a></li>
+                  <li><a href="../catalog/?section=padel-rackets">Взрослые ракетки</a></li>
+                  <li><a href="../catalog/?section=padel-rackets">Детские ракетки</a></li>
+                  <li><a href="../catalog/?section=padel-balls">Мячи для падел</a></li>
+                  <li><a href="../catalog/?section=padel-bags">Сумки. Рюкзаки. Чехлы</a></li>
+                  <li><a href="../catalog/?section=padel-acc">Аксессуары</a></li>
                 </ul>
               </section>
               <section class="footer__section">
                 <h3 class="footer__heading">Теннисная одежда</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Мужская одежда</a></li>
-                  <li><a href="#">Женская одежда</a></li>
-                  <li><a href="#">Одежда для мальчиков</a></li>
-                  <li><a href="#">Одежда для девочек</a></li>
+                  <li><a href="../catalog/?section=apparel-men">Мужская одежда</a></li>
+                  <li><a href="../catalog/?section=apparel-women">Женская одежда</a></li>
+                  <li><a href="../catalog/?section=apparel-kids">Одежда для мальчиков</a></li>
+                  <li><a href="../catalog/?section=apparel-kids">Одежда для девочек</a></li>
                 </ul>
               </section>
             </div>
@@ -748,30 +756,30 @@
               <section class="footer__section">
                 <h3 class="footer__heading">Настольный теннис</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Ракетки готовые</a></li>
-                  <li><a href="#">Ракетки собранные</a></li>
-                  <li><a href="#">Сборки чемпионов</a></li>
-                  <li><a href="#">Основания</a></li>
-                  <li><a href="#">Накладки</a></li>
-                  <li><a href="#">Наборы</a></li>
-                  <li><a href="#">Мячи</a></li>
-                  <li><a href="#">Сетки</a></li>
-                  <li><a href="#">Чехлы для ракеток</a></li>
-                  <li><a href="#">Аксессуары</a></li>
+                  <li><a href="../catalog/?section=table-rackets">Ракетки готовые</a></li>
+                  <li><a href="../catalog/?section=table-rackets">Ракетки собранные</a></li>
+                  <li><a href="../catalog/?section=table-rackets">Сборки чемпионов</a></li>
+                  <li><a href="../catalog/?section=table-rackets">Основания</a></li>
+                  <li><a href="../catalog/?section=table-rubbers">Накладки</a></li>
+                  <li><a href="../catalog/?section=table-rackets">Наборы</a></li>
+                  <li><a href="../catalog/?section=table-balls">Мячи</a></li>
+                  <li><a href="../catalog/?section=table-acc">Сетки</a></li>
+                  <li><a href="../catalog/?section=table-acc">Чехлы для ракеток</a></li>
+                  <li><a href="../catalog/?section=table-acc">Аксессуары</a></li>
                 </ul>
               </section>
               <section class="footer__section">
                 <h3 class="footer__heading">Другие виды спорта</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Кроссовки для бега</a></li>
-                  <li><a href="#">Бутсы футбольные</a></li>
-                  <li><a href="#">Сквош</a></li>
-                  <li><a href="#">Кроссминтон</a></li>
-                  <li><a href="#">Пляжный теннис</a></li>
-                  <li><a href="#">Фрисби</a></li>
-                  <li><a href="#">Мячи футбольные</a></li>
-                  <li><a href="#">Мячи волейбольные</a></li>
-                  <li><a href="#">Мячи баскетбольные</a></li>
+                  <li><a href="../catalog/?section=other">Кроссовки для бега</a></li>
+                  <li><a href="../catalog/?section=other">Бутсы футбольные</a></li>
+                  <li><a href="../catalog/?section=squash">Сквош</a></li>
+                  <li><a href="../catalog/?section=other">Кроссминтон</a></li>
+                  <li><a href="../catalog/?section=beach-tennis">Пляжный теннис</a></li>
+                  <li><a href="../catalog/?section=other">Фрисби</a></li>
+                  <li><a href="../catalog/?section=other">Мячи футбольные</a></li>
+                  <li><a href="../catalog/?section=other">Мячи волейбольные</a></li>
+                  <li><a href="../catalog/?section=other">Мячи баскетбольные</a></li>
                 </ul>
               </section>
             </div>

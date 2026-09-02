@@ -272,6 +272,77 @@ function initCatalogSidebar() {
   });
 }
 
+let mobileSearchScrollY = 0;
+let mobileSearchOverlay = null;
+let mobileSearchTouchLock = null;
+const mobileSearchScreenMq = window.matchMedia("(max-width: 860px)");
+
+function ensureMobileSearchOverlay() {
+  if (mobileSearchOverlay) return mobileSearchOverlay;
+  mobileSearchOverlay = document.createElement("div");
+  mobileSearchOverlay.className = "mobile-search-screen";
+  mobileSearchOverlay.hidden = true;
+  mobileSearchOverlay.setAttribute("aria-hidden", "true");
+  document.body.appendChild(mobileSearchOverlay);
+  return mobileSearchOverlay;
+}
+
+function setMobileSearchTouchLock(active) {
+  if (active && !mobileSearchTouchLock) {
+    mobileSearchTouchLock = (event) => {
+      if (!document.body.classList.contains("is-mobile-search-open")) return;
+      if (event.target.closest(".search-suggest__scroll")) return;
+      event.preventDefault();
+    };
+    document.addEventListener("touchmove", mobileSearchTouchLock, { passive: false });
+    return;
+  }
+
+  if (!active && mobileSearchTouchLock) {
+    document.removeEventListener("touchmove", mobileSearchTouchLock);
+    mobileSearchTouchLock = null;
+  }
+}
+
+function clearMobileSearchViewportVars() {
+  document.documentElement.style.removeProperty("--mobile-vv-offset-top");
+  document.documentElement.style.removeProperty("--mobile-vv-height");
+  document.documentElement.style.removeProperty("--mobile-search-panel-top");
+  document.documentElement.style.removeProperty("--mobile-search-panel-h");
+}
+
+function setMobileSearchScreen(open) {
+  if (!mobileSearchScreenMq.matches) {
+    if (!open) {
+      document.documentElement.classList.remove("is-mobile-search-open");
+      document.body.classList.remove("is-mobile-search-open");
+      clearMobileSearchViewportVars();
+      setMobileSearchTouchLock(false);
+      mobileSearchOverlay?.remove();
+      mobileSearchOverlay = null;
+    }
+    return;
+  }
+
+  if (open) {
+    mobileSearchScrollY = window.scrollY;
+    ensureMobileSearchOverlay();
+    document.documentElement.classList.add("is-mobile-search-open");
+    document.body.classList.add("is-mobile-search-open");
+    mobileSearchOverlay.hidden = false;
+    setMobileSearchTouchLock(true);
+    window.worSearch?.syncPanel?.();
+    return;
+  }
+
+  document.documentElement.classList.remove("is-mobile-search-open");
+  document.body.classList.remove("is-mobile-search-open");
+  if (mobileSearchOverlay) mobileSearchOverlay.hidden = true;
+  setMobileSearchTouchLock(false);
+  clearMobileSearchViewportVars();
+  window.scrollTo(0, mobileSearchScrollY);
+}
+
 function initMobileHeader() {
   const header = qs(".header");
   const searchInput = qs(".search__input");
@@ -279,14 +350,701 @@ function initMobileHeader() {
   qsa("[data-search-toggle]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const open = header?.classList.toggle("is-search-open");
-      if (open) searchInput?.focus();
+      setMobileSearchScreen(open);
+      if (open) {
+        window.worSearch?.openIdle?.();
+        requestAnimationFrame(() => window.worSearch?.syncPanel?.());
+      } else {
+        window.worSearch?.close();
+      }
     });
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
-    header?.classList.remove("is-search-open");
+    if (!header?.classList.contains("is-search-open")) return;
+    header.classList.remove("is-search-open");
+    setMobileSearchScreen(false);
+    window.worSearch?.close();
   });
+}
+
+function getSharedAssetPath(relativePath) {
+  const link = qs('link[href*="shared/css/base.css"]');
+  const href = link?.getAttribute("href") || "../../shared/css/base.css";
+  const marker = "shared/";
+  const index = href.indexOf(marker);
+  if (index === -1) return `../../shared/${relativePath}`;
+  return `${href.slice(0, index + marker.length)}${relativePath}`;
+}
+
+function getPageProductImage(imagePath) {
+  const match = window.location.pathname.match(/\/pages\/([^/]+)\//);
+  const page = match?.[1] || "home";
+  if (page === "home") return `./images/${imagePath}`;
+  return `../home/images/${imagePath}`;
+}
+
+const SEARCH_INDEX = {
+  products: [
+    {
+      title: "Ракетка Babolat Pure Drive Team",
+      brand: "Babolat",
+      price: "12 990 ₽",
+      href: "../product/",
+      image: "products/cart-babolat.png",
+      terms: ["babolat", "pure", "drive", "team", "ракетка", "теннис"],
+    },
+    {
+      title: "Ракетка Babolat Pure Aero",
+      brand: "Babolat",
+      price: "15 490 ₽",
+      href: "../product/",
+      image: "products/cart-babolat.png",
+      terms: ["babolat", "pure", "aero", "ракетка", "теннис"],
+    },
+    {
+      title: "Ракетка Babolat Pure Drive 2024",
+      brand: "Babolat",
+      price: "18 900 ₽",
+      href: "../product/",
+      image: "products/cart-babolat.png",
+      terms: ["babolat", "pure", "drive", "2024", "ракетка", "теннис"],
+    },
+    {
+      title: "Ракетка Babolat Boost Drive",
+      brand: "Babolat",
+      price: "9 990 ₽",
+      href: "../product/",
+      image: "products/cart-babolat.png",
+      terms: ["babolat", "boost", "drive", "ракетка", "теннис"],
+    },
+  ],
+  categories: [
+    {
+      title: "Взрослые теннисные ракетки",
+      href: "../catalog/?section=tennis-adult",
+      terms: ["взрослые", "теннис", "ракетки", "ракетка"],
+    },
+    {
+      title: "Теннисные сумки",
+      href: "../catalog/?section=tennis-bags",
+      terms: ["теннис", "сумки", "сумка", "bag"],
+    },
+  ],
+  brands: [
+    {
+      title: "Babolat",
+      href: "../catalog/?section=tennis-adult&brand=babolat",
+      terms: ["babolat", "баболат"],
+    },
+  ],
+};
+
+function normalizeSearchQuery(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
+}
+
+function matchesSearchQuery(query, terms = [], title = "") {
+  if (!query) return false;
+  const haystack = `${title} ${terms.join(" ")}`.toLowerCase();
+  return haystack.includes(query);
+}
+
+function filterSearchCategories(query, hasOtherMatches) {
+  const matched = SEARCH_INDEX.categories.filter((item) =>
+    matchesSearchQuery(query, [...item.terms], item.title)
+  );
+  if (matched.length) return matched;
+  if (hasOtherMatches) return SEARCH_INDEX.categories;
+  return [];
+}
+
+function buildSearchResultsUrl(query) {
+  return `../search/?q=${encodeURIComponent(query.trim())}`;
+}
+
+const FOOTER_CATALOG_SECTIONS = {
+  Бадминтон: {
+    Ракетки: "badminton-rackets",
+    Наборы: "badminton",
+    Воланы: "badminton-shuttle",
+    "Сумки. Рюкзаки. Чехлы": "badminton-bags",
+  },
+  "Большой теннис": {
+    "Взрослые ракетки": "tennis-adult",
+    "Детские ракетки": "tennis-kids",
+    "Теннисные мячи": "tennis-balls",
+    "Сумки. Рюкзаки. Чехлы": "tennis-bags",
+    "Теннисные струны": "tennis-strings",
+    Аксессуары: "tennis-acc",
+  },
+  "Теннисная обувь": {
+    "Мужские кроссовки": "shoes-men",
+    "Женские кроссовки": "shoes-women",
+    "Детские кроссовки": "shoes-kids",
+  },
+  Падел: {
+    "Взрослые ракетки": "padel-rackets",
+    "Детские ракетки": "padel-rackets",
+    "Мячи для падел": "padel-balls",
+    "Сумки. Рюкзаки. Чехлы": "padel-bags",
+    Аксессуары: "padel-acc",
+  },
+  "Теннисная одежда": {
+    "Мужская одежда": "apparel-men",
+    "Женская одежда": "apparel-women",
+    "Одежда для мальчиков": "apparel-kids",
+    "Одежда для девочек": "apparel-kids",
+  },
+  "Настольный теннис": {
+    "Ракетки готовые": "table-rackets",
+    "Ракетки собранные": "table-rackets",
+    "Сборки чемпионов": "table-rackets",
+    Основания: "table-rackets",
+    Накладки: "table-rubbers",
+    Наборы: "table-rackets",
+    Мячи: "table-balls",
+    Сетки: "table-acc",
+    "Чехлы для ракеток": "table-acc",
+    Аксессуары: "table-acc",
+  },
+  "Другие виды спорта": {
+    "Кроссовки для бега": "other",
+    "Бутсы футбольные": "other",
+    Сквош: "squash",
+    Кроссминтон: "other",
+    "Пляжный теннис": "beach-tennis",
+    Фрисби: "other",
+    "Мячи футбольные": "other",
+    "Мячи волейбольные": "other",
+    "Мячи баскетбольные": "other",
+    Пиклбол: "pickleball",
+  },
+};
+
+const FOOTER_INFO_LINKS = {
+  Магазины: "stores",
+  Доставка: "delivery",
+  Гарантия: "warranty",
+  "Подарочные сертификаты": "gift-cards",
+  "Политика конфиденциальности": "privacy",
+};
+
+function getSitePageHref(pageName) {
+  const isTargetPage = new RegExp(`/pages/${pageName}/`).test(window.location.pathname);
+  if (isTargetPage) return "./";
+  return `../${pageName}/`;
+}
+
+function getCatalogPageHref(section) {
+  const isCatalogPage = /\/pages\/catalog\/?/.test(window.location.pathname);
+  const base = isCatalogPage ? "./" : "../catalog/";
+  return `${base}?section=${encodeURIComponent(section)}`;
+}
+
+function applyFooterSectionLinks(root, headingText) {
+  const infoMap = headingText === "Информация" ? FOOTER_INFO_LINKS : null;
+  const catalogMap = FOOTER_CATALOG_SECTIONS[headingText];
+  if (!infoMap && !catalogMap) return;
+
+  qsa(".footer__links a", root).forEach((link) => {
+    const label = link.textContent.replace(/\s+/g, " ").trim();
+    if (infoMap?.[label]) {
+      link.href = getSitePageHref(infoMap[label]);
+      return;
+    }
+    const section = catalogMap?.[label];
+    if (section) link.href = getCatalogPageHref(section);
+  });
+}
+
+function initFooterCatalogLinks() {
+  qsa(".footer .footer__section").forEach((section) => {
+    const heading = qs(".footer__heading", section)?.textContent?.replace(/\s+/g, " ").trim();
+    if (!heading) return;
+    applyFooterSectionLinks(section, heading);
+  });
+
+  qsa(".footer .footer-acc").forEach((acc) => {
+    const heading = qs(".footer-acc__summary > span", acc)?.textContent?.replace(/\s+/g, " ").trim();
+    if (!heading) return;
+    applyFooterSectionLinks(acc, heading);
+  });
+}
+
+function initFooterBottom() {
+  const footer = qs(".footer");
+  if (!footer || qs(".footer__bottom", footer)) return;
+
+  const bottom = document.createElement("div");
+  bottom.className = "footer__bottom";
+
+  const copyright = document.createElement("p");
+  copyright.className = "footer__copyright";
+  copyright.textContent = "© 2026 Мир ракеток";
+
+  const legal = document.createElement("nav");
+  legal.className = "footer__legal";
+  legal.setAttribute("aria-label", "Юридическая информация");
+
+  const privacyLink = document.createElement("a");
+  privacyLink.href = getSitePageHref("privacy");
+  privacyLink.textContent = "Политика конфиденциальности";
+
+  const consentLink = document.createElement("a");
+  consentLink.href = "#";
+  consentLink.textContent = "Согласие на обработку персональных данных";
+
+  legal.append(privacyLink, consentLink);
+  bottom.append(copyright, legal);
+
+  const anchor = qs("[data-contacts-source]", footer);
+  footer.insertBefore(bottom, anchor ?? null);
+}
+
+function searchHasResults(queryRaw) {
+  const query = normalizeSearchQuery(queryRaw);
+  if (!query) return false;
+
+  const products = SEARCH_INDEX.products.filter((item) =>
+    matchesSearchQuery(query, [...item.terms, item.brand], item.title)
+  );
+  const brands = SEARCH_INDEX.brands.filter((item) =>
+    matchesSearchQuery(query, [...item.terms], item.title)
+  );
+  const categories = filterSearchCategories(query, products.length > 0 || brands.length > 0);
+
+  return products.length > 0 || categories.length > 0 || brands.length > 0;
+}
+
+window.worSearchIndex = {
+  hasResults: searchHasResults,
+  buildResultsUrl: buildSearchResultsUrl,
+};
+
+function initSearch() {
+  const form = qs("[data-search-form]");
+  const input = qs(".search__input", form);
+  const submitBtn = qs(".search__submit", form);
+  if (!form || !input) return;
+
+  const clearBtn = document.createElement("button");
+  clearBtn.type = "button";
+  clearBtn.className = "search__clear";
+  clearBtn.hidden = true;
+  clearBtn.setAttribute("aria-label", "Очистить поиск");
+
+  const clearIcon = document.createElement("img");
+  clearIcon.src = getSharedAssetPath("images/icons/search-clear.png");
+  clearIcon.alt = "";
+  clearIcon.width = 24;
+  clearIcon.height = 24;
+  clearBtn.appendChild(clearIcon);
+
+  if (submitBtn) submitBtn.before(clearBtn);
+  else form.appendChild(clearBtn);
+
+  const safeArea = document.createElement("div");
+  safeArea.className = "search__safe-area";
+  safeArea.setAttribute("aria-hidden", "true");
+
+  const mobileRow = document.createElement("div");
+  mobileRow.className = "search__row";
+
+  const backBtn = document.createElement("button");
+  backBtn.type = "button";
+  backBtn.className = "search__back";
+  backBtn.setAttribute("aria-label", "Закрыть поиск");
+
+  const backIcon = document.createElement("img");
+  backIcon.className = "search__back-icon";
+  backIcon.src = getSharedAssetPath("images/icons/search-back.svg");
+  backIcon.alt = "";
+  backIcon.width = 8;
+  backIcon.height = 14;
+  backBtn.appendChild(backIcon);
+
+  const field = document.createElement("div");
+  field.className = "search__field";
+  field.append(input, clearBtn);
+  if (submitBtn) field.appendChild(submitBtn);
+
+  mobileRow.append(backBtn, field);
+  form.prepend(mobileRow);
+  form.prepend(safeArea);
+
+  const dropdown = document.createElement("div");
+  dropdown.className = "search-suggest";
+  dropdown.id = "search-suggest";
+  dropdown.hidden = true;
+  dropdown.setAttribute("role", "region");
+  dropdown.setAttribute("aria-label", "Подсказки поиска");
+  form.appendChild(dropdown);
+
+  input.setAttribute("aria-controls", dropdown.id);
+  input.setAttribute("aria-expanded", "false");
+  input.setAttribute("aria-autocomplete", "list");
+
+  const mobileSearchMq = window.matchMedia("(max-width: 860px)");
+  const isMobileSearch = () => mobileSearchMq.matches;
+  const header = qs(".header");
+
+  function isMobileKeyboardOpen(viewport) {
+    return window.innerHeight - viewport.height - viewport.offsetTop > 50;
+  }
+
+  function clearMobileSearchPanelMetrics() {
+    document.documentElement.style.removeProperty("--mobile-search-panel-top");
+    document.documentElement.style.removeProperty("--mobile-search-panel-h");
+    dropdown.classList.remove("search-suggest--keyboard-top");
+  }
+
+  function syncMobileSearchViewport() {
+    const viewport = window.visualViewport;
+    const searchOpen = isMobileSearch() && header?.classList.contains("is-search-open");
+
+    if (!searchOpen || !viewport) {
+      return;
+    }
+
+    document.documentElement.style.setProperty("--mobile-vv-offset-top", `${viewport.offsetTop}px`);
+    document.documentElement.style.setProperty("--mobile-vv-height", `${viewport.height}px`);
+  }
+
+  function syncMobileSearchPanelMetrics() {
+    const viewport = window.visualViewport;
+    const searchOpen = isMobileSearch() && header?.classList.contains("is-search-open");
+
+    if (!searchOpen) {
+      clearMobileSearchViewportVars();
+      dropdown.classList.remove("search-suggest--keyboard-top");
+      return;
+    }
+
+    syncMobileSearchViewport();
+
+    if (!viewport || dropdown.hidden) {
+      clearMobileSearchPanelMetrics();
+      return;
+    }
+
+    const headerRect = header.getBoundingClientRect();
+    const panelTop = headerRect.bottom;
+    const visibleBottom = viewport.offsetTop + viewport.height;
+    let panelBottom = visibleBottom;
+
+    const tabbar = qs(".tabbar");
+    if (tabbar) {
+      const tabbarTop = tabbar.getBoundingClientRect().top;
+      if (tabbarTop > headerRect.bottom && tabbarTop < visibleBottom) {
+        panelBottom = tabbarTop;
+      }
+    }
+
+    const panelHeight = Math.max(0, panelBottom - panelTop);
+
+    document.documentElement.style.setProperty("--mobile-search-panel-top", `${panelTop}px`);
+    document.documentElement.style.setProperty("--mobile-search-panel-h", `${panelHeight}px`);
+
+    const keyboardOpen = isMobileKeyboardOpen(viewport);
+    const canCenterContent = panelHeight >= 220;
+    dropdown.classList.toggle("search-suggest--keyboard-top", keyboardOpen && !canCenterContent);
+  }
+
+  function scheduleMobileSearchPanelSync() {
+    syncMobileSearchPanelMetrics();
+    window.requestAnimationFrame(syncMobileSearchPanelMetrics);
+    window.setTimeout(syncMobileSearchPanelMetrics, 120);
+    window.setTimeout(syncMobileSearchPanelMetrics, 320);
+  }
+
+  function bindMobileSearchViewportSync() {
+    if (bindMobileSearchViewportSync.bound) return;
+    bindMobileSearchViewportSync.bound = true;
+
+    const resync = () => scheduleMobileSearchPanelSync();
+    window.visualViewport?.addEventListener("resize", resync);
+    window.visualViewport?.addEventListener("scroll", resync);
+    window.addEventListener("resize", resync);
+    mobileSearchMq.addEventListener("change", resync);
+  }
+
+  bindMobileSearchViewportSync();
+
+  function setOpen(open) {
+    dropdown.hidden = !open;
+    input.setAttribute("aria-expanded", String(open));
+    form.classList.toggle("is-suggest-open", open);
+  }
+
+  function closeSuggest() {
+    dropdown.classList.remove("search-suggest--idle", "search-suggest--empty");
+    setOpen(false);
+    clearMobileSearchPanelMetrics();
+  }
+
+  backBtn.addEventListener("click", () => {
+    header?.classList.remove("is-search-open");
+    setMobileSearchScreen(false);
+    closeSuggest();
+  });
+
+  function renderIdleSuggest() {
+    if (!isMobileSearch()) {
+      closeSuggest();
+      return;
+    }
+
+    dropdown.replaceChildren();
+
+    const idle = document.createElement("div");
+    idle.className = "search-suggest__idle";
+
+    const idleImage = document.createElement("img");
+    idleImage.className = "search-suggest__idle-image";
+    idleImage.src = getSharedAssetPath("images/illustrations/search-hints.png");
+    idleImage.alt = "";
+    idleImage.width = 128;
+    idleImage.height = 64;
+
+    const idleText = document.createElement("p");
+    idleText.className = "search-suggest__idle-text";
+    idleText.textContent = "Введите поисковый запрос, чтобы увидеть подсказки";
+
+    idle.append(idleImage, idleText);
+    dropdown.appendChild(idle);
+    dropdown.classList.add("search-suggest--idle");
+    setOpen(true);
+    scheduleMobileSearchPanelSync();
+  }
+
+  function syncSearchFieldState() {
+    const hasValue = input.value.trim().length > 0;
+    clearBtn.hidden = !hasValue;
+    if (submitBtn) submitBtn.hidden = hasValue;
+  }
+
+  function clearSearch() {
+    input.value = "";
+    syncSearchFieldState();
+    if (isMobileSearch() && qs(".header.is-search-open")) {
+      renderIdleSuggest();
+    } else {
+      closeSuggest();
+    }
+    input.focus();
+  }
+
+  clearBtn.addEventListener("click", clearSearch);
+
+  function renderSuggest(queryRaw) {
+    const query = normalizeSearchQuery(queryRaw);
+    if (!query) {
+      renderIdleSuggest();
+      return;
+    }
+
+    dropdown.classList.remove("search-suggest--idle", "search-suggest--empty");
+
+    const products = SEARCH_INDEX.products.filter((item) =>
+      matchesSearchQuery(query, [...item.terms, item.brand], item.title)
+    );
+    const brands = SEARCH_INDEX.brands.filter((item) =>
+      matchesSearchQuery(query, [...item.terms], item.title)
+    );
+    const hasOtherMatches = products.length > 0 || brands.length > 0;
+    const categories = filterSearchCategories(query, hasOtherMatches);
+    const hasResults = products.length || categories.length || brands.length;
+
+    dropdown.replaceChildren();
+
+    if (!hasResults) {
+      const empty = document.createElement("div");
+      empty.className = "search-suggest__empty";
+
+      const emptyImage = document.createElement("img");
+      emptyImage.className = "search-suggest__empty-image";
+      emptyImage.src = getSharedAssetPath("images/illustrations/search-empty.png");
+      emptyImage.alt = "";
+      emptyImage.width = 128;
+      emptyImage.height = 64;
+
+      const emptyTitle = document.createElement("p");
+      emptyTitle.className = "search-suggest__empty-title";
+      emptyTitle.textContent = "Ничего не нашли";
+
+      const emptyDesc = document.createElement("p");
+      emptyDesc.className = "search-suggest__empty-desc";
+      emptyDesc.textContent = `По запросу «${queryRaw.trim()}» товаров не найдено.\nПопробуйте изменить запрос или сбросить фильтры.`;
+
+      empty.append(emptyImage, emptyTitle, emptyDesc);
+      dropdown.appendChild(empty);
+      if (isMobileSearch()) {
+        dropdown.classList.add("search-suggest--empty");
+      }
+      setOpen(true);
+      scheduleMobileSearchPanelSync();
+      return;
+    }
+
+    const scroll = document.createElement("div");
+    scroll.className = "search-suggest__scroll";
+
+    if (products.length) {
+      scroll.appendChild(createSuggestSection("Товары", products.map(renderProductLink)));
+    }
+
+    if (categories.length) {
+      if (products.length) scroll.appendChild(createDivider());
+      scroll.appendChild(createSuggestSection("Категории", categories.map(renderTextLink)));
+    }
+
+    if (brands.length) {
+      if (products.length || categories.length) scroll.appendChild(createDivider());
+      scroll.appendChild(createSuggestSection("Бренды", brands.map(renderTextLink)));
+    }
+
+    dropdown.appendChild(scroll);
+
+    const footer = document.createElement("div");
+    footer.className = "search-suggest__footer";
+    const allLink = document.createElement("a");
+    allLink.className = "search-suggest__all";
+    allLink.href = buildSearchResultsUrl(queryRaw);
+
+    const allText = document.createElement("span");
+    allText.className = "search-suggest__all-text";
+    allText.textContent = `Все результаты по запросу «${queryRaw.trim()}»`;
+
+    const allArrow = document.createElement("img");
+    allArrow.className = "search-suggest__all-arrow";
+    allArrow.src = getSharedAssetPath("images/icons/search-arrow-right.png");
+    allArrow.alt = "";
+    allArrow.width = 16;
+    allArrow.height = 16;
+
+    allLink.append(allText, allArrow);
+    footer.appendChild(allLink);
+    dropdown.appendChild(footer);
+
+    setOpen(true);
+    scheduleMobileSearchPanelSync();
+  }
+
+  function createDivider() {
+    const divider = document.createElement("div");
+    divider.className = "search-suggest__divider";
+    divider.setAttribute("role", "separator");
+    return divider;
+  }
+
+  function createSuggestSection(title, nodes) {
+    const section = document.createElement("section");
+    section.className = "search-suggest__section";
+
+    const heading = document.createElement("h3");
+    heading.className = "search-suggest__heading";
+    heading.textContent = title;
+    section.appendChild(heading);
+
+    nodes.forEach((node) => section.appendChild(node));
+    return section;
+  }
+
+  function renderProductLink(item) {
+    const link = document.createElement("a");
+    link.className = "search-suggest__product";
+    link.href = item.href;
+    link.innerHTML = `
+      <img class="search-suggest__product-img" src="${getPageProductImage(item.image)}" alt="" width="55" height="55" />
+      <span class="search-suggest__product-body">
+        <span class="search-suggest__product-title">${escapeHtml(item.title)}</span>
+        <span class="search-suggest__product-meta">${escapeHtml(item.brand)} · ${escapeHtml(item.price)}</span>
+      </span>
+    `;
+    link.addEventListener("click", closeSuggest);
+    return link;
+  }
+
+  function renderTextLink(item) {
+    const link = document.createElement("a");
+    link.className = "search-suggest__link";
+    link.href = item.href;
+    link.textContent = item.title;
+    link.addEventListener("click", closeSuggest);
+    return link;
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function goToResults(query) {
+    const normalized = normalizeSearchQuery(query);
+    if (!normalized) return;
+    window.location.href = buildSearchResultsUrl(query);
+  }
+
+  input.addEventListener("input", () => {
+    syncSearchFieldState();
+    renderSuggest(input.value);
+  });
+
+  input.addEventListener("focus", () => {
+    syncSearchFieldState();
+    if (normalizeSearchQuery(input.value)) {
+      renderSuggest(input.value);
+    } else {
+      renderIdleSuggest();
+    }
+    scheduleMobileSearchPanelSync();
+  });
+
+  input.addEventListener("blur", () => {
+    window.setTimeout(scheduleMobileSearchPanelSync, 100);
+  });
+
+  syncSearchFieldState();
+
+  const urlQuery = new URLSearchParams(window.location.search).get("q");
+  if (urlQuery) {
+    input.value = urlQuery;
+    syncSearchFieldState();
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    goToResults(input.value);
+  });
+
+  dropdown.addEventListener("mousedown", (event) => {
+    event.preventDefault();
+  });
+
+  document.addEventListener("click", (event) => {
+    if (form.contains(event.target)) return;
+    if (event.target.closest("[data-search-toggle]")) return;
+    closeSuggest();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeSuggest();
+  });
+
+  window.worSearch = {
+    close: closeSuggest,
+    render: renderSuggest,
+    openIdle: renderIdleSuggest,
+    syncPanel: scheduleMobileSearchPanelSync,
+  };
 }
 
 function initContactsSheet() {
@@ -647,6 +1405,9 @@ function initCart() {
 initNavMenus();
 initCatalogSidebar();
 initMobileHeader();
+initSearch();
 initContactsSheet();
 initFavorites();
 initCart();
+initFooterCatalogLinks();
+initFooterBottom();

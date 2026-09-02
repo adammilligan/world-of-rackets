@@ -65,6 +65,8 @@
 })();
 
 function validateForm(form) {
+  const { validateText, validateRuEmail, validateRuPhone } = window.FormValidation;
+
   let valid = true;
   let firstInvalid = null;
 
@@ -79,19 +81,31 @@ function validateForm(form) {
   const address = form.querySelector("#checkout-address");
   const privacy = form.querySelector('input[name="privacy"]');
 
-  if (!validateName(name)) {
+  const nameResult = validateText(name?.value, { required: true });
+  if (!nameResult.valid) {
+    setFieldError(name, nameResult.message);
     valid = false;
     firstInvalid ||= name;
+  } else if (name) {
+    name.value = nameResult.value;
   }
 
-  if (!validatePhone(phone)) {
+  const phoneResult = validateRuPhone(phone?.value, { required: true });
+  if (!phoneResult.valid) {
+    setFieldError(phone, phoneResult.message);
     valid = false;
     firstInvalid ||= phone;
+  } else if (phone && phoneResult.normalized) {
+    phone.value = formatPhoneInput(phoneResult.normalized, true);
   }
 
-  if (!validateEmail(email)) {
+  const emailResult = validateRuEmail(email?.value, { required: true });
+  if (!emailResult.valid) {
+    setFieldError(email, emailResult.message);
     valid = false;
     firstInvalid ||= email;
+  } else if (email) {
+    email.value = emailResult.value;
   }
 
   if (!delivery) {
@@ -100,9 +114,15 @@ function validateForm(form) {
   }
 
   const needsAddress = delivery && (delivery.value === "courier" || delivery.value === "shipping");
-  if (needsAddress && !validateAddress(address)) {
-    valid = false;
-    firstInvalid ||= address;
+  if (needsAddress) {
+    const addressResult = validateText(address?.value, { required: true });
+    if (!addressResult.valid) {
+      setFieldError(address, addressResult.message);
+      valid = false;
+      firstInvalid ||= address;
+    } else if (address) {
+      address.value = addressResult.value;
+    }
   }
 
   if (!payment) {
@@ -122,51 +142,6 @@ function validateForm(form) {
   }
 
   return valid;
-}
-
-function validateName(input) {
-  const value = input?.value.trim() || "";
-  if (value.length < 5) {
-    setFieldError(input, "Введите ФИО полностью");
-    return false;
-  }
-  if (!/^[\p{L}\s\-'.]+$/u.test(value)) {
-    setFieldError(input, "ФИО может содержать только буквы");
-    return false;
-  }
-  clearFieldError(input);
-  return true;
-}
-
-function validatePhone(input) {
-  const digits = extractPhoneDigits(input?.value || "");
-  if (digits.length !== 11 || !digits.startsWith("7")) {
-    setFieldError(input, "Введите корректный номер телефона");
-    return false;
-  }
-  clearFieldError(input);
-  return true;
-}
-
-function validateEmail(input) {
-  const value = input?.value.trim() || "";
-  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  if (!pattern.test(value)) {
-    setFieldError(input, "Введите корректный email");
-    return false;
-  }
-  clearFieldError(input);
-  return true;
-}
-
-function validateAddress(input) {
-  const value = input?.value.trim() || "";
-  if (value.length < 8) {
-    setFieldError(input, "Укажите полный адрес доставки");
-    return false;
-  }
-  clearFieldError(input);
-  return true;
 }
 
 function setFieldError(field, message) {

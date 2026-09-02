@@ -6,6 +6,10 @@ function qsa(selector, root = document) {
   return [...root.querySelectorAll(selector)];
 }
 
+function isSearchPage() {
+  return Boolean(qs("[data-search-page]"));
+}
+
 const CATALOG_SECTIONS = {
   tennis: {
     title: "Большой теннис",
@@ -732,11 +736,18 @@ function parseSeriesParam(value) {
 
 function buildCatalogUrl({ section, brand, series = [] }) {
   const params = new URLSearchParams();
-  if (section) params.set("section", section);
-  if (brand) params.set("brand", brand);
-  if (series.length) params.set("series", series.join(","));
-  const qs = params.toString();
-  return qs ? `?${qs}` : window.location.pathname;
+  if (isSearchPage()) {
+    const q = new URLSearchParams(window.location.search).get("q");
+    if (q) params.set("q", q);
+    if (brand) params.set("brand", brand);
+    if (series.length) params.set("series", series.join(","));
+  } else {
+    if (section) params.set("section", section);
+    if (brand) params.set("brand", brand);
+    if (series.length) params.set("series", series.join(","));
+  }
+  const query = params.toString();
+  return query ? `?${query}` : window.location.pathname;
 }
 
 function renderSeriesOptions(form, brandSlugValue, selectedSeries = []) {
@@ -766,6 +777,11 @@ function renderSeriesOptions(form, brandSlugValue, selectedSeries = []) {
 function updateCatalogBrandPresentation(sectionKey, brand, selectedSeries = []) {
   const config = CATALOG_SECTIONS[sectionKey] || CATALOG_SECTIONS["tennis-adult"];
   const brandLabel = brand ? brandLabelFromSlug(brand, config.brands) : "";
+
+  if (isSearchPage()) {
+    if (catalogFilterUI) catalogFilterUI.rebuild();
+    return;
+  }
 
   document.title = `${brandLabel || config.title} — Мир ракеток`;
 
@@ -947,7 +963,7 @@ function initCatalogState() {
   updateCatalogBrandPresentation(sectionKey, brand, selectedSeries);
 
   const subnav = qs("[data-catalog-subnav]");
-  if (subnav) {
+  if (subnav && !isSearchPage()) {
     subnav.innerHTML = config.subnav
       .map((item) => {
         const active = item.section === sectionKey;
@@ -1557,8 +1573,13 @@ function initCatalogFilters() {
       const params = new URLSearchParams(window.location.search);
       params.delete("brand");
       params.delete("series");
-      const section = params.get("section") || "tennis-adult";
-      window.location.href = buildCatalogUrl({ section });
+      if (isSearchPage()) {
+        const q = params.get("q");
+        window.location.href = q ? `?q=${encodeURIComponent(q)}` : window.location.pathname;
+      } else {
+        const section = params.get("section") || "tennis-adult";
+        window.location.href = buildCatalogUrl({ section });
+      }
       closeQuickFilterDropdown();
       if (catalogFilterUI) catalogFilterUI.rebuild();
       updateCatalogFilterUI(form);

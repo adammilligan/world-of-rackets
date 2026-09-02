@@ -2,74 +2,18 @@
   const root = document.querySelector("[data-auth-page]");
   if (!root) return;
 
-  const REQUIRED_MESSAGE = "Это поле обязательно";
+  const {
+    validateLoginIdentity,
+    validateRuPhone,
+    validateRuEmail,
+    validatePassword,
+    trimValue,
+  } = window.FormValidation;
+
   const LOGIN_IDENTITY_EMPTY = "Введите телефон или e-mail";
-  const LOGIN_IDENTITY_INVALID = "Введите корректный номер телефона или почту";
   const LOGIN_PASSWORD_EMPTY = "Введите пароль";
-  const PHONE_INVALID_MESSAGE = "Введите корректный номер телефона";
-  const EMAIL_INVALID_MESSAGE = "Введите корректный e-mail";
-  const PASSWORD_MIN_MESSAGE = "Пароль должен содержать не менее 6 символов";
   const LOGIN_ERROR_MESSAGE = "Неверный телефон, e-mail или пароль";
   const SERVER_ERROR_MESSAGE = "Не удалось выполнить запрос. Попробуйте ещё раз";
-
-  function isEmailIdentity(value) {
-    return value.includes("@");
-  }
-
-  function isEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-  }
-
-  function validatePhoneIdentity(value) {
-    const compact = value.replace(/\s/g, "");
-    if (!/^(\+7|7|8)/.test(compact)) {
-      return { valid: false };
-    }
-
-    const digits = value.replace(/\D/g, "");
-    let normalizedDigits;
-
-    if (compact.startsWith("+7")) {
-      if (digits.length !== 11 || !digits.startsWith("7")) {
-        return { valid: false };
-      }
-      normalizedDigits = digits;
-    } else if (digits.startsWith("8")) {
-      if (digits.length !== 11) {
-        return { valid: false };
-      }
-      normalizedDigits = `7${digits.slice(1)}`;
-    } else if (digits.startsWith("7")) {
-      if (digits.length !== 11) {
-        return { valid: false };
-      }
-      normalizedDigits = digits;
-    } else {
-      return { valid: false };
-    }
-
-    return { valid: true, normalized: `+${normalizedDigits}` };
-  }
-
-  function validateLoginIdentity(value) {
-    if (isEmailIdentity(value)) {
-      if (!isEmail(value)) {
-        return { valid: false, message: LOGIN_IDENTITY_INVALID };
-      }
-      return { valid: true, normalized: value.trim() };
-    }
-
-    const phoneResult = validatePhoneIdentity(value);
-    if (!phoneResult.valid) {
-      return { valid: false, message: LOGIN_IDENTITY_INVALID };
-    }
-
-    return { valid: true, normalized: phoneResult.normalized };
-  }
-
-  function isPhone(value) {
-    return validatePhoneIdentity(value).valid;
-  }
 
   root.querySelectorAll("[data-password-toggle]").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -128,16 +72,17 @@
     const identityField = loginForm.querySelector('[data-field="identity"]');
     const passwordField = loginForm.querySelector('[data-field="password"]');
     const identityInput = loginForm.querySelector('[name="identity"]');
-    const identity = identityInput?.value.trim() || "";
-    const password = loginForm.querySelector('[name="password"]')?.value || "";
+    const passwordInput = loginForm.querySelector('[name="password"]');
+    const identity = identityInput?.value || "";
+    const password = passwordInput?.value || "";
 
     let hasError = false;
 
-    if (!identity) {
+    if (trimValue(identity) === "") {
       hasError = setFieldError(identityField, LOGIN_IDENTITY_EMPTY) || hasError;
     }
 
-    if (!password) {
+    if (trimValue(password) === "") {
       hasError = setFieldError(passwordField, LOGIN_PASSWORD_EMPTY) || hasError;
     }
 
@@ -177,29 +122,17 @@
   });
 
   const registerForm = root.querySelector("[data-register-form]");
-  const registerSubmit = registerForm?.querySelector('[type="submit"]');
-
-  function updateRegisterSubmitState() {
-    if (!registerForm || !registerSubmit) return;
-
-    const phone = registerForm.querySelector('[name="phone"]')?.value.trim() || "";
-    const email = registerForm.querySelector('[name="email"]')?.value.trim() || "";
-    const password = registerForm.querySelector('[name="password"]')?.value || "";
-    const agreement = registerForm.querySelector('[name="agreement"]')?.checked;
-
-    registerSubmit.disabled = !(phone && email && password && agreement);
-  }
+  const AGREEMENT_REQUIRED_MESSAGE = "Необходимо принять условия";
 
   registerForm?.querySelectorAll("input").forEach((input) => {
     input.addEventListener("input", () => {
       clearFieldError(input.closest("[data-field]"));
       registerForm.querySelector("[data-auth-alert]")?.setAttribute("hidden", "");
-      updateRegisterSubmitState();
     });
-    input.addEventListener("change", updateRegisterSubmitState);
+    input.addEventListener("change", () => {
+      clearFieldError(input.closest("[data-field]"));
+    });
   });
-
-  updateRegisterSubmitState();
 
   registerForm?.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -210,41 +143,41 @@
     const passwordField = registerForm.querySelector('[data-field="password"]');
     const agreementField = registerForm.querySelector('[data-field="agreement"]');
 
-    const phone = registerForm.querySelector('[name="phone"]')?.value.trim() || "";
-    const email = registerForm.querySelector('[name="email"]')?.value.trim() || "";
-    const password = registerForm.querySelector('[name="password"]')?.value || "";
+    const phoneInput = registerForm.querySelector('[name="phone"]');
+    const emailInput = registerForm.querySelector('[name="email"]');
+    const passwordInput = registerForm.querySelector('[name="password"]');
     const agreement = registerForm.querySelector('[name="agreement"]')?.checked;
 
     let hasError = false;
 
-    if (!phone) {
-      hasError = setFieldError(phoneField, REQUIRED_MESSAGE) || hasError;
-    } else if (!isPhone(phone)) {
-      hasError = setFieldError(phoneField, PHONE_INVALID_MESSAGE) || hasError;
+    const phoneResult = validateRuPhone(phoneInput?.value, { required: true });
+    if (!phoneResult.valid) {
+      hasError = setFieldError(phoneField, phoneResult.message) || hasError;
+    } else if (phoneInput && phoneResult.normalized) {
+      phoneInput.value = phoneResult.normalized;
     }
 
-    if (!email) {
-      hasError = setFieldError(emailField, REQUIRED_MESSAGE) || hasError;
-    } else if (!isEmail(email)) {
-      hasError = setFieldError(emailField, EMAIL_INVALID_MESSAGE) || hasError;
+    const emailResult = validateRuEmail(emailInput?.value, { required: true });
+    if (!emailResult.valid) {
+      hasError = setFieldError(emailField, emailResult.message) || hasError;
+    } else if (emailInput && emailResult.value) {
+      emailInput.value = emailResult.value;
     }
 
-    if (!password) {
-      hasError = setFieldError(passwordField, REQUIRED_MESSAGE) || hasError;
-    } else if (password.length < 6) {
-      hasError = setFieldError(passwordField, PASSWORD_MIN_MESSAGE) || hasError;
+    const passwordResult = validatePassword(passwordInput?.value, { required: true });
+    if (!passwordResult.valid) {
+      hasError = setFieldError(passwordField, passwordResult.message) || hasError;
     }
 
     if (!agreement) {
-      hasError = setFieldError(agreementField, REQUIRED_MESSAGE) || hasError;
+      hasError = setFieldError(agreementField, AGREEMENT_REQUIRED_MESSAGE) || hasError;
     }
 
     if (hasError) {
-      updateRegisterSubmitState();
       return;
     }
 
-    if (email === "error@demo.ru") {
+    if (trimValue(emailInput?.value) === "error@demo.ru") {
       setFormAlert(registerForm, SERVER_ERROR_MESSAGE);
       return;
     }

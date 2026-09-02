@@ -4,10 +4,6 @@
   padding-bottom: 120px;
 }
 
-.warranty-page .breadcrumbs {
-  padding: 24px 0 8px;
-}
-
 .warranty-page__head {
   display: grid;
   gap: 16px;
@@ -282,11 +278,6 @@
   .warranty-page__container {
     padding-bottom: calc(24px + var(--tabbar-h));
   }
-
-  .warranty-page .breadcrumbs {
-    padding: 8px 0;
-  }
-
   .warranty-page__head {
     gap: 16px;
     margin-bottom: 16px;

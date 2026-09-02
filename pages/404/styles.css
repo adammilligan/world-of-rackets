@@ -4,10 +4,6 @@
   padding-bottom: 120px;
 }
 
-.error-page .breadcrumbs {
-  padding: 24px 0;
-}
-
 .error-page__layout {
   display: grid;
   grid-template-columns: minmax(0, 711px) minmax(0, 640px);
@@ -308,11 +304,6 @@
   .error-page__container {
     padding-bottom: calc(24px + var(--tabbar-h));
   }
-
-  .error-page .breadcrumbs {
-    padding: 8px 0;
-  }
-
   .error-page__layout {
     gap: 24px;
     padding: 16px 0 24px;

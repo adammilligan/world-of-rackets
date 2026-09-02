@@ -4,10 +4,6 @@
   padding-bottom: 120px;
 }
 
-.delivery-page .breadcrumbs {
-  padding: 24px 0 8px;
-}
-
 .delivery-page__head {
   display: grid;
   gap: 16px;
@@ -124,11 +120,6 @@
   .delivery-page__container {
     padding-bottom: calc(24px + var(--tabbar-h));
   }
-
-  .delivery-page .breadcrumbs {
-    padding: 8px 0;
-  }
-
   .delivery-page__head {
     gap: 16px;
     margin-bottom: 16px;

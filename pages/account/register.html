@@ -21,16 +21,16 @@
     <div class="topbar">
       <div class="topbar__inner">
         <p class="topbar__hours">с 10 до 21 без выходных</p>
-        <details class="topbar__contacts">
-          <summary>
-            контакты
-            <img class="dropdown-chevron" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" />
-          </summary>
-          <div class="topbar__contacts-panel">
-            <a href="tel:+74957774555">+7 (495) 777-45-55</a>
-            <a href="mailto:info@mirraketok.ru">info@mirraketok.ru</a>
-          </div>
-        </details>
+        <button
+          class="topbar__contacts-btn"
+          type="button"
+          aria-expanded="false"
+          aria-controls="contacts-sheet"
+          data-contacts-open
+        >
+          контакты
+          <img class="dropdown-chevron" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" />
+        </button>
       </div>
     </div>
     <header class="header">
@@ -528,7 +528,7 @@
                   <img src="../../shared/images/icons/eye-slash.png" alt="" width="20" height="20" />
                 </button>
               </div>
-              <p class="auth-field__hint">Не менее 6 символов</p>
+              <p class="auth-field__hint">Не менее 8 символов</p>
               <p class="auth-field__error" data-field-error hidden></p>
             </div>
 
@@ -544,7 +544,7 @@
               <p class="auth-field__error" data-field-error hidden></p>
             </div>
 
-            <button class="btn auth-form__submit" type="submit" disabled>Зарегистрироваться</button>
+            <button class="btn auth-form__submit" type="submit">Зарегистрироваться</button>
 
             <p class="auth-form__switch">
               <span>Уже есть аккаунт?</span>
@@ -580,19 +580,18 @@
                 <ul class="footer__links">
                   <li><a href="../stores/">Магазины</a></li>
                   <li><a href="../delivery/">Доставка</a></li>
-                  <li><a href="./">Гарантия</a></li>
-                  <li><a href="#">Центр продаж теннисных мячей</a></li>
-                  <li><a href="../gift-cards/">Подарочные сертификаты</a></li>
+                  <li><a href="../warranty/">Гарантия</a></li>
+<li><a href="../gift-cards/">Подарочные сертификаты</a></li>
                   <li><a href="../privacy/">Политика конфиденциальности</a></li>
                 </ul>
               </section>
               <section class="footer__section">
                 <h3 class="footer__heading">Бадминтон</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Ракетки</a></li>
-                  <li><a href="#">Наборы</a></li>
-                  <li><a href="#">Воланы</a></li>
-                  <li><a href="#">Сумки. Рюкзаки. Чехлы</a></li>
+                  <li><a href="../catalog/?section=badminton-rackets">Ракетки</a></li>
+                  <li><a href="../catalog/?section=badminton">Наборы</a></li>
+                  <li><a href="../catalog/?section=badminton-shuttle">Воланы</a></li>
+                  <li><a href="../catalog/?section=badminton-bags">Сумки. Рюкзаки. Чехлы</a></li>
                 </ul>
               </section>
             </div>
@@ -601,20 +600,20 @@
               <section class="footer__section">
                 <h3 class="footer__heading">Большой теннис</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Взрослые ракетки</a></li>
-                  <li><a href="#">Детские ракетки</a></li>
-                  <li><a href="#">Теннисные мячи</a></li>
-                  <li><a href="#">Сумки. Рюкзаки. Чехлы</a></li>
-                  <li><a href="#">Теннисные струны</a></li>
-                  <li><a href="#">Аксессуары</a></li>
+                  <li><a href="../catalog/?section=tennis-adult">Взрослые ракетки</a></li>
+                  <li><a href="../catalog/?section=tennis-kids">Детские ракетки</a></li>
+                  <li><a href="../catalog/?section=tennis-balls">Теннисные мячи</a></li>
+                  <li><a href="../catalog/?section=tennis-bags">Сумки. Рюкзаки. Чехлы</a></li>
+                  <li><a href="../catalog/?section=tennis-strings">Теннисные струны</a></li>
+                  <li><a href="../catalog/?section=tennis-acc">Аксессуары</a></li>
                 </ul>
               </section>
               <section class="footer__section">
                 <h3 class="footer__heading">Теннисная обувь</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Мужские кроссовки</a></li>
-                  <li><a href="#">Женские кроссовки</a></li>
-                  <li><a href="#">Детские кроссовки</a></li>
+                  <li><a href="../catalog/?section=shoes-men">Мужские кроссовки</a></li>
+                  <li><a href="../catalog/?section=shoes-women">Женские кроссовки</a></li>
+                  <li><a href="../catalog/?section=shoes-kids">Детские кроссовки</a></li>
                 </ul>
               </section>
             </div>
@@ -623,20 +622,20 @@
               <section class="footer__section">
                 <h3 class="footer__heading">Падел</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Взрослые ракетки</a></li>
-                  <li><a href="#">Детские ракетки</a></li>
-                  <li><a href="#">Мячи для падел</a></li>
-                  <li><a href="#">Сумки. Рюкзаки. Чехлы</a></li>
-                  <li><a href="#">Аксессуары</a></li>
+                  <li><a href="../catalog/?section=padel-rackets">Взрослые ракетки</a></li>
+                  <li><a href="../catalog/?section=padel-rackets">Детские ракетки</a></li>
+                  <li><a href="../catalog/?section=padel-balls">Мячи для падел</a></li>
+                  <li><a href="../catalog/?section=padel-bags">Сумки. Рюкзаки. Чехлы</a></li>
+                  <li><a href="../catalog/?section=padel-acc">Аксессуары</a></li>
                 </ul>
               </section>
               <section class="footer__section">
                 <h3 class="footer__heading">Теннисная одежда</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Мужская одежда</a></li>
-                  <li><a href="#">Женская одежда</a></li>
-                  <li><a href="#">Одежда для мальчиков</a></li>
-                  <li><a href="#">Одежда для девочек</a></li>
+                  <li><a href="../catalog/?section=apparel-men">Мужская одежда</a></li>
+                  <li><a href="../catalog/?section=apparel-women">Женская одежда</a></li>
+                  <li><a href="../catalog/?section=apparel-kids">Одежда для мальчиков</a></li>
+                  <li><a href="../catalog/?section=apparel-kids">Одежда для девочек</a></li>
                 </ul>
               </section>
             </div>
@@ -645,30 +644,30 @@
               <section class="footer__section">
                 <h3 class="footer__heading">Настольный теннис</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Ракетки готовые</a></li>
-                  <li><a href="#">Ракетки собранные</a></li>
-                  <li><a href="#">Сборки чемпионов</a></li>
-                  <li><a href="#">Основания</a></li>
-                  <li><a href="#">Накладки</a></li>
-                  <li><a href="#">Наборы</a></li>
-                  <li><a href="#">Мячи</a></li>
-                  <li><a href="#">Сетки</a></li>
-                  <li><a href="#">Чехлы для ракеток</a></li>
-                  <li><a href="#">Аксессуары</a></li>
+                  <li><a href="../catalog/?section=table-rackets">Ракетки готовые</a></li>
+                  <li><a href="../catalog/?section=table-rackets">Ракетки собранные</a></li>
+                  <li><a href="../catalog/?section=table-rackets">Сборки чемпионов</a></li>
+                  <li><a href="../catalog/?section=table-rackets">Основания</a></li>
+                  <li><a href="../catalog/?section=table-rubbers">Накладки</a></li>
+                  <li><a href="../catalog/?section=table-rackets">Наборы</a></li>
+                  <li><a href="../catalog/?section=table-balls">Мячи</a></li>
+                  <li><a href="../catalog/?section=table-acc">Сетки</a></li>
+                  <li><a href="../catalog/?section=table-acc">Чехлы для ракеток</a></li>
+                  <li><a href="../catalog/?section=table-acc">Аксессуары</a></li>
                 </ul>
               </section>
               <section class="footer__section">
                 <h3 class="footer__heading">Другие виды спорта</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Кроссовки для бега</a></li>
-                  <li><a href="#">Бутсы футбольные</a></li>
-                  <li><a href="#">Сквош</a></li>
-                  <li><a href="#">Кроссминтон</a></li>
-                  <li><a href="#">Пляжный теннис</a></li>
-                  <li><a href="#">Фрисби</a></li>
-                  <li><a href="#">Мячи футбольные</a></li>
-                  <li><a href="#">Мячи волейбольные</a></li>
-                  <li><a href="#">Мячи баскетбольные</a></li>
+                  <li><a href="../catalog/?section=other">Кроссовки для бега</a></li>
+                  <li><a href="../catalog/?section=other">Бутсы футбольные</a></li>
+                  <li><a href="../catalog/?section=squash">Сквош</a></li>
+                  <li><a href="../catalog/?section=other">Кроссминтон</a></li>
+                  <li><a href="../catalog/?section=beach-tennis">Пляжный теннис</a></li>
+                  <li><a href="../catalog/?section=other">Фрисби</a></li>
+                  <li><a href="../catalog/?section=other">Мячи футбольные</a></li>
+                  <li><a href="../catalog/?section=other">Мячи волейбольные</a></li>
+                  <li><a href="../catalog/?section=other">Мячи баскетбольные</a></li>
                 </ul>
               </section>
             </div>
@@ -1082,6 +1081,7 @@
     </div>
 
     <script src="../../shared/js/common.js"></script>
+    <script src="../../shared/js/validation.js"></script>
     <script src="./auth.js"></script>
   </body>
 </html>

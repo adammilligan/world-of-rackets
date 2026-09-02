@@ -4,10 +4,6 @@
   padding-bottom: 120px;
 }
 
-.account-page .breadcrumbs {
-  padding: 24px 0 48px;
-}
-
 .account-page__layout {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
@@ -403,6 +399,19 @@
   color: var(--color-sale);
 }
 
+.account-field__hint {
+  margin: 8px 0 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-muted);
+}
+
+.account-field.is-invalid .account-field__hint {
+  display: none;
+}
+
 .account-field.is-invalid .account-field__input,
 .account-field.is-invalid .account-field__input:focus {
   border-color: #96001c;
@@ -636,14 +645,71 @@
 }
 
 @media (max-width: 860px) {
+  .account-logout-sheet.contacts-sheet {
+    justify-content: stretch;
+    align-items: flex-end;
+  }
+
+  .account-logout-sheet .contacts-sheet__panel {
+    grid-template-rows: auto auto auto;
+    align-content: start;
+    gap: 16px;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    max-height: none;
+    padding: 8px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+
+  .account-logout-sheet .contacts-sheet__head {
+    justify-content: center;
+    touch-action: auto;
+  }
+
+  .account-logout-sheet .contacts-sheet__close {
+    display: none;
+  }
+
+  .account-logout-sheet .contacts-sheet__title {
+    width: 100%;
+    text-align: center;
+  }
+
+  .account-logout-sheet__text {
+    text-align: center;
+  }
+
+  .account-logout-sheet .contacts-sheet__body {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .account-logout-sheet__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .account-logout-sheet__actions .account-logout__btn {
+    width: 100%;
+    max-width: none;
+    height: 44px;
+    min-height: 44px;
+    padding: 12px 32px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-inline: 0;
+  }
+
   .account-page__container {
     padding-bottom: calc(24px + var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
   }
-
-  .account-page .breadcrumbs {
-    padding: 8px 0 48px;
-  }
-
   .account-page__layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;

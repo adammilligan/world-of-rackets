@@ -1,0 +1,134 @@
+.search-page .catalog-subnav {
+  display: none;
+}
+
+.search-page .catalog-mobile-tags {
+  display: none !important;
+}
+
+.search-page__head {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.search-page__title {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  color: #32333e;
+}
+
+.search-page__desc {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #85879a;
+}
+
+.search-page__desc[hidden] {
+  display: none;
+}
+
+.search-page__empty {
+  display: grid;
+  justify-items: center;
+  gap: 24px;
+  padding: 80px 0 48px;
+  text-align: center;
+}
+
+.search-page__empty[hidden],
+.search-page__results[hidden] {
+  display: none !important;
+}
+
+.search-page__empty-image {
+  display: block;
+  width: 128px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.search-page__empty-text {
+  display: grid;
+  gap: 12px;
+  max-width: 353px;
+}
+
+.search-page__empty-title {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  color: #32333e;
+}
+
+.search-page__empty-desc {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: pre-line;
+  color: #85879a;
+}
+
+.search-page__empty-catalog {
+  min-width: 220px;
+}
+
+.search-page__empty-clear {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #32333e;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.search-page__empty-clear:hover {
+  color: var(--color-text);
+}
+
+@media (max-width: 860px) {
+  .search-page__head {
+    margin-bottom: 16px;
+    padding-inline: 16px;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  .search-page__title {
+    font-family: var(--font-sans), sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .search-page__desc {
+    font-family: var(--font-sans), sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0;
+  }
+
+  .search-page__empty {
+    padding: 48px 0 32px;
+  }
+
+  .search-page__empty-text {
+    max-width: none;
+  }
+}

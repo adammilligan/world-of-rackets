@@ -2,6 +2,9 @@
   const root = document.querySelector("[data-account-page]");
   if (!root) return;
 
+  const profileForm = root.querySelector("[data-profile-form]");
+  const passwordForm = root.querySelector("[data-password-form]");
+
   const toast = document.querySelector("[data-account-toast]");
   const logoutModal = document.querySelector("[data-logout-modal]");
   const logoutSheet = document.querySelector("[data-logout-sheet]");
@@ -61,9 +64,11 @@
     btn.addEventListener("click", closeLogout);
   });
 
-  document.querySelector("[data-logout-confirm]")?.addEventListener("click", () => {
-    closeLogout();
-    window.location.href = "../home/";
+  document.querySelectorAll("[data-logout-confirm]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      closeLogout();
+      window.location.href = "../home/";
+    });
   });
 
   document.addEventListener("keydown", (event) => {
@@ -91,6 +96,33 @@
       }
     });
   });
+
+  function clearFieldError(field) {
+    field?.classList.remove("is-invalid");
+    const error = field?.querySelector("[data-field-error]");
+    if (error) error.hidden = true;
+  }
+
+  function setFieldError(field, message) {
+    if (!field) return false;
+    field.classList.add("is-invalid");
+    const error = field.querySelector("[data-field-error]");
+    if (error) {
+      error.textContent = message;
+      error.hidden = false;
+    }
+    return true;
+  }
+
+  function clearFormErrors(form) {
+    form.querySelectorAll("[data-field]").forEach(clearFieldError);
+  }
+
+  function bindFieldValidationClear(form) {
+    form.querySelectorAll("input").forEach((input) => {
+      input.addEventListener("input", () => clearFieldError(input.closest("[data-field]")));
+    });
+  }
 
   function getFormSnapshot(form) {
     return [...form.querySelectorAll("input")].map((input) => input.value);
@@ -121,46 +153,112 @@
     };
   }
 
-  const profileForm = root.querySelector("[data-profile-form]");
+  function validateProfileForm(form) {
+    const { validateText, validateRuEmail, validateRuPhone, validateOptionalText } = window.FormValidation;
+    clearFormErrors(form);
+
+    const nameField = form.querySelector('[data-field="name"]');
+    const phoneField = form.querySelector('[data-field="phone"]');
+    const emailField = form.querySelector('[data-field="email"]');
+    const addressField = form.querySelector('[data-field="address"]');
+
+    const nameInput = form.querySelector('[name="name"]');
+    const phoneInput = form.querySelector('[name="phone"]');
+    const emailInput = form.querySelector('[name="email"]');
+    const addressInput = form.querySelector('[name="address"]');
+
+    let hasError = false;
+
+    const nameResult = validateText(nameInput?.value, { required: true });
+    if (!nameResult.valid) {
+      hasError = setFieldError(nameField, nameResult.message) || hasError;
+    }
+
+    const phoneResult = validateRuPhone(phoneInput?.value, { required: true });
+    if (!phoneResult.valid) {
+      hasError = setFieldError(phoneField, phoneResult.message) || hasError;
+    } else if (phoneInput && phoneResult.normalized) {
+      phoneInput.value = phoneResult.normalized;
+    }
+
+    const emailResult = validateRuEmail(emailInput?.value, { required: true });
+    if (!emailResult.valid) {
+      hasError = setFieldError(emailField, emailResult.message) || hasError;
+    } else if (emailInput && emailResult.value) {
+      emailInput.value = emailResult.value;
+    }
+
+    const addressResult = validateOptionalText(addressInput?.value);
+    if (!addressResult.valid) {
+      hasError = setFieldError(addressField, addressResult.message) || hasError;
+    } else if (addressInput) {
+      addressInput.value = addressResult.value;
+    }
+
+    if (nameResult.valid && nameInput) {
+      nameInput.value = nameResult.value;
+    }
+
+    return !hasError;
+  }
+
+  function validatePasswordForm(form) {
+    const { validatePassword, trimValue, MESSAGES } = window.FormValidation;
+    clearFormErrors(form);
+
+    const currentField = form.querySelector('[data-field="currentPassword"]');
+    const newField = form.querySelector('[data-field="newPassword"]');
+    const repeatField = form.querySelector('[data-field="repeatPassword"]');
+
+    const currentInput = form.querySelector('[name="currentPassword"]');
+    const newInput = form.querySelector('[name="newPassword"]');
+    const repeatInput = form.querySelector('[name="repeatPassword"]');
+
+    let hasError = false;
+
+    if (trimValue(currentInput?.value) === "") {
+      hasError = setFieldError(currentField, MESSAGES.required) || hasError;
+    }
+
+    const newResult = validatePassword(newInput?.value, { required: true });
+    if (!newResult.valid) {
+      hasError = setFieldError(newField, newResult.message) || hasError;
+    }
+
+    const repeatResult = validatePassword(repeatInput?.value, { required: true });
+    if (!repeatResult.valid) {
+      hasError = setFieldError(repeatField, repeatResult.message) || hasError;
+    }
+
+    if (!hasError && trimValue(newInput?.value) !== trimValue(repeatInput?.value)) {
+      hasError = setFieldError(repeatField, "Пароли не совпадают") || hasError;
+    }
+
+    return !hasError;
+  }
+
   const profileFormState = profileForm ? initFormSubmitState(profileForm) : null;
-  profileForm?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    showToast("Данные успешно сохранены");
-    profileFormState?.resetBaseline();
-  });
+  if (profileForm && window.FormValidation) {
+    bindFieldValidationClear(profileForm);
+    profileForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!validateProfileForm(profileForm)) return;
+      showToast("Данные успешно сохранены");
+      profileFormState?.resetBaseline();
+    });
+  }
 
-  const passwordForm = root.querySelector("[data-password-form]");
   const passwordFormState = passwordForm ? initFormSubmitState(passwordForm) : null;
-  passwordForm?.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const current = passwordForm.querySelector('[name="currentPassword"]');
-    const next = passwordForm.querySelector('[name="newPassword"]');
-    const repeat = passwordForm.querySelector('[name="repeatPassword"]');
-    const repeatField = repeat?.closest("[data-field]");
-    const repeatError = repeatField?.querySelector("[data-field-error]");
-
-    repeatField?.classList.remove("is-invalid");
-    if (repeatError) repeatError.hidden = true;
-
-    if (next?.value && repeat?.value && next.value !== repeat.value) {
-      repeatField?.classList.add("is-invalid");
-      if (repeatError) {
-        repeatError.textContent = "Пароли не совпадают";
-        repeatError.hidden = false;
-      }
-      return;
-    }
-
-    if (!current?.value || !next?.value || !repeat?.value) {
-      showToast("Не удалось изменить пароль. Попробуйте еще раз", "error");
-      return;
-    }
-
-    showToast("Пароль успешно изменен");
-    passwordForm.reset();
-    passwordFormState?.resetBaseline();
-  });
+  if (passwordForm && window.FormValidation) {
+    bindFieldValidationClear(passwordForm);
+    passwordForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!validatePasswordForm(passwordForm)) return;
+      showToast("Пароль успешно изменен");
+      passwordForm.reset();
+      passwordFormState?.resetBaseline();
+    });
+  }
 
   root.querySelectorAll("[data-show-toast]").forEach((btn) => {
     btn.addEventListener("click", () => {

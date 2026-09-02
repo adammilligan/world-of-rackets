@@ -4,10 +4,6 @@
   padding-bottom: 120px;
 }
 
-.favorites-page .breadcrumbs {
-  padding: 24px 0 8px;
-}
-
 .favorites-page__head {
   display: flex;
   align-items: flex-end;

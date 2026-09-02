@@ -4,10 +4,6 @@
   padding-bottom: 120px;
 }
 
-.privacy-page .breadcrumbs {
-  padding: 24px 0 48px;
-}
-
 .privacy-page__head {
   margin-bottom: 32px;
 }
@@ -98,11 +94,6 @@
   .privacy-page__container {
     padding-bottom: calc(24px + var(--tabbar-h));
   }
-
-  .privacy-page .breadcrumbs {
-    padding: 8px 0 24px;
-  }
-
   .privacy-page__head {
     margin-bottom: 24px;
   }

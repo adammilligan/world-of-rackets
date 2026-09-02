@@ -4,10 +4,6 @@
   padding-bottom: 120px;
 }
 
-.stores-page .breadcrumbs {
-  padding: 24px 0 8px;
-}
-
 .stores-page__head {
   display: grid;
   gap: 16px;
@@ -174,11 +170,6 @@
   .stores-page__container {
     padding-bottom: calc(24px + var(--tabbar-h));
   }
-
-  .stores-page .breadcrumbs {
-    padding: 8px 0;
-  }
-
   .stores-page__head {
     gap: 16px;
     margin-bottom: 16px;
