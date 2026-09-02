@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Boost Strike 2020 — Мир ракеток</title>
+    <title>Корзина — Мир ракеток</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,6 +12,7 @@
     />
     <link rel="stylesheet" href="../../shared/css/base.css" />
     <link rel="stylesheet" href="../home/styles.css" />
+    <link rel="stylesheet" href="../product/styles.css" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -86,9 +87,9 @@
               <img src="../../shared/images/icons/heart.svg" alt="" width="22" height="22" />
               <span class="icon-btn__badge icon-btn__badge--fav" data-fav-badge>2</span>
             </a>
-            <a class="icon-btn" href="../cart/" aria-label="Корзина">
+            <a class="icon-btn" href="./" aria-label="Корзина" aria-current="page">
               <img src="../../shared/images/icons/trash.svg" alt="" width="22" height="22" />
-              <span class="icon-btn__badge icon-btn__badge--cart" data-cart-badge hidden>0</span>
+              <span class="icon-btn__badge icon-btn__badge--cart" data-cart-badge>3</span>
             </a>
             <a class="icon-btn" href="../account/" aria-label="Профиль">
               <img src="../../shared/images/icons/profile.svg" alt="" width="22" height="22" />
@@ -467,388 +468,268 @@
       </nav>
     </header>
 
-    <main id="main-content" class="product-page">
-      <div class="container product-page__container">
+    <main id="main-content" class="cart-page">
+      <div class="container cart-page__container">
         <nav class="breadcrumbs" aria-label="Хлебные крошки">
           <ol class="breadcrumbs__list">
             <li class="breadcrumbs__item"><a href="../home/">Главная</a></li>
-            <li class="breadcrumbs__item"><span>Большой теннис</span></li>
-            <li class="breadcrumbs__item"><a href="../catalog/">Взрослые ракетки</a></li>
-            <li class="breadcrumbs__item"><a href="#">Babolat</a></li>
-            <li class="breadcrumbs__item"><span aria-current="page">Boost Strike 2020</span></li>
+            <li class="breadcrumbs__item"><span aria-current="page">Корзина</span></li>
           </ol>
         </nav>
 
-        <section class="product" aria-label="Карточка товара">
-          <div class="product__layout">
-            <div class="product-gallery" data-product-gallery>
-              <div class="product-gallery__thumbs-col">
-                <button class="product-gallery__thumbs-arrow product-gallery__thumbs-arrow--up" type="button" aria-label="Прокрутить миниатюры вверх" data-thumbs-prev hidden>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-                <div class="product-gallery__thumbs" aria-label="Миниатюры">
-                  <button class="product-gallery__thumb is-active" type="button" aria-label="Фото 1" data-gallery-thumb="0">
-                    <img src="../home/images/products/racket.jpg" alt="" width="202" height="202" />
-                  </button>
-                  <button class="product-gallery__thumb" type="button" aria-label="Фото 2" data-gallery-thumb="1">
-                    <img src="../home/images/products/padel-racket.jpg" alt="" width="202" height="202" />
-                  </button>
-                  <button class="product-gallery__thumb" type="button" aria-label="Фото 3" data-gallery-thumb="2">
-                    <img src="../home/images/products/racket.jpg" alt="" width="202" height="202" />
-                  </button>
-                  <button class="product-gallery__thumb" type="button" aria-label="Фото 4" data-gallery-thumb="3">
-                    <img src="../home/images/products/padel-racket.jpg" alt="" width="202" height="202" />
-                  </button>
-                </div>
-                <button class="product-gallery__thumbs-arrow product-gallery__thumbs-arrow--down" type="button" aria-label="Прокрутить миниатюры вниз" data-thumbs-next hidden>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-              </div>
+        <div class="cart-page__head">
+          <h1 class="cart-page__title">Корзина</h1>
+          <p class="cart-page__count" data-cart-count>3 товара</p>
+        </div>
 
-              <div class="product-gallery__stage">
-                <img
-                  class="product-gallery__image is-active"
-                  src="../home/images/products/racket.jpg"
-                  alt="Boost Strike 2020"
-                  width="730"
-                  height="730"
-                  data-gallery-image
-                />
-                <img
-                  class="product-gallery__image"
-                  src="../home/images/products/padel-racket.jpg"
-                  alt=""
-                  width="730"
-                  height="730"
-                  hidden
-                  data-gallery-image
-                />
-                <img
-                  class="product-gallery__image"
-                  src="../home/images/products/racket.jpg"
-                  alt=""
-                  width="730"
-                  height="730"
-                  hidden
-                  data-gallery-image
-                />
-                <img
-                  class="product-gallery__image"
-                  src="../home/images/products/padel-racket.jpg"
-                  alt=""
-                  width="730"
-                  height="730"
-                  hidden
-                  data-gallery-image
-                />
-                <button class="product-gallery__arrow product-gallery__arrow--prev" type="button" aria-label="Предыдущее фото" data-gallery-prev>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-                <button class="product-gallery__arrow product-gallery__arrow--next" type="button" aria-label="Следующее фото" data-gallery-next>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-                <div class="product-gallery__dots" aria-hidden="true">
-                  <span class="product-gallery__dot is-active"></span>
-                  <span class="product-gallery__dot"></span>
-                  <span class="product-gallery__dot"></span>
-                  <span class="product-gallery__dot"></span>
-                </div>
-                <span class="badge badge--sale product-gallery__badge">-17%</span>
-                <button class="product-gallery__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-              </div>
-            </div>
+        <div class="cart-page__empty">
+          <img
+            class="cart-page__empty-image"
+            src="../../shared/images/illustrations/empty-cart.svg"
+            alt=""
+            width="158"
+            height="139"
+          />
+          <div class="cart-page__empty-text">
+            <p class="cart-page__empty-title">В корзине пока ничего нет</p>
+            <p class="cart-page__empty-desc">Добавьте товары из каталога — они появятся здесь.</p>
+          </div>
+          <a class="btn" href="../catalog/">Перейти в каталог</a>
+        </div>
 
-            <div class="product-info">
-              <div class="product-info__sidebar">
-                <div class="product-info__block product-info__block--before">
-                  <div class="product-info__intro">
-                    <h1 class="product-info__title">Boost Strike 2020</h1>
-                    <p class="product-info__meta">
-                      <span>Фирма-производитель:</span>
-                      <strong>BULLPADEL</strong>
-                    </p>
-                    <p class="product-info__sku">Артикул: 2230–3224–1000</p>
-                  </div>
-
-                  <ul class="product-specs">
-                    <li class="product-specs__item">
-                      <span class="product-specs__icon" aria-hidden="true"></span>
-                      <span class="product-specs__label">вес (гр)</span>
-                      <strong class="product-specs__value">280</strong>
-                    </li>
-                    <li class="product-specs__item">
-                      <span class="product-specs__icon product-specs__icon--head" aria-hidden="true"></span>
-                      <span class="product-specs__label">головка (см²)</span>
-                      <strong class="product-specs__value">280</strong>
-                    </li>
-                    <li class="product-specs__item">
-                      <span class="product-specs__icon product-specs__icon--balance" aria-hidden="true"></span>
-                      <span class="product-specs__label">баланс (мм)</span>
-                      <strong class="product-specs__value">280</strong>
-                    </li>
-                  </ul>
-
-                  <div class="product-options">
-                    <p class="product-options__label">Размер ручки</p>
-                    <div class="product-options__sizes" role="group" aria-label="Размер ручки">
-                      <button class="product-size" type="button">0</button>
-                      <button class="product-size is-active" type="button" aria-pressed="true">1</button>
-                      <button class="product-size" type="button">2</button>
-                      <button class="product-size" type="button">3</button>
-                      <button class="product-size" type="button">4</button>
-                      <button class="product-size" type="button">5</button>
-                    </div>
-                  </div>
-
-                  <div class="product-info__price">
-                    <span class="badge badge--sale product-info__badge">-17%</span>
-                    <div class="product-info__price-row">
-                      <span class="product-info__price-current">12 900 ₽</span>
-                      <span class="product-info__price-old">17 550 ₽</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="product-info__block product-info__block--after">
-                  <div class="product-buy product-buy--inline">
-                    <div class="product-qty" data-product-qty>
-                      <button class="product-qty__btn" type="button" aria-label="Уменьшить количество" data-qty-minus>−</button>
-                      <span class="product-qty__value" data-qty-value>1</span>
-                      <button class="product-qty__btn" type="button" aria-label="Увеличить количество" data-qty-plus>+</button>
-                    </div>
-                    <div class="product-buy__actions">
-                      <button class="btn product-buy__cart" type="button">В корзину</button>
-                      <button class="product-buy__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                        <span class="product-buy__fav-icon" aria-hidden="true">
-                          <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="24" height="24" />
-                          <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="24" height="24" />
-                        </span>
-                        <span class="product-buy__fav-text">в избранное</span>
-                      </button>
-                    </div>
-                  </div>
+        <div class="cart-page__filled">
+          <div class="cart-page__layout">
+            <div class="cart-page__items">
+            <article class="cart-item" data-unit-price="13900" data-unit-old="18900">
+              <a class="cart-item__thumb" href="../product/">
+                <img src="../home/images/products/cart-padel.png" alt="" width="120" height="120" />
+              </a>
+              <div class="cart-item__info">
+                <a class="cart-item__title" href="../product/">Ракетка для падела Bullpadel Ionic Light 26</a>
+                <dl class="cart-item__specs">
+                  <div class="cart-item__spec"><dt>Фирма:</dt><dd>BULLPADEL</dd></div>
+                  <div class="cart-item__spec"><dt>Баланс:</dt><dd>Средний</dd></div>
+                </dl>
+                <div class="cart-item__price cart-item__price--mobile">
+                  <span class="cart-item__price-current">13 900 ₽</span>
+                  <span class="cart-item__price-old">18 900 ₽</span>
+                  <span class="cart-item__discount">–17%</span>
                 </div>
               </div>
-
-              <section class="product-details" aria-label="Описание и характеристики">
-                <div class="product-tabs product-tabs--accordion" data-product-tabs>
-                  <div class="product-tabs__nav product-tabs__nav--desktop" role="tablist" aria-label="Информация о товаре">
-                    <button class="product-tabs__btn" type="button" role="tab" aria-selected="false" data-tab="description">Описание</button>
-                    <button class="product-tabs__btn" type="button" role="tab" aria-selected="false" data-tab="specs">Характеристики</button>
-                  </div>
-                  <details class="product-acc" data-panel="description">
-                    <summary class="product-acc__summary">
-                      <span>Описание</span>
-                      <img class="product-acc__icon" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" aria-hidden="true" />
-                    </summary>
-                    <div class="product-acc__body">
-                      <div class="product-tabs__content">
-                        <p>Ракетка Boost Strike 2020 на 100% состоит из графита, что обеспечивает отличную мощность и контроль. Подходит для игроков среднего и продвинутого уровня, которые ищут универсальную модель для динамичной игры.</p>
-                        <p>Технология Carbon Flex обеспечивает оптимальную жесткость и комфорт при ударе. Ракетка отлично подойдет для игроков, которые ценят баланс между силой и точностью.</p>
-                        <p>Модель рекомендована для любителей, которые хотят улучшить технику и получить стабильный результат на корте.</p>
-                      </div>
-                    </div>
-                  </details>
-                  <details class="product-acc" data-panel="specs">
-                    <summary class="product-acc__summary">
-                      <span>Характеристики</span>
-                      <img class="product-acc__icon" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" aria-hidden="true" />
-                    </summary>
-                    <div class="product-acc__body">
-                      <dl class="product-specs-table">
-                        <div class="product-specs-table__row">
-                          <dt>Фирма-производитель</dt>
-                          <dd>BULLPADEL</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Артикул</dt>
-                          <dd>2230–3224–1000</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Вес (гр)</dt>
-                          <dd>280</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Размер головки (см²)</dt>
-                          <dd>280</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Баланс (мм)</dt>
-                          <dd>280</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Материал</dt>
-                          <dd>Графит</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Размер ручки</dt>
-                          <dd>1–5</dd>
-                        </div>
-                      </dl>
-                    </div>
-                  </details>
+              <div class="cart-item__qty" aria-label="Количество">
+                <button class="cart-item__qty-btn" type="button" aria-label="Уменьшить количество" data-cart-minus disabled>
+                  <img src="../../shared/images/icons/minus.svg" alt="" width="20" height="20" />
+                </button>
+                <span class="cart-item__qty-value">1</span>
+                <button class="cart-item__qty-btn" type="button" aria-label="Увеличить количество" data-cart-plus>
+                  <img src="../../shared/images/icons/plus.svg" alt="" width="20" height="20" />
+                </button>
+              </div>
+              <div class="cart-item__price cart-item__price--desktop">
+                <span class="cart-item__price-current">13 900 ₽</span>
+                <span class="cart-item__price-old">18 900 ₽</span>
+                <span class="cart-item__discount">–17%</span>
+              </div>
+              <div class="cart-item__actions">
+                <button class="cart-item__action cart-item__action--fav" type="button" aria-label="Добавить в избранное" aria-pressed="false">
+                  <span class="cart-item__action-icon cart-item__action-icon--fav" aria-hidden="true"></span>
+                </button>
+                <button class="cart-item__action cart-item__action--delete" type="button" aria-label="Удалить из корзины" data-cart-delete><span class="cart-item__action-icon cart-item__action-icon--delete" aria-hidden="true"></span></button>
+              </div>
+              <div class="cart-item__footer">
+                <div class="cart-item__qty cart-item__qty--mobile" aria-label="Количество">
+                  <button class="cart-item__qty-btn" type="button" aria-label="Уменьшить количество" data-cart-minus disabled>
+                    <img src="../../shared/images/icons/minus.svg" alt="" width="20" height="20" />
+                  </button>
+                  <span class="cart-item__qty-value">1</span>
+                  <button class="cart-item__qty-btn" type="button" aria-label="Увеличить количество" data-cart-plus>
+                    <img src="../../shared/images/icons/plus.svg" alt="" width="20" height="20" />
+                  </button>
                 </div>
-              </section>
+                <div class="cart-item__actions cart-item__actions--mobile">
+                  <button class="cart-item__action cart-item__action--fav" type="button" aria-label="Добавить в избранное" aria-pressed="false">
+                    <span class="cart-item__action-icon cart-item__action-icon--fav" aria-hidden="true"></span>
+                  </button>
+                  <button class="cart-item__action cart-item__action--delete" type="button" aria-label="Удалить из корзины" data-cart-delete><span class="cart-item__action-icon cart-item__action-icon--delete" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </article>
+            <article class="cart-item" data-unit-price="14900" data-unit-old="19550">
+              <a class="cart-item__thumb" href="../product/">
+                <img src="../home/images/products/cart-babolat.png" alt="" width="120" height="120" />
+              </a>
+              <div class="cart-item__info">
+                <a class="cart-item__title" href="../product/">Теннисная ракетка Babolat Pure Drive 2021</a>
+                <dl class="cart-item__specs">
+                  <div class="cart-item__spec"><dt>Фирма:</dt><dd>BABOLAT</dd></div>
+                  <div class="cart-item__spec"><dt>Размер ручки:</dt><dd>3</dd></div>
+                </dl>
+                <div class="cart-item__price cart-item__price--mobile">
+                  <span class="cart-item__price-current">14 900 ₽</span>
+                  <span class="cart-item__price-old">19 550 ₽</span>
+                  <span class="cart-item__discount">–24%</span>
+                </div>
+              </div>
+              <div class="cart-item__qty" aria-label="Количество">
+                <button class="cart-item__qty-btn" type="button" aria-label="Уменьшить количество" data-cart-minus disabled>
+                  <img src="../../shared/images/icons/minus.svg" alt="" width="20" height="20" />
+                </button>
+                <span class="cart-item__qty-value">1</span>
+                <button class="cart-item__qty-btn" type="button" aria-label="Увеличить количество" data-cart-plus>
+                  <img src="../../shared/images/icons/plus.svg" alt="" width="20" height="20" />
+                </button>
+              </div>
+              <div class="cart-item__price cart-item__price--desktop">
+                <span class="cart-item__price-current">14 900 ₽</span>
+                <span class="cart-item__price-old">19 550 ₽</span>
+                <span class="cart-item__discount">–24%</span>
+              </div>
+              <div class="cart-item__actions">
+                <button class="cart-item__action cart-item__action--fav" type="button" aria-label="Добавить в избранное" aria-pressed="false">
+                  <span class="cart-item__action-icon cart-item__action-icon--fav" aria-hidden="true"></span>
+                </button>
+                <button class="cart-item__action cart-item__action--delete" type="button" aria-label="Удалить из корзины" data-cart-delete><span class="cart-item__action-icon cart-item__action-icon--delete" aria-hidden="true"></span></button>
+              </div>
+              <div class="cart-item__footer">
+                <div class="cart-item__qty cart-item__qty--mobile" aria-label="Количество">
+                  <button class="cart-item__qty-btn" type="button" aria-label="Уменьшить количество" data-cart-minus disabled>
+                    <img src="../../shared/images/icons/minus.svg" alt="" width="20" height="20" />
+                  </button>
+                  <span class="cart-item__qty-value">1</span>
+                  <button class="cart-item__qty-btn" type="button" aria-label="Увеличить количество" data-cart-plus>
+                    <img src="../../shared/images/icons/plus.svg" alt="" width="20" height="20" />
+                  </button>
+                </div>
+                <div class="cart-item__actions cart-item__actions--mobile">
+                  <button class="cart-item__action cart-item__action--fav" type="button" aria-label="Добавить в избранное" aria-pressed="false">
+                    <span class="cart-item__action-icon cart-item__action-icon--fav" aria-hidden="true"></span>
+                  </button>
+                  <button class="cart-item__action cart-item__action--delete" type="button" aria-label="Удалить из корзины" data-cart-delete><span class="cart-item__action-icon cart-item__action-icon--delete" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </article>
+            <article class="cart-item" data-unit-price="12950" data-unit-old="14200">
+              <a class="cart-item__thumb" href="../product/">
+                <img src="../home/images/products/cart-asics.png" alt="" width="120" height="120" />
+              </a>
+              <div class="cart-item__info">
+                <a class="cart-item__title" href="../product/">Кроссовки для тенниса Asics Gel-Resolution 8</a>
+                <dl class="cart-item__specs">
+                  <div class="cart-item__spec"><dt>Фирма:</dt><dd>ASICS</dd></div>
+                  <div class="cart-item__spec"><dt>Размер:</dt><dd>42</dd></div>
+                </dl>
+                <div class="cart-item__price cart-item__price--mobile">
+                  <span class="cart-item__price-current">12 950 ₽</span>
+                  <span class="cart-item__price-old">14 200 ₽</span>
+                  <span class="cart-item__discount">–9%</span>
+                </div>
+              </div>
+              <div class="cart-item__qty" aria-label="Количество">
+                <button class="cart-item__qty-btn" type="button" aria-label="Уменьшить количество" data-cart-minus disabled>
+                  <img src="../../shared/images/icons/minus.svg" alt="" width="20" height="20" />
+                </button>
+                <span class="cart-item__qty-value">1</span>
+                <button class="cart-item__qty-btn" type="button" aria-label="Увеличить количество" data-cart-plus>
+                  <img src="../../shared/images/icons/plus.svg" alt="" width="20" height="20" />
+                </button>
+              </div>
+              <div class="cart-item__price cart-item__price--desktop">
+                <span class="cart-item__price-current">12 950 ₽</span>
+                <span class="cart-item__price-old">14 200 ₽</span>
+                <span class="cart-item__discount">–9%</span>
+              </div>
+              <div class="cart-item__actions">
+                <button class="cart-item__action cart-item__action--fav" type="button" aria-label="Добавить в избранное" aria-pressed="false">
+                  <span class="cart-item__action-icon cart-item__action-icon--fav" aria-hidden="true"></span>
+                </button>
+                <button class="cart-item__action cart-item__action--delete" type="button" aria-label="Удалить из корзины" data-cart-delete><span class="cart-item__action-icon cart-item__action-icon--delete" aria-hidden="true"></span></button>
+              </div>
+              <div class="cart-item__footer">
+                <div class="cart-item__qty cart-item__qty--mobile" aria-label="Количество">
+                  <button class="cart-item__qty-btn" type="button" aria-label="Уменьшить количество" data-cart-minus disabled>
+                    <img src="../../shared/images/icons/minus.svg" alt="" width="20" height="20" />
+                  </button>
+                  <span class="cart-item__qty-value">1</span>
+                  <button class="cart-item__qty-btn" type="button" aria-label="Увеличить количество" data-cart-plus>
+                    <img src="../../shared/images/icons/plus.svg" alt="" width="20" height="20" />
+                  </button>
+                </div>
+                <div class="cart-item__actions cart-item__actions--mobile">
+                  <button class="cart-item__action cart-item__action--fav" type="button" aria-label="Добавить в избранное" aria-pressed="false">
+                    <span class="cart-item__action-icon cart-item__action-icon--fav" aria-hidden="true"></span>
+                  </button>
+                  <button class="cart-item__action cart-item__action--delete" type="button" aria-label="Удалить из корзины" data-cart-delete><span class="cart-item__action-icon cart-item__action-icon--delete" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </article>
             </div>
+          <aside class="cart-page__summary cart-page__summary--desktop" aria-labelledby="cart-summary-title">
+            <h2 class="cart-page__summary-title" id="cart-summary-title">Ваш заказ</h2>
+            <div class="cart-page__summary-rows">
+              <div class="cart-page__summary-row">
+                <span>Количество товаров</span>
+                <span data-cart-summary-count>3 шт.</span>
+              </div>
+              <div class="cart-page__summary-row">
+                <span>Стоимость товаров</span>
+                <span data-cart-summary-subtotal>41 750 ₽</span>
+              </div>
+              <div class="cart-page__summary-row cart-page__summary-row--discount">
+                <span>Скидка</span>
+                <span data-cart-summary-discount>–10 950 ₽</span>
+              </div>
+              <div class="cart-page__summary-row cart-page__summary-row--muted">
+                <span>Доставка</span>
+                <span>Уточнит менеджер</span>
+              </div>
+            </div>
+            <hr class="cart-page__summary-divider" />
+            <div class="cart-page__summary-total">
+              <span class="cart-page__summary-total-label">Итого</span>
+              <span class="cart-page__summary-total-value" data-cart-summary-total>30 800 ₽</span>
+            </div>
+            <a class="btn cart-page__summary-btn" href="../checkout/">Перейти к оформлению</a>
+            <div class="cart-page__summary-secondary">
+              <a class="cart-page__summary-link" href="../catalog/">Продолжить покупки</a>
+              <p class="cart-page__summary-note">Оплата на сайте не требуется</p>
+            </div>
+          </aside>
           </div>
 
-          <div class="product-buy product-buy--bar" data-product-buy-bar>
-            <div class="product-qty" data-product-qty-bar>
-              <button class="product-qty__btn" type="button" aria-label="Уменьшить количество" data-qty-minus>−</button>
-              <span class="product-qty__value" data-qty-value>1</span>
-              <button class="product-qty__btn" type="button" aria-label="Увеличить количество" data-qty-plus>+</button>
-            </div>
-            <div class="product-buy__actions">
-              <button class="btn product-buy__cart" type="button">В корзину</button>
-              <button class="product-buy__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                <span class="product-buy__fav-icon" aria-hidden="true">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="24" height="24" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="24" height="24" />
-                </span>
-                <span class="product-buy__fav-text">в избранное</span>
-              </button>
+          <div class="cart-page__mobile-actions">
+            <aside class="cart-page__summary" aria-labelledby="cart-summary-mobile-title">
+              <h2 class="cart-page__summary-title" id="cart-summary-mobile-title">Ваш заказ</h2>
+              <div class="cart-page__summary-rows">
+                <div class="cart-page__summary-row">
+                  <span>Количество товаров</span>
+                  <span data-cart-summary-count>3 шт.</span>
+                </div>
+                <div class="cart-page__summary-row">
+                  <span>Стоимость товаров</span>
+                  <span data-cart-summary-subtotal>41 750 ₽</span>
+                </div>
+                <div class="cart-page__summary-row cart-page__summary-row--discount">
+                  <span>Скидка</span>
+                  <span data-cart-summary-discount>–10 950 ₽</span>
+                </div>
+                <div class="cart-page__summary-row cart-page__summary-row--muted">
+                  <span>Доставка</span>
+                  <span>Уточнит менеджер</span>
+                </div>
+              </div>
+              <hr class="cart-page__summary-divider" />
+              <div class="cart-page__summary-total">
+                <span class="cart-page__summary-total-label">Итого</span>
+                <span class="cart-page__summary-total-value" data-cart-summary-total>30 800 ₽</span>
+              </div>
+            </aside>
+            <a class="btn cart-page__summary-btn" href="../checkout/">Перейти к оформлению</a>
+            <div class="cart-page__summary-secondary">
+              <a class="cart-page__summary-link" href="../catalog/">Продолжить покупки</a>
+              <p class="cart-page__summary-note">Оплата на сайте не требуется</p>
             </div>
           </div>
-        </section>
-
-        <section class="section product-related section--last" aria-label="Похожие товары">
-          <h2 class="section__title">С этим товаром покупают</h2>
-          <div class="products-carousel" data-products-carousel role="region" aria-roledescription="карусель" aria-label="С этим товаром покупают">
-            <button class="products-carousel__arrow products-carousel__arrow--prev" type="button" aria-label="Предыдущие товары">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
-            <div class="products-carousel__viewport">
-              <ul class="products">
-                <li class="product-card">
-                  <div class="product-card__shell">
-                    <a class="product-card__link" href="../home/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-                    <div class="product-card__media">
-                      <span class="badge badge--new">NEW</span>
-                      <button class="product-card__fav is-active" type="button" aria-pressed="true" aria-label="Убрать из избранного">
-                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                      </button>
-                      <img src="../home/images/products/padel-racket.jpg" alt="" />
-                    </div>
-                    <div class="product-card__body">
-                      <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light 26</span>
-                      <ul class="product-card__specs">
-                        <li>фирма: название</li>
-                        <li>вес: значение</li>
-                        <li>баланс: значение</li>
-                      </ul>
-                      <div class="product-card__footer">
-                        <span class="product-card__price">
-                          13 900 ₽
-                          <span class="product-card__price-old">18 900 ₽</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="btn product-card__cart" type="button">В корзину</button>
-                </li>
-                <li class="product-card">
-                  <div class="product-card__shell">
-                    <a class="product-card__link" href="../home/" aria-label="Теннисные кроссовки"></a>
-                    <div class="product-card__media">
-                      <span class="badge badge--new">NEW</span>
-                      <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                      </button>
-                      <img src="../home/images/products/shoes.jpg" alt="" />
-                    </div>
-                    <div class="product-card__body">
-                      <span class="product-card__title">Теннисные кроссовки</span>
-                      <p class="product-card__sizes">40 40,5 41 42</p>
-                      <div class="product-card__footer">
-                        <span class="product-card__price">
-                          13 900 ₽
-                          <span class="product-card__price-old">18 900 ₽</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="btn product-card__cart" type="button">В корзину</button>
-                </li>
-                <li class="product-card">
-                  <div class="product-card__shell">
-                    <a class="product-card__link" href="../home/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-                    <div class="product-card__media">
-                      <span class="badge badge--new">NEW</span>
-                      <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                      </button>
-                      <img src="../home/images/products/racket.jpg" alt="" />
-                    </div>
-                    <div class="product-card__body">
-                      <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light 26</span>
-                      <ul class="product-card__specs">
-                        <li>фирма: название</li>
-                        <li>вес: значение</li>
-                        <li>баланс: значение</li>
-                      </ul>
-                      <div class="product-card__footer">
-                        <span class="product-card__price">
-                          13 900 ₽
-                          <span class="product-card__price-old">18 900 ₽</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="btn product-card__cart" type="button">В корзину</button>
-                </li>
-                <li class="product-card">
-                  <div class="product-card__shell">
-                    <a class="product-card__link" href="../home/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-                    <div class="product-card__media">
-                      <span class="badge badge--new">NEW</span>
-                      <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                      </button>
-                      <img src="../home/images/products/padel-racket.jpg" alt="" />
-                    </div>
-                    <div class="product-card__body">
-                      <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light 26</span>
-                      <ul class="product-card__specs">
-                        <li>фирма: название</li>
-                        <li>вес: значение</li>
-                        <li>баланс: значение</li>
-                      </ul>
-                      <div class="product-card__footer">
-                        <span class="product-card__price">
-                          13 900 ₽
-                          <span class="product-card__price-old">18 900 ₽</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="btn product-card__cart" type="button">В корзину</button>
-                </li>
-              </ul>
-            </div>
-            <button class="products-carousel__arrow products-carousel__arrow--next" type="button" aria-label="Следующие товары">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
-          </div>
-        </section>
+        </div>
       </div>
     </main>
     <footer class="footer">
@@ -875,9 +756,9 @@
               <section class="footer__section">
                 <h3 class="footer__heading">Информация</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Магазины</a></li>
-                  <li><a href="#">Доставка</a></li>
-                  <li><a href="#">Гарантия</a></li>
+                  <li><a href="./">Магазины</a></li>
+                  <li><a href="../delivery/">Доставка</a></li>
+                  <li><a href="../warranty/">Гарантия</a></li>
                   <li><a href="#">Центр продаж теннисных мячей</a></li>
                   <li><a href="../gift-cards/">Подарочные сертификаты</a></li>
                   <li><a href="../privacy/">Политика конфиденциальности</a></li>
@@ -1037,10 +918,10 @@
         </span>
         <span>Избранное</span>
       </a>
-      <a class="tabbar__item" href="../cart/">
+      <a class="tabbar__item is-active" href="./" aria-current="page">
         <span class="tabbar__icon-wrap">
           <span class="tabbar__icon tabbar__icon--cart" aria-hidden="true"></span>
-          <span class="tabbar__badge" data-cart-badge hidden>0</span>
+          <span class="tabbar__badge" data-cart-badge>3</span>
         </span>
         <span>Корзина</span>
       </a>
@@ -1380,5 +1261,5 @@
 
     <script src="../../shared/js/common.js"></script>
     <script src="./main.js"></script>
-  </body>
+      </body>
 </html>

@@ -293,6 +293,7 @@ function initContactsSheet() {
   const sheet = qs("#contacts-sheet");
   const panel = qs(".contacts-sheet__panel", sheet);
   const handle = qs(".contacts-sheet__handle", sheet);
+  const head = qs(".contacts-sheet__head", sheet);
   const title = qs(".contacts-sheet__title", sheet);
   const body = qs("[data-contacts-sheet-body]", sheet);
   const source = qs("[data-contacts-source]");
@@ -417,8 +418,8 @@ function initContactsSheet() {
         if (!dragMode) {
           if (Math.abs(deltaY) < 8) return;
           const fromHandle = handle && handle.contains(event.target);
-          const fromTitle = title && title.contains(event.target);
-          if ((fromHandle || fromTitle) && deltaY > 0) {
+          const fromHead = head && head.contains(event.target);
+          if ((fromHandle || fromHead) && deltaY > 0) {
             dragMode = "dismiss";
           } else if (body.scrollTop <= 0 && deltaY > 0) {
             dragMode = "dismiss";
@@ -504,59 +505,143 @@ function initContactsSheet() {
   initContactsSheetSwipe();
 }
 
-function initFavorites() {
-  const badges = qsa("[data-fav-badge]");
-  const buttons = qsa(".product-card__fav");
+const FAV_COUNT_KEY = "wor-fav-count";
 
-  function syncButton(btn) {
-    const active = btn.classList.contains("is-active");
-    btn.setAttribute("aria-pressed", String(active));
-    btn.setAttribute("aria-label", active ? "Убрать из избранного" : "В избранное");
+function readFavCount() {
+  try {
+    const raw = localStorage.getItem(FAV_COUNT_KEY);
+    if (raw === null) return null;
+    return Math.max(0, Number(raw) || 0);
+  } catch {
+    return null;
   }
-
-  function syncBadge() {
-    const count = buttons.filter((btn) => btn.classList.contains("is-active")).length;
-    badges.forEach((badge) => {
-      badge.textContent = String(count);
-      badge.hidden = count <= 0;
-    });
-  }
-
-  buttons.forEach((btn) => {
-    syncButton(btn);
-    btn.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      btn.classList.toggle("is-active");
-      syncButton(btn);
-      syncBadge();
-    });
-  });
-
-  syncBadge();
 }
 
-function initCart() {
-  const badges = qsa("[data-cart-badge]");
-  let count = 0;
-
-  function syncBadge() {
-    badges.forEach((badge) => {
-      badge.textContent = String(count);
-      badge.hidden = count <= 0;
-    });
+function writeFavCount(count) {
+  const value = Math.max(0, count);
+  try {
+    localStorage.setItem(FAV_COUNT_KEY, String(value));
+  } catch {
+    /* ignore quota / private mode */
   }
+  syncFavBadges(value);
+  return value;
+}
 
-  qsa(".product-card__cart").forEach((btn) => {
+function syncFavBadges(count = readFavCount() ?? 0) {
+  qsa("[data-fav-badge]").forEach((badge) => {
+    badge.textContent = String(count);
+    badge.hidden = count <= 0;
+  });
+}
+
+window.worFavorites = {
+  getCount() {
+    return readFavCount() ?? 0;
+  },
+  setCount(count) {
+    return writeFavCount(count);
+  },
+  increment(by = 1) {
+    return writeFavCount((readFavCount() ?? 0) + by);
+  },
+  decrement(by = 1) {
+    return writeFavCount((readFavCount() ?? 0) - by);
+  },
+  syncBadges: syncFavBadges,
+};
+
+function initFavorites() {
+  syncFavBadges();
+
+  qsa(".product-card__fav").forEach((btn) => {
+    function syncButton() {
+      const active = btn.classList.contains("is-active");
+      btn.setAttribute("aria-pressed", String(active));
+      btn.setAttribute("aria-label", active ? "Убрать из избранного" : "В избранное");
+    }
+
+    syncButton();
     btn.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
-      count += 1;
-      syncBadge();
+      const wasActive = btn.classList.contains("is-active");
+      btn.classList.toggle("is-active");
+      syncButton();
+
+      if (wasActive) {
+        window.worFavorites.decrement(1);
+      } else {
+        window.worFavorites.increment(1);
+      }
+
+      const favoritesPage = btn.closest(".favorites-page");
+      if (favoritesPage && wasActive && btn.closest(".favorites-page__grid")) {
+        btn.closest(".product-card")?.remove();
+        favoritesPage.dispatchEvent(new CustomEvent("favorites-page:update"));
+      }
     });
   });
+}
 
-  syncBadge();
+const CART_COUNT_KEY = "wor-cart-count";
+
+function readCartCount() {
+  try {
+    const raw = localStorage.getItem(CART_COUNT_KEY);
+    if (raw === null) return null;
+    return Math.max(0, Number(raw) || 0);
+  } catch {
+    return null;
+  }
+}
+
+function writeCartCount(count) {
+  const value = Math.max(0, count);
+  try {
+    localStorage.setItem(CART_COUNT_KEY, String(value));
+  } catch {
+    /* ignore quota / private mode */
+  }
+  syncCartBadges(value);
+  return value;
+}
+
+function syncCartBadges(count = readCartCount() ?? 0) {
+  qsa("[data-cart-badge]").forEach((badge) => {
+    badge.textContent = String(count);
+    badge.hidden = count <= 0;
+  });
+}
+
+function incrementCartCount(by = 1) {
+  const current = readCartCount() ?? 0;
+  return writeCartCount(current + by);
+}
+
+window.worCart = {
+  getCount() {
+    return readCartCount() ?? 0;
+  },
+  setCount(count) {
+    return writeCartCount(count);
+  },
+  increment(by = 1) {
+    return incrementCartCount(by);
+  },
+  syncBadges: syncCartBadges,
+};
+
+function initCart() {
+  syncCartBadges();
+
+  qsa(".product-card__cart, .product-buy__cart").forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      incrementCartCount(1);
+    });
+  });
 }
 
 initNavMenus();

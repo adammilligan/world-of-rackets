@@ -18,16 +18,16 @@
     <div class="topbar">
       <div class="topbar__inner">
         <p class="topbar__hours">с 10 до 21 без выходных</p>
-        <details class="topbar__contacts">
-          <summary>
-            контакты
-            <img class="dropdown-chevron" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" />
-          </summary>
-          <div class="topbar__contacts-panel">
-            <a href="tel:+74957774555">+7 (495) 777-45-55</a>
-            <a href="mailto:info@mirraketok.ru">info@mirraketok.ru</a>
-          </div>
-        </details>
+        <button
+          class="topbar__contacts-btn"
+          type="button"
+          aria-expanded="false"
+          aria-controls="contacts-sheet"
+          data-contacts-open
+        >
+          контакты
+          <img class="dropdown-chevron" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" />
+        </button>
       </div>
     </div>
     <header class="header">
@@ -81,15 +81,15 @@
           </form>
 
           <div class="header__actions">
-            <a class="icon-btn" href="#" aria-label="Избранное">
+            <a class="icon-btn" href="../favorites/" aria-label="Избранное">
               <img src="../../shared/images/icons/heart.svg" alt="" width="22" height="22" />
               <span class="icon-btn__badge icon-btn__badge--fav" data-fav-badge>2</span>
             </a>
-            <a class="icon-btn" href="#" aria-label="Корзина">
+            <a class="icon-btn" href="../cart/" aria-label="Корзина">
               <img src="../../shared/images/icons/trash.svg" alt="" width="22" height="22" />
               <span class="icon-btn__badge icon-btn__badge--cart" data-cart-badge hidden>0</span>
             </a>
-            <a class="icon-btn" href="#" aria-label="Профиль">
+            <a class="icon-btn" href="../account/" aria-label="Профиль">
               <img src="../../shared/images/icons/profile.svg" alt="" width="22" height="22" />
             </a>
           </div>
@@ -188,7 +188,7 @@
                       <li><a href="../catalog/?section=tennis-balls&amp;brand=wilson">Wilson</a></li>
                     </ul>
                     <p class="nav__mega-title"><a href="../catalog/?section=tennis-stringing">Натяжка струн</a></p>
-                    <p class="nav__mega-title"><a href="../catalog/?section=gift-cards">Подарочные сертификаты</a></p>
+                    <p class="nav__mega-title"><a href="../gift-cards/">Подарочные сертификаты</a></p>
                   </div>
                   <div class="nav__mega-col">
                     <p class="nav__mega-title"><a href="../catalog/?section=tennis-bags">Сумки. Рюкзаки. Чехлы.</a></p>
@@ -960,11 +960,12 @@
               <section class="footer__section">
                 <h3 class="footer__heading">Информация</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Магазины</a></li>
-                  <li><a href="#">Доставка</a></li>
-                  <li><a href="#">Гарантия</a></li>
+                  <li><a href="../stores/">Магазины</a></li>
+                  <li><a href="../delivery/">Доставка</a></li>
+                  <li><a href="../warranty/">Гарантия</a></li>
                   <li><a href="#">Центр продаж теннисных мячей</a></li>
-                  <li><a href="#">Подарочные сертификаты</a></li>
+                  <li><a href="../gift-cards/">Подарочные сертификаты</a></li>
+                  <li><a href="../privacy/">Политика конфиденциальности</a></li>
                 </ul>
               </section>
               <section class="footer__section">
@@ -1114,16 +1115,294 @@
         </details>
         <details class="footer-acc">
           <summary class="footer-acc__summary">
+            <span>Доставка</span>
+            <span class="footer-acc__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="footer-acc__body footer-delivery">
+            <p class="footer-delivery__intro">
+              Доставляем ракетки, обувь и аксессуары по&nbsp;Москве и&nbsp;всей России. Забрать заказ можно и&nbsp;в&nbsp;наших магазинах.
+            </p>
+
+            <section class="footer-delivery__group">
+              <h3 class="footer-delivery__heading">Доставка по Москве</h3>
+              <div class="footer-delivery__cards">
+                <article class="footer-delivery__card">
+                  <div class="footer-delivery__card-head">
+                    <span class="footer-delivery__icon" aria-hidden="true">
+                      <img src="../../shared/images/icons/map-pin.svg" alt="" width="24" height="24" />
+                    </span>
+                    <div>
+                      <p class="footer-delivery__card-title">500 ₽ в пределах МКАД</p>
+                      <p class="footer-delivery__card-sub">Москва</p>
+                    </div>
+                  </div>
+                  <p class="footer-delivery__card-text">При заказе от 20 000 ₽. Минимальная сумма заказа — 5 000 ₽</p>
+                  <p class="footer-delivery__card-text">За МКАД — стоимость рассчитывается индивидуально</p>
+                </article>
+                <article class="footer-delivery__card">
+                  <div class="footer-delivery__card-head">
+                    <span class="footer-delivery__icon" aria-hidden="true">
+                      <img src="../../shared/images/icons/package-check.svg" alt="" width="24" height="24" />
+                    </span>
+                    <div>
+                      <p class="footer-delivery__card-title">Бесплатно в пределах МКАД</p>
+                      <p class="footer-delivery__card-sub">Бесплатная доставка</p>
+                    </div>
+                  </div>
+                  <p class="footer-delivery__card-text">При заказе от 20 000 ₽ (кроме крупногабаритных товаров)</p>
+                </article>
+                <article class="footer-delivery__card">
+                  <div class="footer-delivery__card-head">
+                    <span class="footer-delivery__icon" aria-hidden="true">
+                      <img src="../../shared/images/icons/store.svg" alt="" width="24" height="24" />
+                    </span>
+                    <div>
+                      <p class="footer-delivery__card-title">2 магазина</p>
+                      <p class="footer-delivery__card-sub">Самовывоз</p>
+                    </div>
+                  </div>
+                  <p class="footer-delivery__card-text">Москва. Магазин на Тульской и Беломорской</p>
+                </article>
+              </div>
+              <div class="footer-delivery__row">
+                <p class="footer-delivery__row-label">Сроки</p>
+                <p class="footer-delivery__row-text">Возможна доставка в день заказа при наличии товара. Обычно 1–2 рабочих дня. Доставляем 7 дней в неделю.</p>
+              </div>
+            </section>
+
+            <section class="footer-delivery__group footer-delivery__group--wide">
+              <h3 class="footer-delivery__heading">Доставка по России</h3>
+              <div class="footer-delivery__cards">
+                <article class="footer-delivery__card">
+                  <div class="footer-delivery__card-head">
+                    <span class="footer-delivery__icon" aria-hidden="true">
+                      <img src="../../shared/images/icons/truck.svg" alt="" width="24" height="24" />
+                    </span>
+                    <div>
+                      <p class="footer-delivery__card-title">СДЭК / Почта России</p>
+                      <p class="footer-delivery__card-sub">По России</p>
+                    </div>
+                  </div>
+                  <p class="footer-delivery__card-text">Стоимость зависит от региона</p>
+                </article>
+                <article class="footer-delivery__detail">
+                  <h4 class="footer-delivery__detail-title">Почта России</h4>
+                  <ul class="footer-delivery__list">
+                    <li>Отправления до 3 кг</li>
+                    <li>Заказ от 1 500 ₽</li>
+                    <li>100% предоплата</li>
+                    <li>Стоимость по тарифам Почты России</li>
+                    <li>Для отправки нужны: ФИО, полный адрес, индекс</li>
+                  </ul>
+                </article>
+                <article class="footer-delivery__detail">
+                  <h4 class="footer-delivery__detail-title">СДЭК</h4>
+                  <ul class="footer-delivery__list">
+                    <li>Срок доставки от 2 дней</li>
+                    <li>Заказ от 2 000 ₽</li>
+                    <li>Вес не ограничен</li>
+                    <li>Предоплата или наложенный платёж</li>
+                  </ul>
+                </article>
+              </div>
+            </section>
+
+            <section class="footer-delivery__group">
+              <h3 class="footer-delivery__heading">Доставка в СНГ</h3>
+              <article class="footer-delivery__card">
+                <div class="footer-delivery__card-head">
+                  <span class="footer-delivery__icon" aria-hidden="true">
+                    <img src="../../shared/images/icons/truck.svg" alt="" width="24" height="24" />
+                  </span>
+                  <div>
+                    <p class="footer-delivery__card-title">СДЭК</p>
+                    <p class="footer-delivery__card-sub">СНГ</p>
+                  </div>
+                </div>
+                <p class="footer-delivery__card-text">Только СДЭК. Срок доставки от 3 суток. 100% предоплата.</p>
+              </article>
+            </section>
+
+            <section class="footer-delivery__group">
+              <h3 class="footer-delivery__heading">Самовывоз</h3>
+              <div class="footer-delivery__pickup">
+                <div class="footer-acc__card">
+                  <p class="footer-acc__card-title">Адрес: г. Москва, ул. Мытная, д.48 (вход с улицы)</p>
+                  <div class="footer-acc__metros">
+                    <span><i class="metro metro--gray"></i>Тульская</span>
+                    <span><i class="metro metro--orange"></i>Шаболовская</span>
+                    <span><i class="metro metro--brown"></i>Добрынинская</span>
+                  </div>
+                  <div class="footer-acc__phone-row">
+                    <a href="tel:+79197734033">+7 (919) 773-40-33</a>
+                    <div class="footer__social">
+                      <a href="tg://resolve?phone=79197734033" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+                        <img src="../../shared/images/icons/telegram.svg" alt="" width="32" height="32" />
+                      </a>
+                      <a href="bip://chat?phone=79197734033" aria-label="BIP" target="_blank" rel="noopener noreferrer">
+                        <img src="../../shared/images/icons/bip.svg" alt="" width="32" height="32" />
+                      </a>
+                    </div>
+                  </div>
+                  <p class="footer-acc__row footer-acc__row--hours"><img class="footer-acc__icon-img" src="../../shared/images/icons/time.svg" alt="" width="16" height="16" />с 10 до 21 без выходных</p>
+                  <p class="footer-acc__row footer-acc__row--holiday">праздничные дни: с 10 до 19</p>
+                </div>
+                <div class="footer-acc__card">
+                  <p class="footer-acc__card-title">Адрес: г. Москва, ул. Смольная, д. 63 Б, ТЦ «Экстрим», Этаж 1, павильон A-4.</p>
+                  <div class="footer-acc__metros">
+                    <span><i class="metro metro--gray"></i>Беломорская</span>
+                  </div>
+                  <div class="footer-acc__phone-row">
+                    <a href="tel:+79853342515">+7 (985) 334-25-15</a>
+                    <div class="footer__social">
+                      <a href="tg://resolve?phone=79853342515" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+                        <img src="../../shared/images/icons/telegram.svg" alt="" width="32" height="32" />
+                      </a>
+                      <a href="bip://chat?phone=79853342515" aria-label="BIP" target="_blank" rel="noopener noreferrer">
+                        <img src="../../shared/images/icons/bip.svg" alt="" width="32" height="32" />
+                      </a>
+                    </div>
+                  </div>
+                  <p class="footer-acc__row footer-acc__row--hours"><img class="footer-acc__icon-img" src="../../shared/images/icons/time.svg" alt="" width="16" height="16" />с 10 до 21 без выходных</p>
+                  <p class="footer-acc__row footer-acc__row--holiday">праздничные дни: с 10 до 19</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="footer-delivery__oversized">
+              <h3 class="footer-delivery__heading">Крупногабаритные товары</h3>
+              <div class="footer-delivery__row footer-delivery__row--border">
+                <p class="footer-delivery__row-label">Москва</p>
+                <p class="footer-delivery__row-text">Доставка через сервис Достависта. Стоимость рассчитывается индивидуально.</p>
+              </div>
+              <div class="footer-delivery__row footer-delivery__row--border">
+                <p class="footer-delivery__row-label">Регионы</p>
+                <p class="footer-delivery__row-text">Доставка через СДЭК.</p>
+              </div>
+            </section>
+
+            <aside class="footer-delivery__notice" aria-label="Обратите внимание">
+              <div class="footer-delivery__notice-head">
+                <span class="footer-delivery__notice-icon" aria-hidden="true">
+                  <img src="../../shared/images/icons/info.svg" alt="" width="20" height="20" />
+                </span>
+                <p class="footer-delivery__notice-title">Обратите внимание</p>
+              </div>
+              <ul class="footer-delivery__list footer-delivery__list--notice">
+                <li>После оформления заказа менеджер свяжется с вами для подтверждения сроков, стоимости и условий доставки.</li>
+                <li>При необоснованном отказе от заказа после приезда курьера может потребоваться компенсация транспортных расходов курьера.</li>
+              </ul>
+            </aside>
+          </div>
+        </details>
+        <details class="footer-acc">
+          <summary class="footer-acc__summary">
+            <span>Гарантия и возврат</span>
+            <span class="footer-acc__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="footer-acc__body footer-warranty">
+            <p class="footer-warranty__intro">
+              Магазин «Мир Ракеток» соблюдает законодательство РФ о&nbsp;защите прав потребителей и&nbsp;гарантийные обязательства производителей.
+            </p>
+
+            <section class="footer-warranty__group">
+              <div class="footer-warranty__section-head">
+                <span class="footer-warranty__icon footer-warranty__icon--sm" aria-hidden="true">
+                  <img src="../../shared/images/icons/calendar.svg" alt="" width="16" height="16" />
+                </span>
+                <h3 class="footer-warranty__heading">Сроки возврата</h3>
+              </div>
+              <p class="footer-warranty__highlight">Вернуть или обменять товар можно в течение 14 дней после покупки.</p>
+              <div class="footer-warranty__panel">
+                <p class="footer-warranty__panel-title">Условия для возврата товара:</p>
+                <ul class="footer-warranty__list">
+                  <li>товар не был в употреблении;</li>
+                  <li>сохранён товарный вид и свойства;</li>
+                  <li>сохранены все бирки, ярлыки, упаковка и штрихкоды;</li>
+                  <li>имеется документ, подтверждающий оплату (чек).</li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="footer-warranty__group footer-warranty__group--steps">
+              <div class="footer-warranty__section-head">
+                <span class="footer-warranty__icon footer-warranty__icon--sm" aria-hidden="true">
+                  <img src="../../shared/images/icons/rotate-right.svg" alt="" width="16" height="16" />
+                </span>
+                <h3 class="footer-warranty__heading">Как оформить возврат</h3>
+              </div>
+              <article class="footer-warranty__step">
+                <div class="footer-warranty__step-head">
+                  <span class="footer-warranty__step-num">1</span>
+                  <h4 class="footer-warranty__step-title">Свяжитесь с магазином</h4>
+                </div>
+                <p class="footer-warranty__step-text">Сообщите менеджерам о намерении совершить возврат или обмен минимум за 1 рабочий день до визита.</p>
+              </article>
+              <article class="footer-warranty__step">
+                <div class="footer-warranty__step-head">
+                  <span class="footer-warranty__step-num">2</span>
+                  <h4 class="footer-warranty__step-title">Подготовьте товар</h4>
+                </div>
+                <p class="footer-warranty__step-text">Убедитесь, что товар находится в оригинальной фабричной упаковке и сохранен его первоначальный вид.</p>
+              </article>
+              <article class="footer-warranty__step">
+                <div class="footer-warranty__step-head">
+                  <span class="footer-warranty__step-num">3</span>
+                  <h4 class="footer-warranty__step-title">Документы об оплате</h4>
+                </div>
+                <p class="footer-warranty__step-text">Возьмите с собой кассовый или электронный чек, а также документ, удостоверяющий вашу личность.</p>
+              </article>
+            </section>
+
+            <aside class="footer-warranty__notice" aria-label="Важно для ракеток">
+              <div class="footer-warranty__notice-head">
+                <span class="footer-warranty__notice-icon" aria-hidden="true">
+                  <img src="../../shared/images/icons/danger.svg" alt="" width="20" height="20" />
+                </span>
+                <p class="footer-warranty__notice-title">Важно для ракеток</p>
+              </div>
+              <p class="footer-warranty__notice-text">
+                Упаковкой теннисной ракетки считается фабричный целлофан на ручке. Если защитная плёнка с ручки снята, ракетка считается бывшей в употреблении и не подлежит возврату или обмену.
+              </p>
+            </aside>
+
+            <section class="footer-warranty__block">
+              <h3 class="footer-warranty__heading">Товары, не подлежащие возврату</h3>
+              <ul class="footer-warranty__list footer-warranty__list--spaced">
+                <li>бывшие в употреблении товары;</li>
+                <li>текстильные товары (мерные);</li>
+                <li>изделия и материалы, контактирующие с пищевыми продуктами, из полимерных материалов;</li>
+                <li>товары бытовой химии, пестициды и агрохимикаты;</li>
+                <li>технически сложные товары бытового назначения, на которые установлены гарантийные сроки;</li>
+                <li>автомобили и мотовелотовары;</li>
+                <li>гражданское оружие;</li>
+                <li>животные и растения;</li>
+                <li>непериодические издания (книги, брошюры, альбомы);</li>
+                <li>теннисные ракетки с нарушенной упаковкой или снятой защитной плёнкой с ручки;</li>
+                <li>другие товары, указанные в Постановлении Правительства РФ и иных нормативных актах.</li>
+              </ul>
+            </section>
+
+            <section class="footer-warranty__block">
+              <h3 class="footer-warranty__heading">Правовая информация</h3>
+              <div class="footer-warranty__legal">
+                <p>Возврат и обмен товаров регулируется Законом РФ «О защите прав потребителей» (статья 25), а также Постановлением Правительства РФ №55, устанавливающим перечень непродовольственных товаров надлежащего качества, не подлежащих обмену.</p>
+                <p>Магазин оставляет за собой право отказать в возврате или обмене товара, если не соблюдены условия, предусмотренные действующим законодательством.</p>
+                <p>Полный текст нормативных документов доступен на официальных ресурсах правовой информации.</p>
+              </div>
+            </section>
+          </div>
+        </details>
+        <details class="footer-acc">
+          <summary class="footer-acc__summary">
             <span>Информация</span>
             <span class="footer-acc__icon" aria-hidden="true"></span>
           </summary>
           <div class="footer-acc__body">
             <ul class="footer__links">
-              <li><a href="#">Магазины</a></li>
-              <li><a href="#">Доставка</a></li>
-              <li><a href="#">Гарантия</a></li>
+              <li><a href="../stores/">Магазины</a></li>
               <li><a href="#">Центр продаж теннисных мячей</a></li>
-              <li><a href="#">Подарочные сертификаты</a></li>
+              <li><a href="../gift-cards/">Подарочные сертификаты</a></li>
             </ul>
           </div>
         </details>
@@ -1248,21 +1527,21 @@
         </svg>
         <span>Каталог</span>
       </button>
-      <a class="tabbar__item" href="#">
+      <a class="tabbar__item" href="../favorites/">
         <span class="tabbar__icon-wrap">
           <span class="tabbar__icon tabbar__icon--heart" aria-hidden="true"></span>
           <span class="tabbar__badge" data-fav-badge>2</span>
         </span>
         <span>Избранное</span>
       </a>
-      <a class="tabbar__item" href="#">
+      <a class="tabbar__item" href="../cart/">
         <span class="tabbar__icon-wrap">
           <span class="tabbar__icon tabbar__icon--cart" aria-hidden="true"></span>
           <span class="tabbar__badge" data-cart-badge hidden>0</span>
         </span>
         <span>Корзина</span>
       </a>
-      <a class="tabbar__item" href="#">
+      <a class="tabbar__item" href="../account/">
         <span class="tabbar__icon tabbar__icon--profile" aria-hidden="true"></span>
         <span>Профиль</span>
       </a>
@@ -1390,7 +1669,7 @@
             </button>
           </li>
           <li><a class="catalog-sidebar__item" href="#">Натяжка струн</a></li>
-          <li><a class="catalog-sidebar__item" href="#">Подарочные сертификаты</a></li>
+          <li><a class="catalog-sidebar__item" href="../gift-cards/">Подарочные сертификаты</a></li>
         </ul>
       </template>
 
@@ -1591,7 +1870,12 @@
         tabindex="-1"
       >
         <div class="contacts-sheet__handle" aria-hidden="true"></div>
-        <h2 class="contacts-sheet__title" id="contacts-sheet-title">контакты</h2>
+        <div class="contacts-sheet__head">
+          <h2 class="contacts-sheet__title" id="contacts-sheet-title">Контакты</h2>
+          <button class="contacts-sheet__close" type="button" aria-label="Закрыть" data-contacts-close>
+            <img src="../../shared/images/icons/close.svg" alt="" width="20" height="20" />
+          </button>
+        </div>
         <div class="contacts-sheet__body" data-contacts-sheet-body></div>
       </div>
     </div>

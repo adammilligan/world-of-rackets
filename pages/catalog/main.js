@@ -675,22 +675,113 @@ function brandSlug(name) {
     .replace(/[^a-z0-9\-]/g, "");
 }
 
-function initCatalogState() {
-  const params = new URLSearchParams(window.location.search);
-  const sectionKey = params.get("section") || "tennis-adult";
-  const brand = (params.get("brand") || "").toLowerCase();
-  const config = CATALOG_SECTIONS[sectionKey] || CATALOG_SECTIONS["tennis-adult"];
+function brandLabelFromSlug(slug, brands) {
+  if (!slug) return "";
+  const match = brands.find((name) => brandSlug(name) === slug);
+  return match || slug;
+}
 
-  document.title = `${config.title} — Мир ракеток`;
+const BRAND_SERIES = {
+  babolat: [
+    { slug: "pure-aero", label: "Pure Aero" },
+    { slug: "pure-drive", label: "Pure Drive" },
+    { slug: "pure-strike", label: "Pure Strike" },
+    { slug: "boost", label: "Boost" },
+    { slug: "evoke", label: "Evoke" },
+  ],
+  head: [
+    { slug: "burn", label: "Burn" },
+    { slug: "extreme", label: "Extreme" },
+    { slug: "gravity", label: "Gravity" },
+    { slug: "prestige", label: "Prestige" },
+    { slug: "radical", label: "Radical" },
+    { slug: "speed", label: "Speed" },
+  ],
+  wilson: [
+    { slug: "blade", label: "Blade" },
+    { slug: "clash", label: "Clash" },
+    { slug: "pro-staff", label: "Pro Staff" },
+    { slug: "ultra", label: "Ultra" },
+  ],
+  yonex: [
+    { slug: "ezone", label: "EZONE" },
+    { slug: "vcore", label: "VCORE" },
+    { slug: "percept", label: "PERCEPT" },
+  ],
+  tecnifibre: [
+    { slug: "tfight", label: "T-Fight" },
+    { slug: "tflash", label: "T-Flash" },
+  ],
+  prince: [
+    { slug: "beast", label: "Beast" },
+    { slug: "phantom", label: "Phantom" },
+    { slug: "twist", label: "Twist" },
+  ],
+  prokennex: [{ slug: "ki", label: "Ki" }],
+};
+
+function getSeriesForBrand(brandSlugValue) {
+  if (!brandSlugValue) return [];
+  return BRAND_SERIES[brandSlugValue] || [];
+}
+
+function parseSeriesParam(value) {
+  if (!value) return [];
+  return value.split(",").map((item) => item.trim()).filter(Boolean);
+}
+
+function buildCatalogUrl({ section, brand, series = [] }) {
+  const params = new URLSearchParams();
+  if (section) params.set("section", section);
+  if (brand) params.set("brand", brand);
+  if (series.length) params.set("series", series.join(","));
+  const qs = params.toString();
+  return qs ? `?${qs}` : window.location.pathname;
+}
+
+function renderSeriesOptions(form, brandSlugValue, selectedSeries = []) {
+  const seriesBlock = qs("[data-filter-series]", form);
+  if (!seriesBlock) return;
+
+  const body = qs("[data-series-options]", seriesBlock) || qs(".filter-acc__body", seriesBlock);
+  if (!body) return;
+
+  const items = getSeriesForBrand(brandSlugValue);
+  if (!items.length) {
+    body.innerHTML = "";
+    seriesBlock.hidden = true;
+    return;
+  }
+
+  body.innerHTML = items
+    .map(({ slug, label }) => {
+      const checked = selectedSeries.includes(slug) ? "checked" : "";
+      return `<label class="filter-option"><input type="checkbox" name="series" value="${slug}" ${checked} /> <span>${label}</span></label>`;
+    })
+    .join("");
+  seriesBlock.hidden = false;
+  seriesBlock.open = true;
+}
+
+function updateCatalogBrandPresentation(sectionKey, brand, selectedSeries = []) {
+  const config = CATALOG_SECTIONS[sectionKey] || CATALOG_SECTIONS["tennis-adult"];
+  const brandLabel = brand ? brandLabelFromSlug(brand, config.brands) : "";
+
+  document.title = `${brandLabel || config.title} — Мир ракеток`;
 
   const titleEl = qs("[data-catalog-title]");
-  if (titleEl) titleEl.textContent = config.title;
+  if (titleEl) titleEl.textContent = brandLabel || config.title;
 
   const crumbs = qs("[data-catalog-crumbs]");
   if (crumbs) {
+    const sectionHref = `?section=${sectionKey}`;
     const items = [
       `<li class="breadcrumbs__item"><a href="../home/">Главная</a></li>`,
-      ...config.crumbs.map((crumb) => {
+      ...config.crumbs.map((crumb, index) => {
+        const isLastConfigCrumb = index === config.crumbs.length - 1;
+        if (crumb.current && brand && isLastConfigCrumb) {
+          return `<li class="breadcrumbs__item"><a href="${sectionHref}">${crumb.label}</a></li>`;
+        }
         if (crumb.current) {
           return `<li class="breadcrumbs__item"><span aria-current="page">${crumb.label}</span></li>`;
         }
@@ -700,8 +791,160 @@ function initCatalogState() {
         return `<li class="breadcrumbs__item"><span>${crumb.label}</span></li>`;
       }),
     ];
+
+    if (brand) {
+      items.push(`<li class="breadcrumbs__item"><span aria-current="page">${brandLabel}</span></li>`);
+    }
+
     crumbs.innerHTML = items.join("");
   }
+
+  renderMobileTags(config, sectionKey, brand, selectedSeries);
+
+  if (catalogFilterUI) catalogFilterUI.rebuild();
+}
+
+function handleBrandFilterChange(form, input) {
+  const params = new URLSearchParams(window.location.search);
+  const sectionKey = params.get("section") || "tennis-adult";
+  const brand = (input.value || "").toLowerCase();
+
+  if (isMobileCatalog()) {
+    window.location.href = brand
+      ? buildCatalogUrl({ section: sectionKey, brand })
+      : buildCatalogUrl({ section: sectionKey });
+    return;
+  }
+
+  window.history.replaceState(
+    {},
+    "",
+    brand ? buildCatalogUrl({ section: sectionKey, brand }) : buildCatalogUrl({ section: sectionKey })
+  );
+
+  syncSeriesVisibility(form);
+  updateCatalogBrandPresentation(sectionKey, brand, []);
+  updateCatalogFilterUI(form);
+}
+
+function refreshMobileTagsFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const sectionKey = params.get("section") || "tennis-adult";
+  const brand = (params.get("brand") || "").toLowerCase();
+  const selectedSeries = parseSeriesParam(params.get("series"));
+  const config = CATALOG_SECTIONS[sectionKey] || CATALOG_SECTIONS["tennis-adult"];
+  renderMobileTags(config, sectionKey, brand, selectedSeries);
+}
+
+function applyMobileBrandSelection(sectionKey, brand, selectedSeries = []) {
+  window.history.pushState(
+    {},
+    "",
+    buildCatalogUrl({ section: sectionKey, brand, series: selectedSeries })
+  );
+
+  const form = qs("[data-filters-form]");
+  if (form) {
+    qsa('input[name="brand"]', form).forEach((input) => {
+      input.checked = brand ? input.value === brand : input.value === "";
+    });
+    syncSeriesVisibility(form);
+  }
+
+  updateCatalogBrandPresentation(sectionKey, brand, selectedSeries);
+  if (form) updateCatalogFilterUI(form);
+}
+
+function renderMobileTags(config, sectionKey, brand, selectedSeries = []) {
+  const root = qs("[data-catalog-mobile-tags]");
+  const brandGrid = qs("[data-brand-tags]");
+  const seriesGrid = qs("[data-series-tags]");
+  if (!root || !brandGrid || !seriesGrid) return;
+
+  const showTags = isMobileCatalog() && config.brands.length > 0;
+  if (!showTags) {
+    root.hidden = true;
+    return;
+  }
+
+  root.hidden = false;
+  root.removeAttribute("hidden");
+
+  if (brand && config.series) {
+    brandGrid.hidden = true;
+    brandGrid.innerHTML = "";
+    seriesGrid.hidden = false;
+    seriesGrid.removeAttribute("hidden");
+
+    const items = getSeriesForBrand(brand);
+    seriesGrid.innerHTML = items
+      .map(({ slug, label }) => {
+        const active = selectedSeries.includes(slug);
+        return `<button type="button" class="catalog-tag${active ? " is-active" : ""}" data-series-tag="${slug}">${label}</button>`;
+      })
+      .join("");
+    return;
+  }
+
+  if (brand) {
+    brandGrid.hidden = true;
+    seriesGrid.hidden = true;
+    root.hidden = true;
+    return;
+  }
+
+  brandGrid.hidden = false;
+  brandGrid.removeAttribute("hidden");
+  seriesGrid.hidden = true;
+  brandGrid.innerHTML = config.brands
+    .map((name) => {
+      const slug = brandSlug(name);
+      return `<button type="button" class="catalog-tag" data-brand-tag="${slug}" data-section="${sectionKey}">${name}</button>`;
+    })
+    .join("");
+}
+
+function initMobileTags() {
+  const root = qs("[data-catalog-mobile-tags]");
+  if (!root) return;
+
+  root.addEventListener("click", (event) => {
+    const brandBtn = event.target.closest("[data-brand-tag]");
+    if (brandBtn) {
+      if (!isMobileCatalog()) return;
+      applyMobileBrandSelection(
+        brandBtn.dataset.section || "tennis-adult",
+        brandBtn.dataset.brandTag,
+        []
+      );
+      return;
+    }
+
+    const seriesBtn = event.target.closest("[data-series-tag]");
+    if (!seriesBtn) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const sectionKey = params.get("section") || "tennis-adult";
+    const brand = (params.get("brand") || "").toLowerCase();
+    if (!brand) return;
+
+    const slug = seriesBtn.dataset.seriesTag;
+    const current = parseSeriesParam(params.get("series"));
+    const next = current.includes(slug) ? current.filter((item) => item !== slug) : [...current, slug];
+    applyMobileBrandSelection(sectionKey, brand, next);
+  });
+
+  window.addEventListener("popstate", refreshMobileTagsFromUrl);
+}
+
+function initCatalogState() {
+  const params = new URLSearchParams(window.location.search);
+  const sectionKey = params.get("section") || "tennis-adult";
+  const brand = (params.get("brand") || "").toLowerCase();
+  const selectedSeries = parseSeriesParam(params.get("series"));
+  const config = CATALOG_SECTIONS[sectionKey] || CATALOG_SECTIONS["tennis-adult"];
+
+  updateCatalogBrandPresentation(sectionKey, brand, selectedSeries);
 
   const subnav = qs("[data-catalog-subnav]");
   if (subnav) {
@@ -732,7 +975,10 @@ function initCatalogState() {
   }
 
   const seriesBlock = qs("[data-filter-series]");
-  if (seriesBlock) {
+  const form = qs("[data-filters-form]");
+  if (form && brand && config.series) {
+    renderSeriesOptions(form, brand, selectedSeries);
+  } else if (seriesBlock) {
     seriesBlock.hidden = !(config.series && brand);
   }
 
@@ -740,12 +986,9 @@ function initCatalogState() {
   if (brandAcc) {
     brandAcc.hidden = config.brands.length === 0;
   }
-
-  if (catalogFilterUI) catalogFilterUI.rebuild();
 }
 
 const QUICK_FILTER_SECTIONS = [
-  { key: "brand", label: "Бренд", selector: "[data-filter-brand]" },
   { key: "series", label: "Серия", selector: "[data-filter-series]" },
   { key: "price", label: "Цена (₽)", selector: '[data-filter-acc="price"]' },
   { key: "weight", label: "Вес без струн (гр)", selector: '[data-filter-acc="weight"]' },
@@ -850,19 +1093,18 @@ function syncSeriesVisibility(form) {
   if (!series) return;
   const params = new URLSearchParams(window.location.search);
   const sectionKey = params.get("section") || "tennis-adult";
+  const brand = (params.get("brand") || "").toLowerCase();
+  const selectedSeries = parseSeriesParam(params.get("series"));
   const config = CATALOG_SECTIONS[sectionKey] || CATALOG_SECTIONS["tennis-adult"];
-  if (!config.series) {
+  if (!config.series || !brand) {
     series.hidden = true;
-    return;
-  }
-  const selected = qs('input[name="brand"]:checked', form);
-  const hasBrand = Boolean(selected?.value);
-  series.hidden = !hasBrand;
-  if (!hasBrand) {
     qsa('input[name="series"]', series).forEach((input) => {
       input.checked = false;
     });
+    return;
   }
+
+  renderSeriesOptions(form, brand, selectedSeries);
 }
 
 function pushQuickCloneToSource() {
@@ -1108,16 +1350,12 @@ function toggleQuickFilterDropdown(select, section) {
   const syncToSource = (event) => {
     pushQuickCloneToSource();
     if (event?.target?.name === "brand") {
+      closeQuickFilterDropdown();
+      handleBrandFilterChange(form, event.target);
+      return;
+    }
+    if (event?.target?.name === "series") {
       syncSeriesVisibility(form);
-      const brandInput = qs('input[name="brand"]:checked', form);
-      const params = new URLSearchParams(window.location.search);
-      if (brandInput?.value) params.set("brand", brandInput.value);
-      else params.delete("brand");
-      const sectionKey = params.get("section") || "tennis-adult";
-      params.set("section", sectionKey);
-      const qsStr = params.toString();
-      window.history.replaceState({}, "", qsStr ? `?${qsStr}` : "?section=tennis-adult");
-      catalogFilterUI?.rebuild();
     }
     updateCatalogFilterUI(form);
   };
@@ -1160,6 +1398,7 @@ function buildQuickFilters(form) {
   QUICK_FILTER_SECTIONS.forEach(({ key, label, selector }) => {
     const section = qs(selector, form);
     if (!section || section.hidden) return;
+    if (isMobileCatalog() && (key === "brand" || key === "series")) return;
 
     const select = document.createElement("div");
     select.className = "catalog-filter-select";
@@ -1258,33 +1497,36 @@ function initCatalogSort() {
   });
 }
 
+function syncSeriesToUrl(form) {
+  const params = new URLSearchParams(window.location.search);
+  const section = params.get("section") || "tennis-adult";
+  const brand = (params.get("brand") || "").toLowerCase();
+  const series = qsa('input[name="series"]:checked', form).map((item) => item.value);
+  window.history.replaceState({}, "", buildCatalogUrl({ section, brand, series }));
+  renderMobileTags(
+    CATALOG_SECTIONS[section] || CATALOG_SECTIONS["tennis-adult"],
+    section,
+    brand,
+    series
+  );
+}
+
 function initCatalogFilters() {
   const forms = qsa("[data-filters-form]");
   if (!forms.length) return;
 
-  function bindBrandChange(form) {
-    qsa('input[name="brand"]', form).forEach((input) => {
-      input.addEventListener("change", () => {
-        syncSeriesVisibility(form);
-        const params = new URLSearchParams(window.location.search);
-        if (input.value) params.set("brand", input.value);
-        else params.delete("brand");
-        const section = params.get("section") || "tennis-adult";
-        params.set("section", section);
-        const qsStr = params.toString();
-        window.history.replaceState({}, "", qsStr ? `?${qsStr}` : "?section=tennis-adult");
-        if (catalogFilterUI) catalogFilterUI.rebuild();
-        updateCatalogFilterUI(form);
-      });
-    });
-  }
-
   forms.forEach((form) => {
-    bindBrandChange(form);
     syncSeriesVisibility(form);
     qsa("[data-range]", form).forEach((group) => attachRangeSync(group));
 
     form.addEventListener("change", (event) => {
+      if (event.target.name === "brand") {
+        handleBrandFilterChange(form, event.target);
+        return;
+      }
+      if (event.target.name === "series") {
+        syncSeriesToUrl(form);
+      }
       if (activeQuickFilter?.body?.contains(event.target)) {
         syncOpenQuickCloneFromSource();
       }
@@ -1314,8 +1556,9 @@ function initCatalogFilters() {
       syncSeriesVisibility(form);
       const params = new URLSearchParams(window.location.search);
       params.delete("brand");
+      params.delete("series");
       const section = params.get("section") || "tennis-adult";
-      window.history.replaceState({}, "", `?section=${section}`);
+      window.location.href = buildCatalogUrl({ section });
       closeQuickFilterDropdown();
       if (catalogFilterUI) catalogFilterUI.rebuild();
       updateCatalogFilterUI(form);
@@ -1374,6 +1617,8 @@ function initFiltersSheet() {
 
   window.addEventListener("resize", () => {
     closeQuickFilterDropdown();
+    refreshMobileTagsFromUrl();
+    if (catalogFilterUI) catalogFilterUI.rebuild();
     if (!window.matchMedia("(max-width: 860px)").matches) {
       sheet.classList.remove("is-open");
       sheet.hidden = true;
@@ -1387,4 +1632,6 @@ initCatalogState();
 initCatalogSort();
 initCatalogFilters();
 initQuickFilters();
+initMobileTags();
 initFiltersSheet();
+refreshMobileTagsFromUrl();

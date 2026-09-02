@@ -82,15 +82,15 @@
           </form>
 
           <div class="header__actions">
-            <a class="icon-btn" href="#" aria-label="Избранное">
+            <a class="icon-btn" href="../favorites/" aria-label="Избранное">
               <img src="../../shared/images/icons/heart.svg" alt="" width="22" height="22" />
               <span class="icon-btn__badge icon-btn__badge--fav" data-fav-badge>2</span>
             </a>
-            <a class="icon-btn" href="#" aria-label="Корзина">
+            <a class="icon-btn" href="../cart/" aria-label="Корзина">
               <img src="../../shared/images/icons/trash.svg" alt="" width="22" height="22" />
               <span class="icon-btn__badge icon-btn__badge--cart" data-cart-badge hidden>0</span>
             </a>
-            <a class="icon-btn" href="#" aria-label="Профиль">
+            <a class="icon-btn" href="../account/" aria-label="Профиль">
               <img src="../../shared/images/icons/profile.svg" alt="" width="22" height="22" />
             </a>
           </div>
@@ -189,7 +189,7 @@
                       <li><a href="../catalog/?section=tennis-balls&amp;brand=wilson">Wilson</a></li>
                     </ul>
                     <p class="nav__mega-title"><a href="../catalog/?section=tennis-stringing">Натяжка струн</a></p>
-                    <p class="nav__mega-title"><a href="../catalog/?section=gift-cards">Подарочные сертификаты</a></p>
+                    <p class="nav__mega-title"><a href="../gift-cards/">Подарочные сертификаты</a></p>
                   </div>
                   <div class="nav__mega-col">
                     <p class="nav__mega-title"><a href="../catalog/?section=tennis-bags">Сумки. Рюкзаки. Чехлы.</a></p>
@@ -860,7 +860,8 @@
                   <li><a href="#">Доставка</a></li>
                   <li><a href="#">Гарантия</a></li>
                   <li><a href="#">Центр продаж теннисных мячей</a></li>
-                  <li><a href="#">Подарочные сертификаты</a></li>
+                  <li><a href="../gift-cards/">Подарочные сертификаты</a></li>
+                  <li><a href="../privacy/">Политика конфиденциальности</a></li>
                 </ul>
               </section>
               <section class="footer__section">
@@ -953,187 +954,53 @@
         </div>
       </div>
 
-      <div class="footer__mobile">
-        <details class="footer-acc">
-          <summary class="footer-acc__summary">
-            <span>Контакты</span>
-            <span class="footer-acc__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="footer-acc__body" data-contacts-source>
-            <div class="footer-acc__card">
-              <p class="footer-acc__card-title">Интернет-магазин</p>
-              <a class="footer-acc__row" href="tel:+79197734033">+7 (919) 773-40-33</a>
-              <p class="footer-acc__row footer-acc__row--hours"><img class="footer-acc__icon-img" src="../../shared/images/icons/time.svg" alt="" width="16" height="16" />с 10 до 21 без выходных</p>
-              <a class="footer-acc__row" href="mailto:info@mirraketok.ru">info@mirraketok.ru</a>
-            </div>
-            <div class="footer-acc__card">
-              <p class="footer-acc__card-title">Адрес: г. Москва, ул. Мытная, д.48 (вход с улицы)</p>
-              <div class="footer-acc__metros">
-                <span><i class="metro metro--gray"></i>Тульская</span>
-                <span><i class="metro metro--orange"></i>Шаболовская</span>
-                <span><i class="metro metro--brown"></i>Добрынинская</span>
-              </div>
-              <div class="footer-acc__phone-row">
-                <a href="tel:+79197734033">+7 (919) 773-40-33</a>
-                <div class="footer__social">
-                  <a href="tg://resolve?phone=79197734033" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
-                    <img src="../../shared/images/icons/telegram.svg" alt="" width="32" height="32" />
-                  </a>
-                  <a href="bip://chat?phone=79197734033" aria-label="BIP" target="_blank" rel="noopener noreferrer">
-                    <img src="../../shared/images/icons/bip.svg" alt="" width="32" height="32" />
-                  </a>
-                </div>
-              </div>
-              <p class="footer-acc__row footer-acc__row--hours"><img class="footer-acc__icon-img" src="../../shared/images/icons/time.svg" alt="" width="16" height="16" />с 10 до 21 без выходных</p>
-              <p class="footer-acc__row footer-acc__row--holiday">праздничные дни: с 10 до 19</p>
-            </div>
-            <div class="footer-acc__card">
-              <p class="footer-acc__card-title">Адрес: г. Москва, ул. Смольная, д. 63 Б, ТЦ «Экстрим», Этаж 1, павильон A-4.</p>
-              <div class="footer-acc__metros">
-                <span><i class="metro metro--gray"></i>Беломорская</span>
-              </div>
-              <div class="footer-acc__phone-row">
-                <a href="tel:+79853342515">+7 (985) 334-25-15</a>
-                <div class="footer__social">
-                  <a href="tg://resolve?phone=79853342515" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
-                    <img src="../../shared/images/icons/telegram.svg" alt="" width="32" height="32" />
-                  </a>
-                  <a href="bip://chat?phone=79853342515" aria-label="BIP" target="_blank" rel="noopener noreferrer">
-                    <img src="../../shared/images/icons/bip.svg" alt="" width="32" height="32" />
-                  </a>
-                </div>
-              </div>
-              <p class="footer-acc__row footer-acc__row--hours"><img class="footer-acc__icon-img" src="../../shared/images/icons/time.svg" alt="" width="16" height="16" />с 10 до 21 без выходных</p>
-              <p class="footer-acc__row footer-acc__row--holiday">праздничные дни: с 10 до 19</p>
+      <div hidden data-contacts-source>
+        <div class="footer-acc__card">
+          <p class="footer-acc__card-title">Интернет-магазин</p>
+          <a class="footer-acc__row" href="tel:+79197734033">+7 (919) 773-40-33</a>
+          <p class="footer-acc__row footer-acc__row--hours"><img class="footer-acc__icon-img" src="../../shared/images/icons/time.svg" alt="" width="16" height="16" />с 10 до 21 без выходных</p>
+          <a class="footer-acc__row" href="mailto:info@mirraketok.ru">info@mirraketok.ru</a>
+        </div>
+        <div class="footer-acc__card">
+          <p class="footer-acc__card-title">Адрес: г. Москва, ул. Мытная, д.48 (вход с улицы)</p>
+          <div class="footer-acc__metros">
+            <span><i class="metro metro--gray"></i>Тульская</span>
+            <span><i class="metro metro--orange"></i>Шаболовская</span>
+            <span><i class="metro metro--brown"></i>Добрынинская</span>
+          </div>
+          <div class="footer-acc__phone-row">
+            <a href="tel:+79197734033">+7 (919) 773-40-33</a>
+            <div class="footer__social">
+              <a href="tg://resolve?phone=79197734033" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+                <img src="../../shared/images/icons/telegram.svg" alt="" width="32" height="32" />
+              </a>
+              <a href="bip://chat?phone=79197734033" aria-label="BIP" target="_blank" rel="noopener noreferrer">
+                <img src="../../shared/images/icons/bip.svg" alt="" width="32" height="32" />
+              </a>
             </div>
           </div>
-        </details>
-        <details class="footer-acc">
-          <summary class="footer-acc__summary">
-            <span>Информация</span>
-            <span class="footer-acc__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="footer-acc__body">
-            <ul class="footer__links">
-              <li><a href="#">Магазины</a></li>
-              <li><a href="#">Доставка</a></li>
-              <li><a href="#">Гарантия</a></li>
-              <li><a href="#">Центр продаж теннисных мячей</a></li>
-              <li><a href="#">Подарочные сертификаты</a></li>
-            </ul>
+          <p class="footer-acc__row footer-acc__row--hours"><img class="footer-acc__icon-img" src="../../shared/images/icons/time.svg" alt="" width="16" height="16" />с 10 до 21 без выходных</p>
+          <p class="footer-acc__row footer-acc__row--holiday">праздничные дни: с 10 до 19</p>
+        </div>
+        <div class="footer-acc__card">
+          <p class="footer-acc__card-title">Адрес: г. Москва, ул. Смольная, д. 63 Б, ТЦ «Экстрим», Этаж 1, павильон A-4.</p>
+          <div class="footer-acc__metros">
+            <span><i class="metro metro--gray"></i>Беломорская</span>
           </div>
-        </details>
-        <details class="footer-acc">
-          <summary class="footer-acc__summary">
-            <span>Большой теннис</span>
-            <span class="footer-acc__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="footer-acc__body">
-            <ul class="footer__links">
-              <li><a href="#">Взрослые ракетки</a></li>
-              <li><a href="#">Детские ракетки</a></li>
-              <li><a href="#">Теннисные мячи</a></li>
-              <li><a href="#">Сумки. Рюкзаки. Чехлы</a></li>
-              <li><a href="#">Теннисные струны</a></li>
-              <li><a href="#">Аксессуары</a></li>
-            </ul>
+          <div class="footer-acc__phone-row">
+            <a href="tel:+79853342515">+7 (985) 334-25-15</a>
+            <div class="footer__social">
+              <a href="tg://resolve?phone=79853342515" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+                <img src="../../shared/images/icons/telegram.svg" alt="" width="32" height="32" />
+              </a>
+              <a href="bip://chat?phone=79853342515" aria-label="BIP" target="_blank" rel="noopener noreferrer">
+                <img src="../../shared/images/icons/bip.svg" alt="" width="32" height="32" />
+              </a>
+            </div>
           </div>
-        </details>
-        <details class="footer-acc">
-          <summary class="footer-acc__summary">
-            <span>Падел</span>
-            <span class="footer-acc__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="footer-acc__body">
-            <ul class="footer__links">
-              <li><a href="#">Взрослые ракетки</a></li>
-              <li><a href="#">Детские ракетки</a></li>
-              <li><a href="#">Мячи для падел</a></li>
-              <li><a href="#">Сумки. Рюкзаки. Чехлы</a></li>
-              <li><a href="#">Аксессуары</a></li>
-            </ul>
-          </div>
-        </details>
-        <details class="footer-acc">
-          <summary class="footer-acc__summary">
-            <span>Настольный теннис</span>
-            <span class="footer-acc__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="footer-acc__body">
-            <ul class="footer__links">
-              <li><a href="#">Ракетки готовые</a></li>
-              <li><a href="#">Ракетки собранные</a></li>
-              <li><a href="#">Сборки чемпионов</a></li>
-              <li><a href="#">Основания</a></li>
-              <li><a href="#">Накладки</a></li>
-              <li><a href="#">Наборы</a></li>
-              <li><a href="#">Мячи</a></li>
-              <li><a href="#">Сетки</a></li>
-              <li><a href="#">Чехлы для ракеток</a></li>
-              <li><a href="#">Аксессуары</a></li>
-            </ul>
-          </div>
-        </details>
-        <details class="footer-acc">
-          <summary class="footer-acc__summary">
-            <span>Бадминтон</span>
-            <span class="footer-acc__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="footer-acc__body">
-            <ul class="footer__links">
-              <li><a href="#">Ракетки</a></li>
-              <li><a href="#">Наборы</a></li>
-              <li><a href="#">Воланы</a></li>
-              <li><a href="#">Сумки. Рюкзаки. Чехлы</a></li>
-            </ul>
-          </div>
-        </details>
-        <details class="footer-acc">
-          <summary class="footer-acc__summary">
-            <span>Теннисная обувь</span>
-            <span class="footer-acc__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="footer-acc__body">
-            <ul class="footer__links">
-              <li><a href="#">Мужские кроссовки</a></li>
-              <li><a href="#">Женские кроссовки</a></li>
-              <li><a href="#">Детские кроссовки</a></li>
-            </ul>
-          </div>
-        </details>
-        <details class="footer-acc">
-          <summary class="footer-acc__summary">
-            <span>Теннисная одежда</span>
-            <span class="footer-acc__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="footer-acc__body">
-            <ul class="footer__links">
-              <li><a href="#">Мужская одежда</a></li>
-              <li><a href="#">Женская одежда</a></li>
-              <li><a href="#">Одежда для мальчиков</a></li>
-              <li><a href="#">Одежда для девочек</a></li>
-            </ul>
-          </div>
-        </details>
-        <details class="footer-acc">
-          <summary class="footer-acc__summary">
-            <span>Другие виды спорта</span>
-            <span class="footer-acc__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="footer-acc__body">
-            <ul class="footer__links">
-              <li><a href="#">Кроссовки для бега</a></li>
-              <li><a href="#">Бутсы футбольные</a></li>
-              <li><a href="#">Сквош</a></li>
-              <li><a href="#">Кроссминтон</a></li>
-              <li><a href="#">Пляжный теннис</a></li>
-              <li><a href="#">Фрисби</a></li>
-              <li><a href="#">Мячи футбольные</a></li>
-              <li><a href="#">Мячи волейбольные</a></li>
-              <li><a href="#">Мячи баскетбольные</a></li>
-            </ul>
-          </div>
-        </details>
+          <p class="footer-acc__row footer-acc__row--hours"><img class="footer-acc__icon-img" src="../../shared/images/icons/time.svg" alt="" width="16" height="16" />с 10 до 21 без выходных</p>
+          <p class="footer-acc__row footer-acc__row--holiday">праздничные дни: с 10 до 19</p>
+        </div>
       </div>
     </footer>
 
@@ -1144,21 +1011,21 @@
         </svg>
         <span>Каталог</span>
       </button>
-      <a class="tabbar__item" href="#">
+      <a class="tabbar__item" href="../favorites/">
         <span class="tabbar__icon-wrap">
           <span class="tabbar__icon tabbar__icon--heart" aria-hidden="true"></span>
           <span class="tabbar__badge" data-fav-badge>2</span>
         </span>
         <span>Избранное</span>
       </a>
-      <a class="tabbar__item" href="#">
+      <a class="tabbar__item" href="../cart/">
         <span class="tabbar__icon-wrap">
           <span class="tabbar__icon tabbar__icon--cart" aria-hidden="true"></span>
           <span class="tabbar__badge" data-cart-badge hidden>0</span>
         </span>
         <span>Корзина</span>
       </a>
-      <a class="tabbar__item" href="#">
+      <a class="tabbar__item" href="../account/">
         <span class="tabbar__icon tabbar__icon--profile" aria-hidden="true"></span>
         <span>Профиль</span>
       </a>
@@ -1286,7 +1153,7 @@
             </button>
           </li>
           <li><a class="catalog-sidebar__item" href="#">Натяжка струн</a></li>
-          <li><a class="catalog-sidebar__item" href="#">Подарочные сертификаты</a></li>
+          <li><a class="catalog-sidebar__item" href="../gift-cards/">Подарочные сертификаты</a></li>
         </ul>
       </template>
 

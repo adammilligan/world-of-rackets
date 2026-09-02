@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Boost Strike 2020 — Мир ракеток</title>
+    <title>Политика конфиденциальности — Мир ракеток</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,6 +12,7 @@
     />
     <link rel="stylesheet" href="../../shared/css/base.css" />
     <link rel="stylesheet" href="../home/styles.css" />
+    <link rel="stylesheet" href="../product/styles.css" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -467,388 +468,166 @@
       </nav>
     </header>
 
-    <main id="main-content" class="product-page">
-      <div class="container product-page__container">
+    <main id="main-content" class="privacy-page">
+      <div class="container privacy-page__container">
         <nav class="breadcrumbs" aria-label="Хлебные крошки">
           <ol class="breadcrumbs__list">
             <li class="breadcrumbs__item"><a href="../home/">Главная</a></li>
-            <li class="breadcrumbs__item"><span>Большой теннис</span></li>
-            <li class="breadcrumbs__item"><a href="../catalog/">Взрослые ракетки</a></li>
-            <li class="breadcrumbs__item"><a href="#">Babolat</a></li>
-            <li class="breadcrumbs__item"><span aria-current="page">Boost Strike 2020</span></li>
+            <li class="breadcrumbs__item"><span aria-current="page">Политика конфиденциальности</span></li>
           </ol>
         </nav>
 
-        <section class="product" aria-label="Карточка товара">
-          <div class="product__layout">
-            <div class="product-gallery" data-product-gallery>
-              <div class="product-gallery__thumbs-col">
-                <button class="product-gallery__thumbs-arrow product-gallery__thumbs-arrow--up" type="button" aria-label="Прокрутить миниатюры вверх" data-thumbs-prev hidden>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-                <div class="product-gallery__thumbs" aria-label="Миниатюры">
-                  <button class="product-gallery__thumb is-active" type="button" aria-label="Фото 1" data-gallery-thumb="0">
-                    <img src="../home/images/products/racket.jpg" alt="" width="202" height="202" />
-                  </button>
-                  <button class="product-gallery__thumb" type="button" aria-label="Фото 2" data-gallery-thumb="1">
-                    <img src="../home/images/products/padel-racket.jpg" alt="" width="202" height="202" />
-                  </button>
-                  <button class="product-gallery__thumb" type="button" aria-label="Фото 3" data-gallery-thumb="2">
-                    <img src="../home/images/products/racket.jpg" alt="" width="202" height="202" />
-                  </button>
-                  <button class="product-gallery__thumb" type="button" aria-label="Фото 4" data-gallery-thumb="3">
-                    <img src="../home/images/products/padel-racket.jpg" alt="" width="202" height="202" />
-                  </button>
-                </div>
-                <button class="product-gallery__thumbs-arrow product-gallery__thumbs-arrow--down" type="button" aria-label="Прокрутить миниатюры вниз" data-thumbs-next hidden>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-              </div>
+        <div class="privacy-page__head">
+          <h1 class="privacy-page__title">Политика конфиденциальности</h1>
+        </div>
 
-              <div class="product-gallery__stage">
-                <img
-                  class="product-gallery__image is-active"
-                  src="../home/images/products/racket.jpg"
-                  alt="Boost Strike 2020"
-                  width="730"
-                  height="730"
-                  data-gallery-image
-                />
-                <img
-                  class="product-gallery__image"
-                  src="../home/images/products/padel-racket.jpg"
-                  alt=""
-                  width="730"
-                  height="730"
-                  hidden
-                  data-gallery-image
-                />
-                <img
-                  class="product-gallery__image"
-                  src="../home/images/products/racket.jpg"
-                  alt=""
-                  width="730"
-                  height="730"
-                  hidden
-                  data-gallery-image
-                />
-                <img
-                  class="product-gallery__image"
-                  src="../home/images/products/padel-racket.jpg"
-                  alt=""
-                  width="730"
-                  height="730"
-                  hidden
-                  data-gallery-image
-                />
-                <button class="product-gallery__arrow product-gallery__arrow--prev" type="button" aria-label="Предыдущее фото" data-gallery-prev>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-                <button class="product-gallery__arrow product-gallery__arrow--next" type="button" aria-label="Следующее фото" data-gallery-next>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-                <div class="product-gallery__dots" aria-hidden="true">
-                  <span class="product-gallery__dot is-active"></span>
-                  <span class="product-gallery__dot"></span>
-                  <span class="product-gallery__dot"></span>
-                  <span class="product-gallery__dot"></span>
-                </div>
-                <span class="badge badge--sale product-gallery__badge">-17%</span>
-                <button class="product-gallery__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                </button>
-              </div>
+        <div class="privacy-page__intro">
+          <p class="privacy-page__text">Настоящий документ «Политика конфиденциальности» (далее — по тексту – «Политика») представляет собой правила использования сайтом -[Индивидуальный предприниматель <span class="privacy-page__mark">ФИО</span> ИНН <span class="privacy-page__mark">1111111111111</span>] (далее — Оператор) персональной информации Пользователя, которую Оператор, включая всех лиц, входящих в одну группу с Оператором, могут получить о Пользователе во время использования им любого из сайтов, сервисов, служб, программ, продуктов или услуг Оператора (далее — сайт) и в ходе исполнения Оператором любых соглашений и договоров с Пользователем. Согласие Пользователя с Политикой, выраженное им в рамках отношений с одним из перечисленных лиц, распространяется на все остальные перечисленные лица.</p>
+          <p class="privacy-page__text">Использование сайта означает безоговорочное согласие Пользователя с настоящей Политикой и указанными в ней условиями обработки его персональной информации; в случае несогласия с этими условиями Пользователь должен воздержаться от использования сайта.</p>
+        </div>
+
+        <div class="privacy-page__content">
+          <section class="privacy-page__section">
+            <h2 class="privacy-page__section-title">1. ОБЩИЕ ПОЛОЖЕНИЯ ПОЛИТИКИ</h2>
+            <div class="privacy-page__section-body">
+              <p class="privacy-page__text">1.1 Настоящая Политика является неотъемлемой частью Публичной оферты (далее – «Оферта»), размещённой и/или доступной в сети Интернет по адресу: а также иных заключаемых с Пользователем договоров, когда это прямо предусмотрено их условиями.</p>
+              <p class="privacy-page__text">1.2 Настоящая Политика составлена в соответствии с Федеральным законом «О персональных данных» № 152-ФЗ от 27 июля 2006 г., а также иными нормативно-правовыми актами Российской Федерации в области защиты и обработки персональных данных и действует в отношении всех персональных данных, которые Оператор может получить от Пользователя, являющегося стороной по гражданско-правовому договору.</p>
+              <p class="privacy-page__text">1.3 Оператор имеет право вносить изменения в настоящую Политику. При внесении изменений в заголовке Политики указывается дата последнего обновления редакции. Новая редакция Политики вступает в силу с момента её размещения на сайте, если иное не предусмотрено новой редакцией Политики.</p>
+              <p class="privacy-page__text">1.4 К настоящей Политике, включая толкование её положений и порядок принятия, исполнения, изменения и прекращения, подлежит применению законодательство Российской Федерации.</p>
             </div>
-
-            <div class="product-info">
-              <div class="product-info__sidebar">
-                <div class="product-info__block product-info__block--before">
-                  <div class="product-info__intro">
-                    <h1 class="product-info__title">Boost Strike 2020</h1>
-                    <p class="product-info__meta">
-                      <span>Фирма-производитель:</span>
-                      <strong>BULLPADEL</strong>
-                    </p>
-                    <p class="product-info__sku">Артикул: 2230–3224–1000</p>
-                  </div>
-
-                  <ul class="product-specs">
-                    <li class="product-specs__item">
-                      <span class="product-specs__icon" aria-hidden="true"></span>
-                      <span class="product-specs__label">вес (гр)</span>
-                      <strong class="product-specs__value">280</strong>
-                    </li>
-                    <li class="product-specs__item">
-                      <span class="product-specs__icon product-specs__icon--head" aria-hidden="true"></span>
-                      <span class="product-specs__label">головка (см²)</span>
-                      <strong class="product-specs__value">280</strong>
-                    </li>
-                    <li class="product-specs__item">
-                      <span class="product-specs__icon product-specs__icon--balance" aria-hidden="true"></span>
-                      <span class="product-specs__label">баланс (мм)</span>
-                      <strong class="product-specs__value">280</strong>
-                    </li>
-                  </ul>
-
-                  <div class="product-options">
-                    <p class="product-options__label">Размер ручки</p>
-                    <div class="product-options__sizes" role="group" aria-label="Размер ручки">
-                      <button class="product-size" type="button">0</button>
-                      <button class="product-size is-active" type="button" aria-pressed="true">1</button>
-                      <button class="product-size" type="button">2</button>
-                      <button class="product-size" type="button">3</button>
-                      <button class="product-size" type="button">4</button>
-                      <button class="product-size" type="button">5</button>
-                    </div>
-                  </div>
-
-                  <div class="product-info__price">
-                    <span class="badge badge--sale product-info__badge">-17%</span>
-                    <div class="product-info__price-row">
-                      <span class="product-info__price-current">12 900 ₽</span>
-                      <span class="product-info__price-old">17 550 ₽</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="product-info__block product-info__block--after">
-                  <div class="product-buy product-buy--inline">
-                    <div class="product-qty" data-product-qty>
-                      <button class="product-qty__btn" type="button" aria-label="Уменьшить количество" data-qty-minus>−</button>
-                      <span class="product-qty__value" data-qty-value>1</span>
-                      <button class="product-qty__btn" type="button" aria-label="Увеличить количество" data-qty-plus>+</button>
-                    </div>
-                    <div class="product-buy__actions">
-                      <button class="btn product-buy__cart" type="button">В корзину</button>
-                      <button class="product-buy__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                        <span class="product-buy__fav-icon" aria-hidden="true">
-                          <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="24" height="24" />
-                          <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="24" height="24" />
-                        </span>
-                        <span class="product-buy__fav-text">в избранное</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <section class="product-details" aria-label="Описание и характеристики">
-                <div class="product-tabs product-tabs--accordion" data-product-tabs>
-                  <div class="product-tabs__nav product-tabs__nav--desktop" role="tablist" aria-label="Информация о товаре">
-                    <button class="product-tabs__btn" type="button" role="tab" aria-selected="false" data-tab="description">Описание</button>
-                    <button class="product-tabs__btn" type="button" role="tab" aria-selected="false" data-tab="specs">Характеристики</button>
-                  </div>
-                  <details class="product-acc" data-panel="description">
-                    <summary class="product-acc__summary">
-                      <span>Описание</span>
-                      <img class="product-acc__icon" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" aria-hidden="true" />
-                    </summary>
-                    <div class="product-acc__body">
-                      <div class="product-tabs__content">
-                        <p>Ракетка Boost Strike 2020 на 100% состоит из графита, что обеспечивает отличную мощность и контроль. Подходит для игроков среднего и продвинутого уровня, которые ищут универсальную модель для динамичной игры.</p>
-                        <p>Технология Carbon Flex обеспечивает оптимальную жесткость и комфорт при ударе. Ракетка отлично подойдет для игроков, которые ценят баланс между силой и точностью.</p>
-                        <p>Модель рекомендована для любителей, которые хотят улучшить технику и получить стабильный результат на корте.</p>
-                      </div>
-                    </div>
-                  </details>
-                  <details class="product-acc" data-panel="specs">
-                    <summary class="product-acc__summary">
-                      <span>Характеристики</span>
-                      <img class="product-acc__icon" src="../../shared/images/icons/down.svg" alt="" width="16" height="16" aria-hidden="true" />
-                    </summary>
-                    <div class="product-acc__body">
-                      <dl class="product-specs-table">
-                        <div class="product-specs-table__row">
-                          <dt>Фирма-производитель</dt>
-                          <dd>BULLPADEL</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Артикул</dt>
-                          <dd>2230–3224–1000</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Вес (гр)</dt>
-                          <dd>280</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Размер головки (см²)</dt>
-                          <dd>280</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Баланс (мм)</dt>
-                          <dd>280</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Материал</dt>
-                          <dd>Графит</dd>
-                        </div>
-                        <div class="product-specs-table__row">
-                          <dt>Размер ручки</dt>
-                          <dd>1–5</dd>
-                        </div>
-                      </dl>
-                    </div>
-                  </details>
-                </div>
-              </section>
+          </section>
+          <section class="privacy-page__section">
+            <h2 class="privacy-page__section-title">2. ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ ПОЛЬЗОВАТЕЛЕЙ, КОТОРУЮ ОБРАБАТЫВАЕТ САЙТ</h2>
+            <div class="privacy-page__section-body">
+              <p class="privacy-page__text">2.1 Под персональной информацией в настоящей Политике понимается:</p>
+              <ul class="privacy-page__list">
+                <li>Информация, предоставляемая Пользователем самостоятельно при регистрации (создании учётной записи) или в процессе использования сайта, включая персональные данные Пользователя. Обязательная для предоставления сайту информация помечена специальным образом. Иная информация предоставляется Пользователем на его усмотрение;</li>
+                <li>Данные, которые передаются в автоматическом режиме сайту в процессе их использования с помощью установленного на устройстве Пользователя программного обеспечения, в том числе IP-адрес, данные файлов cookie, информация о браузере Пользователя (или иной программе, с помощью которой осуществляется доступ к сайту), технические характеристики оборудования и программного обеспечения, используемых Пользователем, дата и время доступа к сайту, адреса запрашиваемых страниц и иная подобная информация;</li>
+                <li>Иная информация о Пользователе, обработка которой предусмотрена условиями использования сайта.</li>
+              </ul>
+              <p class="privacy-page__text">Настоящая Политика применима только к информации, обрабатываемой в ходе использования сайта. Сайт не контролирует и не несёт ответственность за обработку информации сайтами третьих лиц, на которые Пользователь может перейти по ссылкам, доступным на сайте.</p>
+              <p class="privacy-page__text">Сайт не проверяет достоверность персональной информации, предоставляемой Пользователем, и не имеет возможности оценивать его дееспособность.</p>
             </div>
-          </div>
-
-          <div class="product-buy product-buy--bar" data-product-buy-bar>
-            <div class="product-qty" data-product-qty-bar>
-              <button class="product-qty__btn" type="button" aria-label="Уменьшить количество" data-qty-minus>−</button>
-              <span class="product-qty__value" data-qty-value>1</span>
-              <button class="product-qty__btn" type="button" aria-label="Увеличить количество" data-qty-plus>+</button>
-            </div>
-            <div class="product-buy__actions">
-              <button class="btn product-buy__cart" type="button">В корзину</button>
-              <button class="product-buy__fav product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                <span class="product-buy__fav-icon" aria-hidden="true">
-                  <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="24" height="24" />
-                  <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="24" height="24" />
-                </span>
-                <span class="product-buy__fav-text">в избранное</span>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <section class="section product-related section--last" aria-label="Похожие товары">
-          <h2 class="section__title">С этим товаром покупают</h2>
-          <div class="products-carousel" data-products-carousel role="region" aria-roledescription="карусель" aria-label="С этим товаром покупают">
-            <button class="products-carousel__arrow products-carousel__arrow--prev" type="button" aria-label="Предыдущие товары">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
-            <div class="products-carousel__viewport">
-              <ul class="products">
-                <li class="product-card">
-                  <div class="product-card__shell">
-                    <a class="product-card__link" href="../home/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-                    <div class="product-card__media">
-                      <span class="badge badge--new">NEW</span>
-                      <button class="product-card__fav is-active" type="button" aria-pressed="true" aria-label="Убрать из избранного">
-                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                      </button>
-                      <img src="../home/images/products/padel-racket.jpg" alt="" />
-                    </div>
-                    <div class="product-card__body">
-                      <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light 26</span>
-                      <ul class="product-card__specs">
-                        <li>фирма: название</li>
-                        <li>вес: значение</li>
-                        <li>баланс: значение</li>
-                      </ul>
-                      <div class="product-card__footer">
-                        <span class="product-card__price">
-                          13 900 ₽
-                          <span class="product-card__price-old">18 900 ₽</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="btn product-card__cart" type="button">В корзину</button>
-                </li>
-                <li class="product-card">
-                  <div class="product-card__shell">
-                    <a class="product-card__link" href="../home/" aria-label="Теннисные кроссовки"></a>
-                    <div class="product-card__media">
-                      <span class="badge badge--new">NEW</span>
-                      <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                      </button>
-                      <img src="../home/images/products/shoes.jpg" alt="" />
-                    </div>
-                    <div class="product-card__body">
-                      <span class="product-card__title">Теннисные кроссовки</span>
-                      <p class="product-card__sizes">40 40,5 41 42</p>
-                      <div class="product-card__footer">
-                        <span class="product-card__price">
-                          13 900 ₽
-                          <span class="product-card__price-old">18 900 ₽</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="btn product-card__cart" type="button">В корзину</button>
-                </li>
-                <li class="product-card">
-                  <div class="product-card__shell">
-                    <a class="product-card__link" href="../home/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-                    <div class="product-card__media">
-                      <span class="badge badge--new">NEW</span>
-                      <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                      </button>
-                      <img src="../home/images/products/racket.jpg" alt="" />
-                    </div>
-                    <div class="product-card__body">
-                      <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light 26</span>
-                      <ul class="product-card__specs">
-                        <li>фирма: название</li>
-                        <li>вес: значение</li>
-                        <li>баланс: значение</li>
-                      </ul>
-                      <div class="product-card__footer">
-                        <span class="product-card__price">
-                          13 900 ₽
-                          <span class="product-card__price-old">18 900 ₽</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="btn product-card__cart" type="button">В корзину</button>
-                </li>
-                <li class="product-card">
-                  <div class="product-card__shell">
-                    <a class="product-card__link" href="../home/" aria-label="Ракетка для падела Bullpadel Ionic Light"></a>
-                    <div class="product-card__media">
-                      <span class="badge badge--new">NEW</span>
-                      <button class="product-card__fav" type="button" aria-pressed="false" aria-label="В избранное">
-                        <img class="fav-icon fav-icon--off" src="../../shared/images/icons/heart.svg" alt="" width="28" height="28" />
-                        <img class="fav-icon fav-icon--on" src="../../shared/images/icons/heart-filled.svg" alt="" width="28" height="28" />
-                      </button>
-                      <img src="../home/images/products/padel-racket.jpg" alt="" />
-                    </div>
-                    <div class="product-card__body">
-                      <span class="product-card__title">Ракетка для падела Bullpadel Ionic Light 26</span>
-                      <ul class="product-card__specs">
-                        <li>фирма: название</li>
-                        <li>вес: значение</li>
-                        <li>баланс: значение</li>
-                      </ul>
-                      <div class="product-card__footer">
-                        <span class="product-card__price">
-                          13 900 ₽
-                          <span class="product-card__price-old">18 900 ₽</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="btn product-card__cart" type="button">В корзину</button>
-                </li>
+          </section>
+          <section class="privacy-page__section">
+            <h2 class="privacy-page__section-title">3. ЦЕЛИ ОБРАБОТКИ ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ ПОЛЬЗОВАТЕЛЕЙ</h2>
+            <div class="privacy-page__section-body">
+              <p class="privacy-page__text">3.1 сайт собирает и хранит только ту персональную информацию, которая необходима для предоставления сервисов или исполнения соглашений и договоров с Пользователем, за исключением случаев, когда законодательством предусмотрено обязательное хранение персональной информации в течение определённого законом срока.</p>
+              <p class="privacy-page__text">3.2 Персональную информацию Пользователя сайт обрабатывает в следующих целях:</p>
+              <ul class="privacy-page__list">
+                <li>Идентификация стороны в рамках сервисов, соглашений и договоров с сайтом;</li>
+                <li>Предоставление Пользователю персонализированных сервисов и услуг, а также исполнение соглашений и договоров;</li>
+                <li>Направление уведомлений, запросов и информации, касающихся использования сайта, исполнения соглашений и договоров, а также обработка запросов и заявок от Пользователя;</li>
+                <li>Улучшение качества работы сайта, удобства его использования для Пользователя, разработка новых услуг и сервисов;</li>
+                <li>Таргетирование рекламных материалов;</li>
+                <li>Проведение статистических и иных исследований на основе обезличенных данных.</li>
               </ul>
             </div>
-            <button class="products-carousel__arrow products-carousel__arrow--next" type="button" aria-label="Следующие товары">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
-          </div>
-        </section>
+          </section>
+          <section class="privacy-page__section">
+            <h2 class="privacy-page__section-title">4. УСЛОВИЯ ОБРАБОТКИ ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ ПОЛЬЗОВАТЕЛЕЙ И ЕЁ ПЕРЕДАЧИ ТРЕТЬИМ ЛИЦАМ</h2>
+            <div class="privacy-page__section-body">
+              <p class="privacy-page__text">4.1 В отношении персональной информации Пользователя сохраняется её конфиденциальность, кроме случаев добровольного предоставления Пользователем информации о себе для общего доступа неограниченному кругу лиц.</p>
+              <p class="privacy-page__text">4.2 сайт вправе передать персональную информацию Пользователя третьим лицам в следующих случаях:</p>
+              <ul class="privacy-page__list">
+                <li>Пользователь выразил согласие на такие действия;</li>
+                <li>Передача необходима для использования Пользователем определённого сервиса либо для исполнения определённого соглашения или договора с Пользователем;</li>
+                <li>Передача необходима для функционирования и работоспособности самого сайта;</li>
+                <li>Передача предусмотрена российским или иным применимым законодательством в рамках установленной законодательством процедуры;</li>
+                <li>Такая передача происходит в рамках продажи или иной передачи бизнеса (полностью или в части), при этом к приобретателю переходят все обязательства по соблюдению условий настоящей Политики применительно к полученной им персональной информации;</li>
+                <li>В целях обеспечения возможности защиты прав и законных интересов сайта или третьих лиц в случаях, когда Пользователь нарушает Пользовательское соглашение сайта, настоящую Политику, либо документы, содержащие условия использования конкретных сервисов.</li>
+                <li>В результате обработки персональной информации Пользователя путём её обезличивания получены обезличенные статистические данные, которые передаются третьему лицу для проведения исследований, выполнения работ или оказания услуг по поручению сайта.</li>
+              </ul>
+            </div>
+          </section>
+          <section class="privacy-page__section">
+            <h2 class="privacy-page__section-title">5. ИЗМЕНЕНИЕ И УДАЛЕНИЕ ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ. ОБЯЗАТЕЛЬНОЕ ХРАНЕНИЕ ДАННЫХ</h2>
+            <div class="privacy-page__section-body">
+              <p class="privacy-page__text">5.1 Пользователь может в любой момент изменить (обновить, дополнить) предоставленную им персональную информацию или её часть, обратившись к сайту по контактам в разделе 9.«Контакты».</p>
+              <p class="privacy-page__text">5.2 Права, предусмотренные п. 5.1. настоящей Политики могут быть ограничены в соответствии с требованиями законодательства. Например, такие ограничения могут предусматривать обязанность сайта сохранить изменённую или удалённую Пользователем информацию на срок, установленный законодательством, и передать такую информацию в соответствии с законодательно установленной процедурой государственному органу.</p>
+            </div>
+          </section>
+          <section class="privacy-page__section">
+            <h2 class="privacy-page__section-title">6. ПРАВО ИСПОЛЬЗОВАНИЯ МАТЕРИАЛОВ/ИЗОБРАЖЕНИЙ</h2>
+            <div class="privacy-page__section-body">
+              <p class="privacy-page__text">6.1 Материалы — объекты авторского права, включая, но, не ограничиваясь, иллюстрации, рисунки, фотографические произведения и иные произведения, полученные способами, аналогичными фотографии, запечатлённые и воспроизводимые как на традиционных, так и на электронных и иных носителях, размещённые Пользователем на сайте в комментариях к Товару, в т.ч. через хэштеги в принадлежащем ему аккаунте социальных сетей, в отношении которых Пользователем получен Запрос о предоставлении права использования на условиях Соглашения.</p>
+              <p class="privacy-page__text">6.2 Изображения — изображения людей (в том числе их фотографии или произведения изобразительного искусства, в которых они изображены) так, как они понимаются в смысле ст. 152.1 ГК РФ, размещённые Пользователем на сайте в комментариях к Товару, в т.ч. через хэштеги в принадлежащем ему аккаунте социальных сетей, в отношении которых Пользователем получен Запрос о предоставлении права использования на условиях Соглашения.</p>
+              <p class="privacy-page__text">6.3 Право использования Материалов — право Компании осуществлять следующие действия: обнародовать, воспроизводить, доводить до всеобщего сведения, публично показывать, перерабатывать, распространять Материалы или любую их часть на любых носителях в любой материальной форме и любым способом, в том числе в сети Интернет</p>
+              <p class="privacy-page__text">6.4 Право использования Изображений — право Компании осуществлять следующие действия: обнародовать, воспроизводить, доводить до всеобщего сведения, публично показывать, перерабатывать, распространять Изображения или любую их часть на любых носителях в любой материальной форме и любым способом, в том числе в сети Интернет.</p>
+              <p class="privacy-page__text">6.5 Запрос — запрос Компании о предоставлении Пользователем права использования Материалов/Изображений, отправленный Пользователю посредством сообщения в поле «Комментарий» к Материалу/Изображению, представляющий собой предложение Компании (оферту) заключить Соглашение.</p>
+              <p class="privacy-page__text">6.6 Акцепт — добавление Пользователем хэштега, указанного в Запросе, в поле «Комментарий» к Запросу. Акцептуя Запрос, Пользователь соглашается в полном и безоговорочном порядке с условиями Соглашения без каких‑либо изъятий и/или ограничений и предоставляет Компании Права использования Материалов/Изображений. Право использования Материалов/Изображений считается предоставленным Компании с момента совершения Пользователем действий по Акцепту.</p>
+              <p class="privacy-page__text">6.7 Все объекты, доступные при помощи сайта, в том числе элементы дизайна, текст, графические изображения, иллюстрации, видео, программы для ЭВМ, базы данных, и другие объекты, а также любой контент, размещённый на сервисе, являются объектами исключительных прав Компании, Пользователей и других правообладателей соответственно.</p>
+              <p class="privacy-page__text">6.8 Использование контента, а также каких‑либо иных элементов сайта возможно только в рамках функционала, предлагаемого сайтом. Никакие элементы содержания сервисов, а также любой контент, размещённый на сайте, не могут быть использованы иным образом без предварительного разрешения правообладателя. Под использованием подразумеваются, в том числе: воспроизведение, копирование, переработка, распространение на любой основе, отображение во фрейме и т.д. Исключение составляют случаи, прямо предусмотренные действующим законодательством РФ.</p>
+              <p class="privacy-page__text">6.9 Использование Пользователем элементов содержания сервисов, а также любого контента для личного некоммерческого использования, допускается при условии сохранения всех знаков охраны авторского права, смежных прав, товарных знаков, других уведомлений об авторстве, сохранения имени (или псевдонима) автора/наименования правообладателя в неизменном виде, сохранении соответствующего объекта в неизменном виде. Исключение составляют случаи, прямо предусмотренные действующим законодательством РФ.</p>
+              <p class="privacy-page__text">6.10 Пользователю запрещено воспроизводить, распространять, перерабатывать в коммерческих или некоммерческих целях элементы сайта, являющиеся объектами авторских прав при отсутствии разрешения соответствующих правообладателей на совершение данных действий.</p>
+              <p class="privacy-page__text">6.11 С момента совершения Пользователем действий по Акцепту Пользователь предоставляет Компании Право использования Материалов и Изображений Пользователя, а также несовершеннолетних, законным представителем которых он является, на территории всех стран мира на весь срок действия исключительного права, а также выражает своё полное и безоговорочное согласие на использование Компанией Изображений с целью обнародования и дальнейшего использования Компанией Материалов и Изображений на сайте с целью привлечения интереса потенциальных покупателей к Компании, к ассортименту продукции, а также с целью повышения потребительского спроса на товары. Способом использования Материалов и Изображений включая, но, не ограничиваясь, являются: воспроизведение в любой материальной форме, доведение до общего сведения, публичный показ, переработка, распространение на любых носителях и любым способом, в том числе в сети Интернет, или использование любым иным способом Материалов и Изображений полностью или фрагментарно, в т.ч. анонимно, т.е. без указания Пользователя, правообладателя, изображённого гражданина, псевдонима указанных лиц.</p>
+              <p class="privacy-page__text">6.12 Неисключительная лицензия на право использования Материалов и согласие на обнародование и дальнейшее использование Изображений предоставляется Пользователем Компании безвозмездно.</p>
+              <p class="privacy-page__text">6.13 Компания вправе самостоятельно принимать решение об использовании или о прекращении использования Материалов/Изображений, вправе опубликовать Материалы/Изображение на сайте в любой момент после Акцепта Пользователя, а также вправе в любой момент прекратить использование Материалов/Изображения и удалить их с сайта. Все риски, связанные с публикацией Материалов/Изображений на сайте, несёт Пользователь.</p>
+              <p class="privacy-page__text">6.14 Пользователь соглашается с тем, что Компания вправе размещать рекламные баннеры и объявления на страницах сайта, что содержат Материалы и Изображения, полученные от Пользователя.</p>
+              <p class="privacy-page__text">6.15 Пользователь самостоятельно не может удалить опубликованные на сайте Материалы и Изображения.</p>
+              <p class="privacy-page__text">6.16 Компания вправе в любое время по собственному усмотрению и без объяснения причин и предварительного уведомления удалить ранее размещённые Материалы и Изображения.</p>
+              <p class="privacy-page__text">6.17 Пользователь несёт единоличную ответственность за Материалы и Изображения, которые Пользователь предоставляет Компании по настоящему Соглашению.</p>
+              <p class="privacy-page__text">6.18 Если Изображение гражданина получено или использовано с нарушением действующего законодательства РФ, то этот гражданин, Пользователь, правообладатель Материалов и Изображения вправе требовать удаления этого изображения.</p>
+              <p class="privacy-page__text">6.19 Пользователь соглашается с тем, что Материалы и Изображения размещаются на сайте в открытом доступе для обозрения неограниченным кругом лиц, имеющим доступ к сайту.</p>
+              <p class="privacy-page__text">6.20 Ответственность за неправомочное копирование Материалов и Изображений, за неправомерно использование Материалов и Изображений, опубликованных на сайте, несут лица, совершившие данное деяние.</p>
+            </div>
+          </section>
+          <section class="privacy-page__section">
+            <h2 class="privacy-page__section-title">7. ГАРАНТИИ И ОТВЕТСТВЕННОСТЬ ПОЛЬЗОВАТЕЛЯ</h2>
+            <div class="privacy-page__section-body">
+              <p class="privacy-page__text">7.1 Принимая условия настоящего Соглашения, Пользователь заявляет и гарантирует, что является автором Материалов/правообладателем Изображений и/или надлежащим образом уполномочен соответствующими авторами/правообладателями предоставлять Компании Право использования Материалов/Изображений, что имеет все необходимые разрешения от авторов Материалов и изображённых на фотографиях лиц на предоставление Компании права использования Материалов/Изображений, а также, что у Пользователя не существует никаких обязательств перед третьими лицами (в том числе перед авторами/ иными правообладателями Материалов и/или лицами, изображёнными на них), которые препятствуют и/или сделают невозможным правомерное использование Материалов/Изображений.</p>
+              <p class="privacy-page__text">7.2 Пользователь гарантирует, что является надлежащим правообладателем Материалов и Изображений или получил разрешение от его правообладателя и от изображённого гражданина на обнародование и использование изображения способами и на условиях, указанных в настоящем Соглашении, а в случае смерти изображённого, правообладателя — согласие его детей, пережившего супруга, а при их отсутствии — с согласия родителей.</p>
+              <p class="privacy-page__text">7.3 Пользователь гарантирует, что Пользователь и изображённый в Материалах гражданин, являются совершеннолетними или законным представителем несовершеннолетнего, изображённого в Материалах.</p>
+              <p class="privacy-page__text">7.4 Передаваемые Пользователем Материалы и Изображения не должны: нарушать действующее законодательство Российской Федерации и охраняемые законом интересы третьих лиц; способствовать разжиганию религиозной, расовой или межнациональной розни; носить непристойный или оскорбительный характер, содержать сцены насилия, рекламу наркотических средств, носить порнографический характер и нарушать права несовершеннолетних лиц; нарушать авторские и смежные права третьих лиц; содержать явную коммерческую рекламу товарного знака на товаре, не являющегося товаром Компании.</p>
+              <p class="privacy-page__text">7.5 Пользователь не должен использовать Сервисы и сайт для:</p>
+              <ul class="privacy-page__list">
+                <li>совершения действий, приводящих к нарушениям нормальной работы сети;</li>
+                <li>загрузка материалов, которые являются незаконными, вредоносными, угрожающими, содержащими вирусы или другие компьютерные коды, файлы или программы, предназначенные для нарушения, уничтожения либо ограничения функциональности любого компьютерного или телекоммуникационного оборудования, или программ для осуществления несанкционированного доступа;</li>
+                <li>ущемления прав меньшинств.</li>
+              </ul>
+              <p class="privacy-page__text">7.6 Пользователь самостоятельно несёт ответственность и считает Компанию свободным от возмещения ущерба/убытков по претензиям третьих лиц, выдвинутых в отношении Материалов/Изображений и их содержания. В случае предъявления претензий к Компании в отношении Материалов/Изображений и их содержания со стороны любых третьих лиц, Пользователь обязуется урегулировать такие претензии и/или иски самостоятельно и за свой счёт либо возместить Компании убытки, вызванные предъявлением таких претензий в полном объёме.</p>
+              <p class="privacy-page__text">7.7 Компания вправе предпринимать незапрещенные законом меры для защиты собственных интеллектуальных прав в отношении сайта, Сервисов.</p>
+              <p class="privacy-page__text">7.8 При нарушении Пользователем Соглашения Компания оставляет за собой право временно ограничить доступ Пользователя к сайту и Сервисам (временный бан), а в случае грубого и/или неоднократного нарушения Соглашения — отказать в доступе к Сервисам и сайту (постоянный бан).</p>
+              <p class="privacy-page__text">7.9 Пользователь обязуется возместить имущественные потери Компании в порядке ст. 406.1 ГК РФ в размере сумм, направленных на возмещении понесённых убытков третьим лицам, чьи интеллектуальные права были нарушены и/или нарушено право, предусмотренное ст. 152.1 ГК РФ, а также Пользователь обязуется возместить судебные расходы, а также расходы, направленные на подготовку, ведение судебных дел, в том числе при привлечении консультантов (адвокатов), в том числе занимающих ведущие позиции в своей области профессиональной деятельности, а также в размере сумм, направленных на исполнение судебных решений, сумм, направленных на уплату санкций, неустоек и шрафов по соответствующим договорам.</p>
+              <p class="privacy-page__text">7.10 Пользователь не имеет права передавать, продавать, публиковать, перемещать, воспроизводить, модифицировать или переделывать материалы сайта или использовать их каким‑либо иным подобным образом, как частично, так и в целом, за исключением письменного разрешения ИП Миндибаева Ф.В. на указанные действия.</p>
+              <p class="privacy-page__text">7.11 Пользователь самостоятельно несёт ответственность перед третьими лицами за свои действия, связанные с использованием сайта, в том числе если такие действия приведут к нарушению прав и законных интересов третьих лиц, а также за соблюдение законодательства при использовании сайта.</p>
+              <p class="privacy-page__text">7.12 ИП <span class="privacy-page__mark">ФИО</span> вправе предпринимать незапрещенные законом меры для защиты собственных интеллектуальных прав в отношении сайта, Сервисов.</p>
+              <p class="privacy-page__text">7.13 Действие настоящего Соглашения в части гарантий и ответственности Пользователя бессрочно.</p>
+            </div>
+          </section>
+          <section class="privacy-page__section">
+            <h2 class="privacy-page__section-title">8. ОБРАБОТКА ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ ПРИ ПОМОЩИ ФАЙЛОВ COOKIE И СЧЕТЧИКОВ</h2>
+            <div class="privacy-page__section-body">
+              <p class="privacy-page__text">8.1 Файлы cookie, передаваемые сайтом оборудованию Пользователя и оборудованием Пользователя сайту, могут использоваться сайтом для предоставления Пользователю персонализированных сервисов, для таргетирования рекламы, которая показывается Пользователю, в статистических и исследовательских целях, а также для улучшения сайта.</p>
+              <p class="privacy-page__text">8.2 Пользователь осознает, что оборудование и программное обеспечение, используемые им для посещения сайтов в сети интернет могут обладать функцией запрещения операций с файлами cookie (для любых сайтов или для определённых сайтов), а также удаления ранее полученных файлов cookie.</p>
+              <p class="privacy-page__text">8.3 сайт вправе установить, что предоставление определённого сервиса или услуги возможно только при условии, что приём и получение файлов cookie разрешены Пользователем.</p>
+              <p class="privacy-page__text">8.4 Структура файла cookie, его содержание и технические параметры определяются сайтом и могут изменяться без предварительного уведомления Пользователя.</p>
+              <p class="privacy-page__text">8.5 Счётчики, размещённые сайтом, могут использоваться для анализа файлов cookie Пользователя, для сбора и обработки статистической информации об использовании сайта, а также для обеспечения работоспособности сайта в целом или их отдельных функций в частности. Технические параметры работы счётчиков определяются сайтом и могут изменяться без предварительного уведомления Пользователя.</p>
+            </div>
+          </section>
+          <section class="privacy-page__section">
+            <h2 class="privacy-page__section-title">9. ЗАЩИТА ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ ПОЛЬЗОВАТЕЛЯ</h2>
+            <div class="privacy-page__section-body">
+              <p class="privacy-page__text">9.1 сайт предпринимает необходимые и достаточные организационные и технические меры для защиты персональной информации Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий с ней третьих лиц.</p>
+            </div>
+          </section>
+          <section class="privacy-page__section">
+            <h2 class="privacy-page__section-title">10. ИЗМЕНЕНИЕ ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ</h2>
+            <div class="privacy-page__section-body">
+              <p class="privacy-page__text">10.1 сайт имеет право вносить изменения в настоящую Политику конфиденциальности. При внесении изменений в актуальной редакции указывается дата последнего обновления. Новая редакция Политики вступает в силу с момента её размещения, если иное не предусмотрено новой редакцией Политики.</p>
+            </div>
+          </section>
+          <section class="privacy-page__section">
+            <h2 class="privacy-page__section-title">11. КОНТАКТЫ И ВОПРОСЫ ПО ПЕРСОНАЛЬНЫМ ДАННЫМ</h2>
+            <div class="privacy-page__section-body">
+              <p class="privacy-page__text">11.1 Все предложения, вопросы, запросы и иные обращения по поводу настоящей Политики и использования своих персональных данных Пользователь вправе направлять сайту:</p>
+              <ul class="privacy-page__list">
+                <li>по адресу электронной почты:</li>
+                <li>по почтовому адресу:</li>
+              </ul>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
     <footer class="footer">
@@ -875,9 +654,9 @@
               <section class="footer__section">
                 <h3 class="footer__heading">Информация</h3>
                 <ul class="footer__links">
-                  <li><a href="#">Магазины</a></li>
-                  <li><a href="#">Доставка</a></li>
-                  <li><a href="#">Гарантия</a></li>
+                  <li><a href="../stores/">Магазины</a></li>
+                  <li><a href="../delivery/">Доставка</a></li>
+                  <li><a href="../warranty/">Гарантия</a></li>
                   <li><a href="#">Центр продаж теннисных мячей</a></li>
                   <li><a href="../gift-cards/">Подарочные сертификаты</a></li>
                   <li><a href="../privacy/">Политика конфиденциальности</a></li>
@@ -1379,6 +1158,5 @@
     </div>
 
     <script src="../../shared/js/common.js"></script>
-    <script src="./main.js"></script>
-  </body>
+      </body>
 </html>
