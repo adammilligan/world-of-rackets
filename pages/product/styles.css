@@ -310,7 +310,22 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #f5f5f7 url("../../shared/images/icons/time.svg") center / 20px no-repeat;
+  background: #f5f5f7 url("../../shared/images/icons/spec-weight.png") center / 20px 20px no-repeat;
+}
+
+.product-specs__icon--weight {
+  background-image: url("../../shared/images/icons/spec-weight.png");
+  background-size: 20px 20px;
+}
+
+.product-specs__icon--head {
+  background-image: url("../../shared/images/icons/spec-head.png");
+  background-size: 22px 22px;
+}
+
+.product-specs__icon--balance {
+  background-image: url("../../shared/images/icons/spec-balance.png");
+  background-size: 24px 7px;
 }
 
 .product-specs__label {

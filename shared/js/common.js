@@ -688,7 +688,37 @@ const SEARCH_INDEX = {
     {
       title: "Babolat",
       href: "../catalog/?section=tennis-adult&brand=babolat",
-      terms: ["babolat", "баболат"],
+      terms: ["babolat", "баболат", "бабо"],
+    },
+    {
+      title: "Wilson",
+      href: "../catalog/?section=tennis-adult&brand=wilson",
+      terms: ["wilson", "уилсон", "вилсон"],
+    },
+    {
+      title: "Head",
+      href: "../catalog/?section=tennis-adult&brand=head",
+      terms: ["head", "хед"],
+    },
+    {
+      title: "Yonex",
+      href: "../catalog/?section=tennis-adult&brand=yonex",
+      terms: ["yonex", "йонекс"],
+    },
+    {
+      title: "Tecnifibre",
+      href: "../catalog/?section=tennis-adult&brand=tecnifibre",
+      terms: ["tecnifibre", "технифайбр", "технифибре"],
+    },
+    {
+      title: "Bullpadel",
+      href: "../catalog/?section=padel-rackets&brand=bullpadel",
+      terms: ["bullpadel", "буллпадел", "булпадел"],
+    },
+    {
+      title: "Asics",
+      href: "../catalog/?section=shoes-men&brand=asics",
+      terms: ["asics", "асикс"],
     },
   ],
 };
@@ -696,14 +726,15 @@ const SEARCH_INDEX = {
 function normalizeSearchQuery(value) {
   return String(value || "")
     .trim()
-    .toLowerCase()
+    .toLocaleLowerCase("ru-RU")
     .replace(/\s+/g, " ");
 }
 
 function matchesSearchQuery(query, terms = [], title = "") {
-  if (!query) return false;
-  const haystack = `${title} ${terms.join(" ")}`.toLowerCase();
-  return haystack.includes(query);
+  const normalizedQuery = normalizeSearchQuery(query);
+  if (!normalizedQuery) return false;
+  const haystack = `${title} ${terms.join(" ")}`.toLocaleLowerCase("ru-RU");
+  return haystack.includes(normalizedQuery);
 }
 
 function filterSearchCategories(query, hasOtherMatches) {
@@ -713,6 +744,47 @@ function filterSearchCategories(query, hasOtherMatches) {
   if (matched.length) return matched;
   if (hasOtherMatches) return SEARCH_INDEX.categories;
   return [];
+}
+
+function brandSlug(title) {
+  return String(title || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9а-яё]+/gi, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function filterSearchBrands(query, products) {
+  const matched = SEARCH_INDEX.brands.filter((item) =>
+    matchesSearchQuery(query, [...item.terms], item.title)
+  );
+  const byTitle = new Map(
+    SEARCH_INDEX.brands.map((item) => [item.title.toLowerCase(), item])
+  );
+  const seen = new Set(matched.map((item) => item.title.toLowerCase()));
+  const fromProducts = [];
+
+  products.forEach((product) => {
+    const title = String(product.brand || "").trim();
+    if (!title) return;
+    const key = title.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+
+    const known = byTitle.get(key);
+    if (known) {
+      fromProducts.push(known);
+      return;
+    }
+
+    fromProducts.push({
+      title,
+      href: `../catalog/?section=tennis-adult&brand=${encodeURIComponent(brandSlug(title))}`,
+      terms: [key],
+    });
+  });
+
+  return [...matched, ...fromProducts];
 }
 
 function buildSearchResultsUrl(query) {
@@ -848,7 +920,7 @@ function initFooterBottom() {
   privacyLink.textContent = "Политика конфиденциальности";
 
   const consentLink = document.createElement("a");
-  consentLink.href = "#";
+  consentLink.href = getSitePageHref("consent");
   consentLink.textContent = "Согласие на обработку персональных данных";
 
   legal.append(privacyLink, consentLink);
@@ -865,9 +937,7 @@ function searchHasResults(queryRaw) {
   const products = SEARCH_INDEX.products.filter((item) =>
     matchesSearchQuery(query, [...item.terms, item.brand], item.title)
   );
-  const brands = SEARCH_INDEX.brands.filter((item) =>
-    matchesSearchQuery(query, [...item.terms], item.title)
-  );
+  const brands = filterSearchBrands(query, products);
   const categories = filterSearchCategories(query, products.length > 0 || brands.length > 0);
 
   return products.length > 0 || categories.length > 0 || brands.length > 0;
@@ -1105,9 +1175,7 @@ function initSearch() {
     const products = SEARCH_INDEX.products.filter((item) =>
       matchesSearchQuery(query, [...item.terms, item.brand], item.title)
     );
-    const brands = SEARCH_INDEX.brands.filter((item) =>
-      matchesSearchQuery(query, [...item.terms], item.title)
-    );
+    const brands = filterSearchBrands(query, products);
     const hasOtherMatches = products.length > 0 || brands.length > 0;
     const categories = filterSearchCategories(query, hasOtherMatches);
     const hasResults = products.length || categories.length || brands.length;
@@ -1152,12 +1220,12 @@ function initSearch() {
 
     if (categories.length) {
       if (products.length) scroll.appendChild(createDivider());
-      scroll.appendChild(createSuggestSection("Категории", categories.map(renderTextLink)));
+      scroll.appendChild(createSuggestSection("Категории", categories.map(renderCategoryLink)));
     }
 
     if (brands.length) {
       if (products.length || categories.length) scroll.appendChild(createDivider());
-      scroll.appendChild(createSuggestSection("Бренды", brands.map(renderTextLink)));
+      scroll.appendChild(createSuggestSection("Бренды", brands.map(renderBrandLink)));
     }
 
     dropdown.appendChild(scroll);
@@ -1215,16 +1283,28 @@ function initSearch() {
       <img class="search-suggest__product-img" src="${getPageProductImage(item.image)}" alt="" width="55" height="55" />
       <span class="search-suggest__product-body">
         <span class="search-suggest__product-title">${escapeHtml(item.title)}</span>
-        <span class="search-suggest__product-meta">${escapeHtml(item.brand)} · ${escapeHtml(item.price)}</span>
+        <span class="search-suggest__product-meta">
+          <span class="search-suggest__product-brand">${escapeHtml(item.brand)}</span>
+          <span class="search-suggest__product-price">${escapeHtml(item.price)}</span>
+        </span>
       </span>
     `;
     link.addEventListener("click", closeSuggest);
     return link;
   }
 
-  function renderTextLink(item) {
+  function renderCategoryLink(item) {
     const link = document.createElement("a");
     link.className = "search-suggest__link";
+    link.href = item.href;
+    link.textContent = item.title;
+    link.addEventListener("click", closeSuggest);
+    return link;
+  }
+
+  function renderBrandLink(item) {
+    const link = document.createElement("a");
+    link.className = "search-suggest__link search-suggest__link--brand";
     link.href = item.href;
     link.textContent = item.title;
     link.addEventListener("click", closeSuggest);

@@ -1,0 +1,128 @@
+.consent-page__container {
+  width: min(100% - 2 * var(--page-gutter), var(--container));
+  margin-inline: auto;
+  padding-bottom: 120px;
+}
+
+.consent-page__head {
+  margin-bottom: 32px;
+}
+
+.consent-page__title {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  color: #32333e;
+}
+
+.consent-page__intro {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.consent-page__content {
+  display: grid;
+  gap: 32px;
+}
+
+.consent-page__section {
+  display: grid;
+  gap: 24px;
+}
+
+.consent-page__section-title {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #32333e;
+  text-transform: uppercase;
+}
+
+.consent-page__section-body {
+  display: grid;
+  gap: 16px;
+}
+
+.consent-page__text {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  color: #32333e;
+}
+
+.consent-page__mark {
+  color: var(--color-accent);
+}
+
+.consent-page__text a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.consent-page__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.consent-page__list li {
+  position: relative;
+  padding-left: 18px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  color: #32333e;
+}
+
+.consent-page__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #32333e;
+}
+
+@media (max-width: 860px) {
+  .consent-page__container {
+    padding-bottom: calc(24px + var(--tabbar-h));
+  }
+  .consent-page__head {
+    margin-bottom: 24px;
+  }
+
+  .consent-page__title {
+    font-size: 24px;
+    line-height: 1.375;
+  }
+
+  .consent-page__intro {
+    margin-bottom: 24px;
+  }
+
+  .consent-page__content {
+    gap: 24px;
+  }
+
+  .consent-page__section {
+    gap: 16px;
+  }
+
+  .consent-page__section-title {
+    font-size: 16px;
+    line-height: 1.375;
+  }
+}

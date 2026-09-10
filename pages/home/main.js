@@ -94,6 +94,47 @@ function initHeroSlider(root) {
   });
 }
 
+/** На мобильных overflow-x каруселях: вертикальный жест — скролл страницы, горизонтальный — карусель. */
+function initHorizontalScrollPassthrough(scroller) {
+  let startX = 0;
+  let startY = 0;
+  let axis = null;
+
+  const reset = () => {
+    axis = null;
+    scroller.style.overflowX = "";
+  };
+
+  scroller.addEventListener(
+    "touchstart",
+    (event) => {
+      if (event.touches.length !== 1) return;
+      startX = event.touches[0].clientX;
+      startY = event.touches[0].clientY;
+      axis = null;
+      scroller.style.overflowX = "";
+    },
+    { passive: true }
+  );
+
+  scroller.addEventListener(
+    "touchmove",
+    (event) => {
+      if (axis || event.touches.length !== 1) return;
+      const dx = Math.abs(event.touches[0].clientX - startX);
+      const dy = Math.abs(event.touches[0].clientY - startY);
+      if (dx < 8 && dy < 8) return;
+      axis = dx > dy ? "x" : "y";
+      // При вертикальном жесте отключаем горизонтальный overflow, чтобы страница скроллилась.
+      if (axis === "y") scroller.style.overflowX = "hidden";
+    },
+    { passive: true }
+  );
+
+  scroller.addEventListener("touchend", reset, { passive: true });
+  scroller.addEventListener("touchcancel", reset, { passive: true });
+}
+
 function initProductsCarousel(root) {
   const track = qs(".products", root);
   const viewport = qs(".products-carousel__viewport", root);
@@ -135,8 +176,10 @@ function initProductsCarousel(root) {
     update();
   });
   window.addEventListener("resize", update);
+  initHorizontalScrollPassthrough(viewport);
   update();
 }
 
 qsa(".hero__slider").forEach(initHeroSlider);
 qsa("[data-products-carousel]").forEach(initProductsCarousel);
+qsa(".categories").forEach(initHorizontalScrollPassthrough);

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Регистрация — Мир ракеток</title>
+    <title>Пользовательское соглашение — Мир ракеток</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="../home/styles.css" />
     <link rel="stylesheet" href="../product/styles.css" />
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./auth.css" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Перейти к содержимому</a>
@@ -469,91 +468,208 @@
       </nav>
     </header>
 
-    <main id="main-content" class="auth-page" data-auth-page>
-      <div class="container auth-page__container">
-        <div class="auth-card">
-          <header class="auth-card__head">
-            <h1 class="auth-card__title">Регистрация</h1>
-            <p class="auth-card__subtitle">Создайте личный кабинет для отслеживания заказов</p>
-          </header>
+    <main id="main-content" class="consent-page">
+      <div class="container consent-page__container">
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+          <ol class="breadcrumbs__list">
+            <li class="breadcrumbs__item"><a href="../home/">Главная</a></li>
+            <li class="breadcrumbs__item"><span aria-current="page">Пользовательское соглашение</span></li>
+          </ol>
+        </nav>
 
-          <form class="auth-form" data-register-form action="#" method="post" novalidate>
-            <p class="auth-form__alert" data-auth-alert hidden role="alert"></p>
+        <div class="consent-page__head">
+          <h1 class="consent-page__title">Пользовательское соглашение</h1>
+        </div>
 
-            <div class="auth-field" data-field="phone">
-              <label class="auth-field__label" for="register-phone">Телефон</label>
-              <input
-                class="auth-field__input"
-                id="register-phone"
-                name="phone"
-                type="tel"
-                autocomplete="tel"
-                placeholder="+7 999 000-00-00"
-              />
-              <p class="auth-field__error" data-field-error hidden></p>
+        <div class="consent-page__intro">
+          <p class="consent-page__text">Дата последнего обновления: <span class="consent-page__mark">[дата]</span></p>
+          <p class="consent-page__text">Настоящее Пользовательское соглашение (далее — «Соглашение») определяет условия использования сайта «Мир Ракеток», расположенного в сети Интернет по адресу https://www.mirraketok.ru/ (далее — «Сайт»). Владельцем и администратором Сайта является <span class="consent-page__mark">[ИП/ООО, наименование]</span>, ИНН <span class="consent-page__mark">[ИНН]</span>, адрес: <span class="consent-page__mark">[адрес]</span> (далее — «Администрация»). Используя Сайт, Пользователь подтверждает, что ознакомился с настоящим Соглашением, понимает его условия и принимает их. Если Пользователь не согласен с условиями настоящего Соглашения, он должен прекратить использование Сайта.</p>
+        </div>
+
+        <div class="consent-page__content">
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">1. ОБЩИЕ ПОЛОЖЕНИЯ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">1.1. Настоящее Соглашение регулирует отношения между Администрацией и физическим лицом, использующим Сайт (далее — «Пользователь»).</p>
+              <p class="consent-page__text">1.2. Сайт предоставляет Пользователю возможность знакомиться с ассортиментом товаров «Мир Ракеток», осуществлять поиск и подбор товаров, добавлять товары в избранное и корзину, оформлять заказы, создавать и использовать личный кабинет, а также пользоваться другими доступными функциями Сайта.</p>
+              <p class="consent-page__text">1.3. Отдельные отношения между Пользователем и Администрацией могут дополнительно регулироваться иными документами, размещёнными на Сайте, в том числе Политикой конфиденциальности и условиями продажи, доставки и возврата товаров.</p>
+              <p class="consent-page__text">1.4. Администрация вправе изменять настоящее Соглашение. Актуальная редакция размещается на Сайте.</p>
+              <p class="consent-page__text">1.5. Продолжение использования Сайта после публикации новой редакции Соглашения означает ознакомление Пользователя с внесёнными изменениями.</p>
             </div>
+          </section>
 
-            <div class="auth-field" data-field="email">
-              <label class="auth-field__label" for="register-email">E-mail</label>
-              <input
-                class="auth-field__input"
-                id="register-email"
-                name="email"
-                type="email"
-                autocomplete="email"
-                placeholder="example@mail.ru"
-              />
-              <p class="auth-field__error" data-field-error hidden></p>
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">2. РЕГИСТРАЦИЯ И ЛИЧНЫЙ КАБИНЕТ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">2.1. Для доступа к отдельным функциям Сайта Пользователь может создать личный кабинет.</p>
+              <p class="consent-page__text">2.2. При регистрации и использовании личного кабинета Пользователь обязуется предоставлять достоверную и актуальную информацию.</p>
+              <p class="consent-page__text">2.3. Для регистрации и идентификации Пользователя могут использоваться номер телефона, адрес электронной почты, пароль и иные данные, предусмотренные интерфейсом Сайта.</p>
+              <p class="consent-page__text">2.4. Пользователь несёт ответственность за сохранность данных, используемых для входа в личный кабинет, и не должен передавать пароль третьим лицам.</p>
+              <p class="consent-page__text">2.5. Все действия, совершённые через личный кабинет Пользователя после успешной авторизации, могут рассматриваться как действия самого Пользователя, если не доказано иное.</p>
+              <p class="consent-page__text">2.6. В случае утраты пароля Пользователь может воспользоваться функцией восстановления доступа, предусмотренной на Сайте.</p>
+              <p class="consent-page__text">2.7. Пользователь обязан уведомить Администрацию, если ему стало известно о несанкционированном использовании его учётной записи.</p>
             </div>
+          </section>
 
-            <div class="auth-field" data-field="password">
-              <label class="auth-field__label" for="register-password">Пароль</label>
-              <div class="auth-field__control">
-                <input
-                  class="auth-field__input auth-field__input--password"
-                  id="register-password"
-                  name="password"
-                  type="password"
-                  autocomplete="new-password"
-                  placeholder="Придумайте пароль"
-                />
-                <button
-                  class="auth-field__toggle"
-                  type="button"
-                  aria-controls="register-password"
-                  aria-label="Показать пароль"
-                  aria-pressed="false"
-                  data-password-toggle
-                >
-                  <img src="../../shared/images/icons/eye-slash.png" alt="" width="20" height="20" />
-                </button>
-              </div>
-              <p class="auth-field__hint">Не менее 8 символов</p>
-              <p class="auth-field__error" data-field-error hidden></p>
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">3. ФУНКЦИОНАЛ САЙТА</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">3.1. Пользователь может использовать Сайт для:</p>
+              <ul class="consent-page__list">
+                <li>просмотра каталога и карточек товаров;</li>
+                <li>поиска и фильтрации товаров;</li>
+                <li>добавления товаров в избранное;</li>
+                <li>добавления товаров в корзину;</li>
+                <li>оформления заказов;</li>
+                <li>просмотра информации о своих заказах;</li>
+                <li>управления данными личного кабинета;</li>
+                <li>получения информации о магазинах, доставке, гарантиях и других услугах;</li>
+                <li>использования иных функций, доступных на Сайте.</li>
+              </ul>
+              <p class="consent-page__text">3.2. Администрация вправе изменять функциональность, структуру, внешний вид и содержание Сайта без предварительного уведомления Пользователя.</p>
+              <p class="consent-page__text">3.3. Отдельные функции Сайта могут временно быть недоступны в связи с проведением технических работ, обновлением программного обеспечения или по иным техническим причинам.</p>
             </div>
+          </section>
 
-            <div class="auth-field auth-field--checkbox" data-field="agreement">
-              <label class="auth-checkbox">
-                <input type="checkbox" name="agreement" value="1" />
-                <span class="auth-checkbox__box" aria-hidden="true"></span>
-                <span class="auth-checkbox__text">
-                  Я соглашаюсь с <a href="../privacy/">Политикой конфиденциальности</a> и
-                  <a href="../consent/">Пользовательским соглашением</a>
-                </span>
-              </label>
-              <p class="auth-field__error" data-field-error hidden></p>
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">4. ИНФОРМАЦИЯ О ТОВАРАХ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">4.1. Администрация принимает разумные меры для размещения на Сайте актуальной информации о товарах, их характеристиках, стоимости и наличии.</p>
+              <p class="consent-page__text">4.2. Изображения товаров на Сайте носят информационный характер. Внешний вид товара, включая оттенок цвета, может незначительно отличаться от изображения вследствие особенностей фотосъёмки, экрана устройства или изменений, внесённых производителем.</p>
+              <p class="consent-page__text">4.3. Производитель вправе изменять характеристики, комплектацию, упаковку и внешний вид товара без предварительного уведомления, если такие изменения не ухудшают основные потребительские свойства товара.</p>
+              <p class="consent-page__text">4.4. Пользователю рекомендуется уточнять существенные для него характеристики товара до оформления или получения заказа.</p>
             </div>
+          </section>
 
-            <button class="btn auth-form__submit" type="submit">Зарегистрироваться</button>
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">5. ОФОРМЛЕНИЕ ЗАКАЗА</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">5.1. Пользователь может сформировать заказ посредством функционала Сайта.</p>
+              <p class="consent-page__text">5.2. При оформлении заказа Пользователь обязан предоставить достоверные сведения, необходимые для его обработки и исполнения.</p>
+              <p class="consent-page__text">5.3. Размещение товара на Сайте само по себе не гарантирует его наличие на момент оформления заказа.</p>
+              <p class="consent-page__text">5.4. После получения заказа представитель магазина при необходимости может связаться с Пользователем для подтверждения наличия товара, состава заказа, способа получения и иной необходимой информации.</p>
+              <p class="consent-page__text">5.5. Если заказанный товар отсутствует, Администрация вправе предложить Пользователю аналогичный товар либо исключить отсутствующий товар из заказа по согласованию с Пользователем.</p>
+              <p class="consent-page__text">5.6. Информация о статусе заказа может отображаться в личном кабинете Пользователя.</p>
+            </div>
+          </section>
 
-            <p class="auth-form__switch">
-              <span>Уже есть аккаунт?</span>
-              <a class="auth-form__link" href="./login.html">Войти</a>
-            </p>
-          </form>
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">6. ПРАВА И ОБЯЗАННОСТИ ПОЛЬЗОВАТЕЛЯ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">6.1. Пользователь вправе:</p>
+              <ul class="consent-page__list">
+                <li>использовать Сайт в пределах предоставленного функционала;</li>
+                <li>получать информацию о товарах и услугах;</li>
+                <li>пользоваться личным кабинетом;</li>
+                <li>оформлять заказы;</li>
+                <li>обращаться к Администрации по вопросам работы Сайта и оформленных заказов.</li>
+              </ul>
+              <p class="consent-page__text">6.2. Пользователь обязуется:</p>
+              <ul class="consent-page__list">
+                <li>соблюдать настоящее Соглашение;</li>
+                <li>предоставлять достоверную информацию;</li>
+                <li>не использовать Сайт в противоправных целях;</li>
+                <li>не предпринимать действий, способных нарушить нормальную работу Сайта;</li>
+                <li>не пытаться получить несанкционированный доступ к личным кабинетам других пользователей, программному обеспечению, серверам или другим системам Сайта;</li>
+                <li>не использовать автоматизированные средства для массового сбора информации с Сайта без разрешения правообладателя.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">7. ПРАВА И ОБЯЗАННОСТИ АДМИНИСТРАЦИИ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">7.1. Администрация вправе изменять, дополнять или удалять материалы Сайта, а также изменять его функциональность.</p>
+              <p class="consent-page__text">7.2. Администрация вправе временно ограничить доступ к Сайту для проведения технических и профилактических работ.</p>
+              <p class="consent-page__text">7.3. При выявлении нарушения настоящего Соглашения Администрация вправе ограничить Пользователю доступ к отдельным функциям Сайта или личному кабинету в случаях, предусмотренных законодательством Российской Федерации.</p>
+              <p class="consent-page__text">7.4. Администрация принимает разумные организационные и технические меры для обеспечения стабильной и безопасной работы Сайта.</p>
+            </div>
+          </section>
+
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">8. ИНТЕЛЛЕКТУАЛЬНАЯ СОБСТВЕННОСТЬ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">8.1. Элементы Сайта, включая дизайн, тексты, графику, изображения, фотографии, логотипы, элементы интерфейса, программный код и другие материалы, являются объектами интеллектуальных прав их соответствующих правообладателей.</p>
+              <p class="consent-page__text">8.2. Использование материалов Сайта допускается исключительно для личных некоммерческих целей, если иное прямо не предусмотрено законодательством или не согласовано с правообладателем.</p>
+              <p class="consent-page__text">8.3. Копирование, распространение, переработка, публикация или коммерческое использование материалов Сайта без соответствующего разрешения правообладателя не допускаются, кроме случаев, прямо предусмотренных законодательством Российской Федерации.</p>
+              <p class="consent-page__text">8.4. Товарные знаки и иные обозначения производителей товаров принадлежат соответствующим правообладателям.</p>
+            </div>
+          </section>
+
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">9. ПЕРСОНАЛЬНЫЕ ДАННЫЕ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">9.1. При использовании Сайта Пользователь может предоставлять Администрации персональные данные, включая имя, номер телефона, адрес электронной почты и сведения, необходимые для оформления и исполнения заказа.</p>
+              <p class="consent-page__text">9.2. Порядок обработки персональных данных определяется Политикой конфиденциальности, размещённой на Сайте.</p>
+              <p class="consent-page__text">9.3. Пользователь обязан ознакомиться с Политикой конфиденциальности до предоставления своих персональных данных.</p>
+              <p class="consent-page__text">9.4. Сайт может использовать файлы cookie и аналогичные технологии в порядке, предусмотренном Политикой конфиденциальности и применимым законодательством.</p>
+            </div>
+          </section>
+
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">10. ОТВЕТСТВЕННОСТЬ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">10.1. Администрация не несёт ответственности за невозможность использования Сайта, вызванную обстоятельствами, находящимися вне разумного контроля Администрации, включая перебои в работе сети Интернет, оборудования, программного обеспечения и сервисов третьих лиц.</p>
+              <p class="consent-page__text">10.2. Пользователь несёт ответственность за достоверность предоставленных им сведений.</p>
+              <p class="consent-page__text">10.3. Пользователь самостоятельно обеспечивает сохранность данных для доступа к своему личному кабинету.</p>
+              <p class="consent-page__text">10.4. Администрация не несёт ответственности за действия третьих лиц, получивших доступ к учётной записи вследствие нарушения Пользователем требований безопасности, за исключением случаев, когда ответственность Администрации предусмотрена законодательством.</p>
+              <p class="consent-page__text">10.5. Ничто в настоящем Соглашении не ограничивает права потребителя и ответственность продавца, установленные законодательством Российской Федерации.</p>
+            </div>
+          </section>
+
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">11. СТОРОННИЕ РЕСУРСЫ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">11.1. Сайт может содержать ссылки на сайты, сервисы и ресурсы третьих лиц.</p>
+              <p class="consent-page__text">11.2. Администрация не контролирует содержание и работу сторонних ресурсов и не несёт ответственности за их содержание, если иное не предусмотрено законодательством.</p>
+              <p class="consent-page__text">11.3. Переход на сторонние ресурсы осуществляется Пользователем самостоятельно.</p>
+            </div>
+          </section>
+
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">12. ПРЕКРАЩЕНИЕ ИСПОЛЬЗОВАНИЯ САЙТА</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">12.1. Пользователь вправе в любое время прекратить использование Сайта.</p>
+              <p class="consent-page__text">12.2. По вопросам удаления учётной записи и персональных данных Пользователь может обратиться к Администрации по контактным данным, указанным в настоящем Соглашении или на Сайте.</p>
+              <p class="consent-page__text">12.3. Удаление отдельных данных может быть невозможно до истечения предусмотренных законодательством сроков их обязательного хранения.</p>
+            </div>
+          </section>
+
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">13. РАЗРЕШЕНИЕ СПОРОВ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">13.1. К настоящему Соглашению применяется законодательство Российской Федерации.</p>
+              <p class="consent-page__text">13.2. Стороны стремятся разрешать возникающие разногласия путём переговоров и направления обращений или претензий.</p>
+              <p class="consent-page__text">13.3. Если спор не может быть урегулирован в добровольном порядке, он разрешается в соответствии с законодательством Российской Федерации.</p>
+              <p class="consent-page__text">13.4. Настоящее Соглашение не ограничивает права Пользователя, предоставленные законодательством Российской Федерации о защите прав потребителей.</p>
+            </div>
+          </section>
+
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">14. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">14.1. Соглашение действует с момента начала использования Пользователем Сайта.</p>
+              <p class="consent-page__text">14.2. Если отдельное положение Соглашения будет признано недействительным, это не влечёт недействительность остальных положений.</p>
+              <p class="consent-page__text">14.3. Актуальная версия Соглашения постоянно доступна на Сайте.</p>
+            </div>
+          </section>
+
+          <section class="consent-page__section">
+            <h2 class="consent-page__section-title">15. РЕКВИЗИТЫ И КОНТАКТЫ</h2>
+            <div class="consent-page__section-body">
+              <p class="consent-page__text">Владелец сайта: <span class="consent-page__mark">[ИП/ООО, полное наименование]</span></p>
+              <p class="consent-page__text">ИНН: <span class="consent-page__mark">[ИНН]</span></p>
+              <p class="consent-page__text">ОГРН/ОГРНИП: <span class="consent-page__mark">[номер]</span></p>
+              <p class="consent-page__text">Адрес: <span class="consent-page__mark">[адрес]</span></p>
+              <p class="consent-page__text">E-mail: <span class="consent-page__mark">[e-mail]</span></p>
+              <p class="consent-page__text">Телефон: <a href="tel:+79197734033">+7 (919) 773-40-33</a></p>
+              <p class="consent-page__text">Сайт: <a href="https://www.mirraketok.ru/" target="_blank" rel="noopener noreferrer">www.mirraketok.ru</a></p>
+            </div>
+          </section>
         </div>
       </div>
     </main>
+
     <footer class="footer">
       <div class="footer__desktop">
         <div class="footer__grid">
@@ -1081,7 +1197,5 @@
     </div>
 
     <script src="../../shared/js/common.js"></script>
-    <script src="../../shared/js/validation.js"></script>
-    <script src="./auth.js"></script>
-  </body>
+      </body>
 </html>
